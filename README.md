@@ -224,7 +224,7 @@ memory_mechanism:
 
 ### 5. Configuration Experiment
 
-！！！实验主要在 `configs\assignment\default.yaml` 中配置，初步计划只需要师兄帮忙跑dualRAG在online模式下，seed=1时的DB、OS、KG、ALF、locomo-0、...、locomo-9单任务，注意不用跑WebShop任务！！！
+！！！实验主要在 `configs\assignment\default.yaml` 中配置，初步计划只需要师兄帮忙跑dualRAG在online模式下，seed=66时的DB、OS、KG、ALF、locomo-0、...、locomo-9单任务，注意不用跑WebShop任务！！！
 
 ```yaml
 # Lifelong Learning Benchmark Configuration
