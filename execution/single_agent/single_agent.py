@@ -23,13 +23,20 @@ class SingleAgentConfig:
 
 class SingleAgentExecutionEngine(ExecutionEngine):
     """
-    最简单的执行引擎：对每条样本只用一个 agent，从头跑到尾。
+    单智能体执行引擎：对每条样本使用一个 agent 完成多轮交互。
 
-    目前先实现一个占位版本：
-    - 不与真实 LLM / /interact 打通，只返回初始 messages 和一个占位 result。
-    - 后续会替换为：
-        - 使用 agent_pool 调 LLM（支持 tools / tool_calls）
-        - 使用 backend_client 与 /interact 多轮交互
+    实现流程：
+    1. 使用 agent_pool 调用 LLM（支持 tools / tool_calls）生成 assistant 消息
+    2. 将 assistant 消息发送到 backend_client.interact() 与环境交互
+    3. 接收环境返回的 tool 结果或 user 提示，追加到 history
+    4. 根据 env_out.finish/status 判断是否继续下一轮
+    5. 重复步骤 1-4 直到任务完成
+
+    特性：
+    - 支持多轮对话和工具调用
+    - 自动规范化消息格式以符合 OpenAI schema
+    - 处理 tool_call_id 对齐和消息格式兼容性
+    - 由后端 Task 控制 max_round / max_step 限制
     """
 
     def __init__(self, config: SingleAgentConfig | None = None) -> None:

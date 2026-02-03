@@ -38,38 +38,45 @@ from src.server.tasks.locomo.task import convert_session_to_history
 # 默认后端地址，可通过环境变量覆盖
 BACKEND_BASE_URL = os.getenv("LLBENCH_BACKEND_URL", "http://localhost:5038/api")
 
-def main() -> None:
-    print(f"Using backend base URL: {BACKEND_BASE_URL}")
-    backend = BackendClient(BACKEND_BASE_URL)
 
-    # 1) 简单健康检查
-    try:
-        workers = backend.list_workers()
-        print("Controller /list_workers OK. Available tasks:")
-        print(json.dumps(workers, indent=2))
-    except Exception as e:
-        print(f"Failed to call /list_workers: {e}")
-        print("请确认后端 Controller 已在默认端口 5038 启动，或通过 LLBENCH_BACKEND_URL 覆盖地址。")
-        return
+def validate_training_mode_constraints(exp_cfg: ExperimentConfig) -> tuple[str, bool]:
+    """
+    集中校验训练模式的约束条件
 
-    # 2) 读取 assignment 配置
-    exp_cfg = load_experiment_config()
+    Args:
+        exp_cfg: 实验配置
 
-    # 2.1) 验证数据集数量与 cross_task 配置的一致性
+    Returns:
+        (training_mode, cross_task): 训练模式和跨任务标志
+
+    Raises:
+        ValueError: 当配置不满足训练模式的约束时
+    """
+    training_mode = exp_cfg.experiment.get("training_mode", "offline")
+    cross_task = exp_cfg.experiment.get("cross_task", False)
     tasks_cfg = exp_cfg.tasks
     task_names: List[str] = [t["name"] for t in tasks_cfg if "name" in t]
-    cross_task = exp_cfg.experiment.get("cross_task", False)
-    
-    # 验证：根据 training_mode 验证 cross_task 和任务数量
-    training_mode = exp_cfg.experiment.get("training_mode", "offline")
-    
+
+    # 检查是否有多个 locomo 任务（personal memory 数据集只能有一个）
+    locomo_tasks = [name for name in task_names if is_locomo_task(name)]
+    if len(locomo_tasks) > 1:
+        raise ValueError(
+            f"Multiple personal memory tasks (locomo) detected: {locomo_tasks}. "
+            "Only one personal memory task (locomo-0 - locomo-9) is allowed per run."
+        )
+
     if training_mode == "transfer":
-        # transfer 模式：必须 cross_task=True，必须选中两个任务
+        # transfer 模式：必须 cross_task=True，必须选中两个任务，不允许 locomo 任务
         if not cross_task:
             raise ValueError("transfer mode requires cross_task=True")
         if len(task_names) != 2:
             raise ValueError(
                 f"transfer mode requires exactly 2 tasks, but found {len(task_names)} tasks: {task_names}"
+            )
+        if locomo_tasks:
+            raise ValueError(
+                f"transfer mode does not support personal memory tasks (locomo). "
+                f"Found locomo task(s): {locomo_tasks}"
             )
         transfer_task = exp_cfg.experiment.get("transfer_task")
         transfer_after_task = exp_cfg.experiment.get("transfer_after_task")
@@ -88,38 +95,73 @@ def main() -> None:
             raise ValueError(
                 f"replay mode requires exactly 1 task, but found {len(task_names)} tasks: {task_names}"
             )
+        # 检查 replay 参数是否设置（对于非 locomo 任务）
+        if not locomo_tasks:
+            replay_m = exp_cfg.experiment.get("replay_m")
+            replay_n = exp_cfg.experiment.get("replay_n")
+            replay_seed = exp_cfg.experiment.get("replay_seed")
+            if replay_m is None or replay_n is None or replay_seed is None:
+                raise ValueError(
+                    f"replay mode requires replay_m, replay_n, and replay_seed to be set. "
+                    f"Got: replay_m={replay_m}, replay_n={replay_n}, replay_seed={replay_seed}"
+                )
+    elif training_mode == "offline":
+        # offline 模式：必须 cross_task=False，必须只选中一个任务
+        if cross_task:
+            raise ValueError("offline mode requires cross_task=False")
+        if len(task_names) != 1:
+            raise ValueError(
+                f"offline mode requires exactly 1 task, but found {len(task_names)} tasks: {task_names}"
+            )
     else:
-        # 其他模式：使用原有的验证逻辑
-        # 验证：cross_task=False 时必须只能选中一个数据集
+        # online 模式：验证 cross_task 和任务数量的一致性
         if not cross_task:
+            # cross_task=False 时必须只能选中一个数据集
             if len(task_names) != 1:
                 raise ValueError(
                     f"Invalid configuration: cross_task=False requires exactly 1 task, "
                     f"but found {len(task_names)} tasks: {task_names}"
                 )
-        
-        # 验证：cross_task=True 时必须选中大于一个数据集
-        if cross_task:
+        else:
+            # cross_task=True 时必须选中大于一个数据集
             if len(task_names) <= 1:
                 raise ValueError(
                     f"Invalid configuration: cross_task=True requires more than 1 task, "
                     f"but found {len(task_names)} task(s): {task_names}"
                 )
 
+    return training_mode, cross_task
+
+
+def main() -> None:
+    print(f"Using backend base URL: {BACKEND_BASE_URL}")
+    backend = BackendClient(BACKEND_BASE_URL)
+
+    # 1) 简单健康检查
+    try:
+        workers = backend.list_workers()
+        print("Controller /list_workers OK. Available tasks:")
+        print(json.dumps(workers, indent=2))
+    except Exception as e:
+        print(f"Failed to call /list_workers: {e}")
+        print("请确认后端 Controller 已在默认端口 5038 启动，或通过 LLBENCH_BACKEND_URL 覆盖地址。")
+        return
+
+    # 2) 读取 assignment 配置
+    exp_cfg = load_experiment_config()
+
+    # 2.1) 校验训练模式约束（集中校验），并获取 training_mode 和 cross_task
+    training_mode, cross_task = validate_training_mode_constraints(exp_cfg)
+
     # 3) 检测并加载 locomo 任务（需要在构建调度之前）
     locomo_task_instance = None
     locomo_task_name = None
     tasks_cfg = exp_cfg.tasks
     task_names: List[str] = [t["name"] for t in tasks_cfg if "name" in t]
-    
-    # 检查是否有多个 locomo 任务（personal memory 数据集只能有一个）
+
+    # 检查是否有 locomo 任务
     locomo_tasks = [name for name in task_names if is_locomo_task(name)]
-    if len(locomo_tasks) > 1:
-        raise ValueError(
-            f"Multiple personal memory tasks (locomo) detected: {locomo_tasks}. "
-            "Only one personal memory task (locomo-0 - locomo-9) is allowed per run."
-        )
-    
+
     # 如果有 locomo 任务，加载它
     if len(locomo_tasks) == 1:
         task_name = locomo_tasks[0]
@@ -129,131 +171,33 @@ def main() -> None:
             raise ValueError(f"Failed to load locomo task instance for {task_name}")
         print(f"\n[Locomo Task Detected] {task_name}, sessions: {locomo_task_instance.session_ids}")
 
-    # 4) 构造调度序列（传入 locomo 任务信息）
-    schedule, task_to_indices, replay_info = build_schedule_from_config(
+    # 4) 构造调度序列（统一入口，返回完整的调度信息）
+    schedule_result = build_schedule_from_config(
         exp_cfg, backend,
         locomo_task_instance=locomo_task_instance,
         locomo_task_name=locomo_task_name
     )
+
+    train_schedule = schedule_result["train_schedule"]
+    test_schedule = schedule_result["test_schedule"]
+    task_to_indices = schedule_result["task_to_indices"]
+    replay_info = schedule_result["replay_info"]
+
     print("\nTasks and available indices:")
     for task, indices in task_to_indices.items():
         print(f"  {task}: {len(indices)} indices -> {indices[:10]}{' ...' if len(indices) > 10 else ''}")
 
-    print(f"\nTotal schedule length: {len(schedule)} (showing first 20 entries):")
-    for pair in schedule[:20]:
-        print(" ", pair)
+    print(f"\nSchedule summary:")
+    print(f"  Train schedule: {len(train_schedule)} samples")
+    if test_schedule:
+        print(f"  Test schedule: {len(test_schedule)} samples")
+    print(f"  First 20 train entries:")
+    for pair in train_schedule[:20]:
+        print("   ", pair)
 
-    if not schedule:
-        print("Schedule is empty; nothing to run.")
+    if not train_schedule:
+        print("Train schedule is empty; nothing to run.")
         return
-
-    # 3.1) 根据 training_mode 和 train_size 分割数据集
-    training_mode = exp_cfg.experiment.get("training_mode", "offline")
-    train_size = exp_cfg.experiment.get("train_size", 0.7)
-    cross_task = exp_cfg.experiment.get("cross_task", False)
-    shuffle_enabled = exp_cfg.experiment.get("shuffle", {}).get("enabled", False)
-    
-    train_schedule: Schedule = []
-    test_schedule: Schedule = []
-    
-    if cross_task and not shuffle_enabled:
-        raise ValueError("Unsupported config: cross_task=True requires shuffle.enabled=True.")
-    
-    if training_mode == "offline" and cross_task:
-        raise ValueError("Unsupported config: cross_task=True is not supported in offline mode. Use online mode instead.")
-
-    if training_mode == "offline" and train_size is not None:
-        # offline 模式：根据 train_size 分割
-        # 注意：offline 模式不支持 cross_task，已在上面检查并报错
-        # 对于 locomo 任务，需要特殊处理：先提取所有 session 注入标记，然后对所有 QA 进行 shuffle 和分割
-        import random
-        
-        # 检查是否有 locomo 任务
-        locomo_tasks_in_schedule = [name for name, _ in schedule if is_locomo_task(name)]
-        has_locomo = len(locomo_tasks_in_schedule) > 0
-        
-        if has_locomo:
-            # Locomo 任务：分离 session 注入标记和 QA
-            session_injections: List[Tuple[TaskName, SampleIndex]] = []
-            qa_samples: List[Tuple[TaskName, SampleIndex]] = []
-            
-            for task_name, sample_index in schedule:
-                if task_name == SESSION_INJECTION_MARKER:
-                    session_injections.append((task_name, sample_index))
-                else:
-                    qa_samples.append((task_name, sample_index))
-            
-            # 训练集：所有 session 注入标记（用于更新记忆）
-            train_schedule = session_injections
-            # 测试集：所有 QA（全部用于测试，可能 shuffle）
-            test_schedule = qa_samples
-            
-            # 对测试 QA 进行 shuffle（如果启用）
-            if shuffle_enabled:
-                shuffle_seed = exp_cfg.experiment.get("shuffle", {}).get("seed", None)
-                if shuffle_seed is not None:
-                    random.seed(shuffle_seed)
-                random.shuffle(test_schedule)
-                print(f"  -> Shuffled {len(test_schedule)} test QAs for locomo task (offline mode)")
-            
-            print(f"\nDataset split (offline mode, locomo task):")
-            print(f"  Session injections: {len(session_injections)} (all in train, for memory update)")
-            print(f"  QAs: {len(qa_samples)} (all in test, for evaluation only)")
-            print(f"  Total: Train={len(train_schedule)}, Test={len(test_schedule)}")
-        else:
-            # 非 locomo 任务：按任务内部分割
-            # 按任务顺序排列的，所以可以按任务分组
-            current_task = None
-            task_samples: List[Tuple[TaskName, SampleIndex]] = []
-            
-            for task_name, sample_index in schedule:
-                if current_task is None:
-                    current_task = task_name
-                    task_samples = [(task_name, sample_index)]
-                elif task_name == current_task:
-                    task_samples.append((task_name, sample_index))
-                else:
-                    # 切换到新任务，先处理上一个任务
-                    if shuffle_enabled:
-                        shuffle_seed = exp_cfg.experiment.get("shuffle", {}).get("seed", None)
-                        if shuffle_seed is not None:
-                            random.seed(shuffle_seed)
-                        random.shuffle(task_samples)
-                        print(f"  -> Shuffled {len(task_samples)} samples for {current_task} (offline mode)")
-                    
-                    split_idx = int(len(task_samples) * train_size)
-                    train_schedule.extend(task_samples[:split_idx])
-                    test_schedule.extend(task_samples[split_idx:])
-                    # 开始新任务
-                    current_task = task_name
-                    task_samples = [(task_name, sample_index)]
-            
-            # 处理最后一个任务
-            if task_samples:
-                if shuffle_enabled:
-                    shuffle_seed = exp_cfg.experiment.get("shuffle", {}).get("seed", None)
-                    if shuffle_seed is not None:
-                        random.seed(shuffle_seed)
-                    random.shuffle(task_samples)
-                    print(f"  -> Shuffled {len(task_samples)} samples for {current_task} (offline mode)")
-                
-                split_idx = int(len(task_samples) * train_size)
-                train_schedule.extend(task_samples[:split_idx])
-                test_schedule.extend(task_samples[split_idx:])
-            
-            print(f"\nDataset split (offline mode, per-task split, train_size={train_size}):")
-            for task_name in task_to_indices.keys():
-                task_train = [s for s in train_schedule if s[0] == task_name]
-                task_test = [s for s in test_schedule if s[0] == task_name]
-                print(f"  {task_name}: Train={len(task_train)}, Test={len(task_test)}")
-            print(f"  Total: Train={len(train_schedule)}, Test={len(test_schedule)}")
-    else:
-        # online 模式或其他情况：全部作为训练集
-        train_schedule = schedule
-        test_schedule = []
-        print(f"\nDataset split (online mode or train_size not set):")
-        print(f"  Train: {len(train_schedule)} samples (all samples)")
-        print(f"  Test: {len(test_schedule)} samples")
 
     # 4) 构造 memory + execution engine
     execution_engine = build_execution_engine_from_config(exp_cfg)
@@ -278,25 +222,9 @@ def main() -> None:
     # 初始 memory
     memory, memory_for_enhance = build_memory_bundle()
 
-    # 4.1) locomo 任务已在上面检测（在构建调度之前）
-    # 如果是 locomo 任务，在开始训练之前注入 session 内容（仅 offline 模式）
-    if locomo_task_instance is not None:
-        if training_mode == "offline":
-            # Offline 模式：先注入所有 session 内容
-            print(f"\n[Locomo Offline Mode] Injecting all sessions into memory...")
-            for session_id in locomo_task_instance.session_ids:
-                session_history = locomo_task_instance.get_session_history(session_id)
-                if session_history:
-                    # 使用 memory（不是 memory_for_enhance）来更新
-                    if isinstance(memory, dict):
-                        # Multi-agent: 更新所有 agent 的 memory
-                        for agent_name, agent_mem in memory.items():
-                            agent_mem.update_memory(locomo_task_name, session_history, {"session_id": session_id, "type": "session_injection", "reward": 1, "status": "completed"})
-                    else:
-                        memory.update_memory(locomo_task_name, session_history, {"session_id": session_id, "type": "session_injection", "reward": 1, "status": "completed"})
-                    print(f"  -> Injected session {session_id} ({len(session_history)} dialogues)")
-            print(f"[Locomo Offline Mode] All {len(locomo_task_instance.session_ids)} sessions injected.\n")
-        # Online 模式的处理会在执行训练集时进行（按 session 顺序）
+    # 4.1) locomo 任务的 session 注入统一由 schedule 中的 SESSION_INJECTION_MARKER 驱动
+    # 不再在 offline 模式下预注入，避免重复注入
+    # Online/Offline 模式的 session 注入都会在训练循环中通过 marker 触发
 
     # 5) 输出目录（根据 train_size 分割，创建 train/test 子目录）
     timestamp = datetime.now().strftime("%Y-%m-%d_%H-%M-%S")

@@ -13,71 +13,58 @@ import yaml
 
 from ..base import MemoryMechanism, parse_llm_json_response
 from ..streamICL.streamICL import RAG
+from src.utils.message_schema import (
+    extract_message_info,
+    enhance_messages_with_memory,
+    extract_original_question,
+)
 
 logger = logging.getLogger(__name__)
 
 
-def _extract_message_info(msg: Any) -> tuple[Optional[str], Optional[str], Optional[Dict[str, Any]]]:
-    """
-    从消息对象中提取 role、content 和完整消息字典。
-    处理多种消息格式：
-    - 字典类型：直接使用
-    - RootModel 包装的对象：访问 .root 属性
-    - RewardHistoryItem 等非聊天消息：返回 None
-    - 其他 Pydantic 模型：尝试转换为字典
-    """
-    # 如果是字典，直接使用
-    if isinstance(msg, dict):
-        return msg.get("role"), msg.get("content", ""), msg
-    
-    # 如果是 RootModel 包装的对象，访问 .root 属性
-    if hasattr(msg, 'root'):
-        root = msg.root
-        # 检查是否是 RewardHistoryItem（有 reward 属性但没有 role 属性）
-        if hasattr(root, 'reward') and not hasattr(root, 'role'):
-            return None, None, None  # 跳过 RewardHistoryItem
-        # 如果是字典，直接使用
-        if isinstance(root, dict):
-            return root.get("role"), root.get("content", ""), root
-        # 如果是 Pydantic 模型，尝试转换为字典
-        if hasattr(root, 'model_dump'):
-            root_dict = root.model_dump(exclude_none=True)
-            return root_dict.get("role"), root_dict.get("content", ""), root_dict
-    
-    # 如果是 RewardHistoryItem 等非聊天消息对象（有 reward 属性但没有 role 属性），跳过
-    if hasattr(msg, 'reward') and not hasattr(msg, 'role'):
-        return None, None, None
-    
-    # 如果是 Pydantic 模型，尝试转换为字典
-    if hasattr(msg, 'model_dump'):
-        msg_dict = msg.model_dump(exclude_none=True)
-        return msg_dict.get("role"), msg_dict.get("content", ""), msg_dict
-    
-    # 其他情况，尝试访问属性
-    if hasattr(msg, 'role') and hasattr(msg, 'content'):
-        return getattr(msg, 'role', None), getattr(msg, 'content', ""), None
-    
-    return None, None, None
-
-
-def _serialize_history(history: List[Any]) -> List[Dict[str, Any]]:
+def _serialize_history(history: List[Any], template_title: Optional[str] = None, where: Optional[str] = None) -> List[Dict[str, Any]]:
     """
     将 history 转换为可序列化的格式（JSON 兼容）。
     过滤掉 RewardHistoryItem 等非聊天消息，并将 Pydantic 模型转换为字典。
+    如果提供了 template_title 和 where，会过滤掉插入的记忆内容。
+
+    Args:
+        history: 对话历史
+        template_title: 模板标题（用于识别记忆内容），可选
+        where: 插入位置（"tail" 或 "front"），可选
     """
     serialized = []
+    template_titles = [template_title] if template_title else []
+
     for msg in history:
-        role, content, msg_dict = _extract_message_info(msg)
-        
+        role, content, msg_dict = extract_message_info(msg)
+
         # 跳过无法提取 role 的消息（如 RewardHistoryItem）
         if role is None:
             continue
-        
+
+        # 如果提供了 template_title 和 where，过滤掉记忆内容
+        if role == "user" and content and template_title and where:
+            from src.utils.message_schema import ORIGINAL_QUESTION_SEPARATOR
+            has_memory = (
+                ORIGINAL_QUESTION_SEPARATOR in str(content) or
+                any(title in str(content) for title in template_titles)
+            )
+
+            if has_memory:
+                # 提取原始问题
+                question = extract_original_question([msg], where=where, template_titles=template_titles)
+                if question:
+                    content = question
+
         # 如果提取到了完整的消息字典，使用它
         if msg_dict is not None:
             # 确保是字典类型
             if isinstance(msg_dict, dict):
-                serialized.append(msg_dict)
+                # 创建新字典，更新content为过滤后的内容
+                filtered_msg = dict(msg_dict)
+                filtered_msg["content"] = str(content) if content else ""
+                serialized.append(filtered_msg)
             else:
                 # 如果是其他类型，创建基本结构
                 serialized.append({
@@ -90,7 +77,7 @@ def _serialize_history(history: List[Any]) -> List[Dict[str, Any]]:
                 "role": role,
                 "content": str(content) if content else ""
             })
-    
+
     return serialized
 
 
@@ -103,22 +90,23 @@ class AWMProConfig:
     workflow_induction_prompt: str
     workflow_management_prompt: str
 
-    # 工作流 RAG 配置
+    # 工作流 RAG 配置（必需字段）
     workflow_rag_embedding_model: str
     workflow_rag_top_k: int
     workflow_rag_order: str
     workflow_rag_seed: int
-    workflow_rag_prompt_template: str  # 改为 prompt_template
+    workflow_rag_prompt_template: str
+    workflow_rag_where: str  # "tail": 记忆放在 user question 后面 | "front": 记忆放在 user question 前面
     workflow_rag_success_only: bool
     workflow_rag_reward_bigger_than_zero: bool
-    
-    # 工作流管理配置
+
+    # 工作流管理配置（必需字段）
     workflow_management_similarity_top_k: int  # 向量搜索时每个新工作流找 top_k 个相似工作流
 
-    # 工作流存储路径
+    # 工作流存储路径（必需字段）
     workflow_storage_path: Path
 
-    # 最大重试次数配置（有默认值的字段必须放在最后）
+    # 可选字段（有默认值的字段必须放在最后）
     workflow_induction_max_retries: int = 5  # 工作流归纳最大重试次数，默认5次
     workflow_management_max_retries: int = 5  # 工作流管理最大重试次数，默认5次
 
@@ -135,6 +123,11 @@ class AWMPro(MemoryMechanism):
         self.config = config
         self._workflow_storage_path = self.config.workflow_storage_path
         self._workflow_storage_path.parent.mkdir(parents=True, exist_ok=True)
+
+        # 提取 template title（从 workflow_rag_prompt_template 中提取，用于识别增强后的消息）
+        # 例如: "Here are some useful workflows:\n{workflows}" -> "Here are some useful workflows:"
+        self.template_title = self.config.workflow_rag_prompt_template.split('{workflows}')[0].strip()
+        self.where = self.config.workflow_rag_where
 
         # 初始化工作流 RAG
         self._workflow_rag: Optional[RAG] = None
@@ -686,19 +679,8 @@ class AWMPro(MemoryMechanism):
         从 messages 中提取第一个 user message 作为检索 query。
         需要过滤掉插入的工作流记忆，只返回原始问题。
         """
-        if not messages:
-            return None
-        template_prefix = "Here are some useful workflows learned from past similar episodes"
-        for msg in messages:
-            role, content, _ = _extract_message_info(msg)
-            if role == "user":
-                content = str(content).strip() if content else ""
-                # 如果包含模板标题，只取模板标题之前的内容
-                if template_prefix in content:
-                    question = content.split(template_prefix)[0].strip()
-                    return question if question else None
-                return content
-        return None
+        template_titles = [self.template_title]
+        return extract_original_question(messages, where=self.where, template_titles=template_titles)
 
     def use_memory(
         self, task: str, messages: List[Dict[str, Any]]
@@ -708,10 +690,7 @@ class AWMPro(MemoryMechanism):
         1. 检索工作流记忆（RAG）
         2. 追加到第一个 user message 的末尾
         """
-        enhanced = list(messages) if messages is not None else []
-
-        # 检索工作流记忆
-        workflow_memory_text = ""
+        # 检索工作流记忆（RAG）
         if self._workflow_rag:
             question = self._extract_question_from_messages(messages)
             if question:
@@ -719,25 +698,18 @@ class AWMPro(MemoryMechanism):
                     query=question, top_k=self._workflow_rag.top_k
                 )
                 if retrieved_texts:
+                    print(f"[AWMPro] Retrieved {len(retrieved_texts)} workflows from RAG")
+
+                    # 组合检索到的 workflows
                     formatted_workflows = "\n\n".join(retrieved_texts)
                     workflow_memory_text = self.config.workflow_rag_prompt_template.format(
                         workflows=formatted_workflows
                     )
 
-        # 找到第一个 user message，在其 content 末尾追加记忆
-        if workflow_memory_text:
-            for i, msg in enumerate(enhanced):
-                role, content, _ = _extract_message_info(msg)
-                if role == "user":
-                    content = content if content else ""
-                    # 追加到 user message 末尾
-                    enhanced[i] = {
-                        **msg,
-                        "content": content + "\n\n" + workflow_memory_text
-                    }
-                    break
+                    # 使用公共工具插入记忆
+                    return enhance_messages_with_memory(messages, workflow_memory_text, where=self.where)
 
-        return enhanced
+        return list(messages) if messages is not None else []
 
     def _build_trajectory_text(
         self, task: str, history: List[Dict[str, Any]], result: Dict[str, Any]
@@ -762,11 +734,11 @@ class AWMPro(MemoryMechanism):
         if not history:
             return None
 
-        template_prefix = "Here are some useful workflows learned from past similar episodes"
+        template_titles = [self.template_title]
         parts: List[str] = [f"Task: {task}"]
 
         for msg in history:
-            role, content, msg_dict = _extract_message_info(msg)
+            role, content, msg_dict = extract_message_info(msg)
             if role is None:
                 continue
             content = str(content).strip() if content else ""
@@ -774,9 +746,21 @@ class AWMPro(MemoryMechanism):
                 continue
 
             if role == "user":
-                # 如果包含模板标题，只取模板标题之前的内容
-                if template_prefix in content:
-                    content = content.split(template_prefix)[0].strip()
+                # 如果是第一个user消息且包含记忆内容，提取原始问题
+                from src.utils.message_schema import ORIGINAL_QUESTION_SEPARATOR
+                has_memory = (
+                    ORIGINAL_QUESTION_SEPARATOR in content or
+                    any(title in content for title in template_titles)
+                )
+
+                if has_memory:
+                    # 使用公共工具提取原始问题
+                    question = extract_original_question([msg], where=self.where, template_titles=template_titles)
+                    if question:
+                        content = question
+                    else:
+                        content = ""
+
                 if content:  # 确保过滤后还有内容
                     parts.append(f"User: {content}")
             elif role == "assistant":
@@ -989,6 +973,7 @@ def load_awmpro_from_yaml(config_path: str) -> AWMPro:
     workflow_rag_order = str(workflow_rag_raw.get("order", "similar_at_top"))
     workflow_rag_seed = int(workflow_rag_raw.get("seed", 42))
     workflow_rag_prompt_template = workflow_rag_raw.get("prompt_template", "") or ""
+    workflow_rag_where = workflow_rag_raw.get("where", "tail")
     workflow_rag_success_only = bool(workflow_rag_raw.get("success_only", True))
     workflow_rag_reward_bigger_than_zero = bool(workflow_rag_raw.get("reward_bigger_than_zero", True))
 
@@ -1011,6 +996,7 @@ def load_awmpro_from_yaml(config_path: str) -> AWMPro:
         workflow_rag_order=workflow_rag_order,
         workflow_rag_seed=workflow_rag_seed,
         workflow_rag_prompt_template=workflow_rag_prompt_template,
+        workflow_rag_where=workflow_rag_where,
         workflow_rag_success_only=workflow_rag_success_only,
         workflow_rag_reward_bigger_than_zero=workflow_rag_reward_bigger_than_zero,
         workflow_management_similarity_top_k=workflow_management_similarity_top_k,

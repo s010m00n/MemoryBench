@@ -9,69 +9,48 @@ from typing import Any, Dict, List, Optional
 import yaml
 
 from ..base import MemoryMechanism
+from src.utils.message_schema import (
+    extract_message_info,
+    enhance_messages_with_memory,
+    extract_original_question,
+)
 
 
-def _extract_message_info(msg: Any) -> tuple[Optional[str], Optional[str], Optional[Dict[str, Any]]]:
-    """
-    从消息对象中提取 role、content 和完整消息字典。
-    处理多种消息格式：
-    - 字典类型：直接使用
-    - RootModel 包装的对象：访问 .root 属性
-    - RewardHistoryItem 等非聊天消息：返回 None
-    - 其他 Pydantic 模型：尝试转换为字典
-    """
-    # 如果是字典，直接使用
-    if isinstance(msg, dict):
-        return msg.get("role"), msg.get("content", ""), msg
-    
-    # 如果是 RootModel 包装的对象，访问 .root 属性
-    if hasattr(msg, 'root'):
-        root = msg.root
-        # 检查是否是 RewardHistoryItem（有 reward 属性但没有 role 属性）
-        if hasattr(root, 'reward') and not hasattr(root, 'role'):
-            return None, None, None  # 跳过 RewardHistoryItem
-        # 如果是字典，直接使用
-        if isinstance(root, dict):
-            return root.get("role"), root.get("content", ""), root
-        # 如果是 Pydantic 模型，尝试转换为字典
-        if hasattr(root, 'model_dump'):
-            root_dict = root.model_dump(exclude_none=True)
-            return root_dict.get("role"), root_dict.get("content", ""), root_dict
-    
-    # 如果是 RewardHistoryItem 等非聊天消息对象（有 reward 属性但没有 role 属性），跳过
-    if hasattr(msg, 'reward') and not hasattr(msg, 'role'):
-        return None, None, None
-    
-    # 如果是 Pydantic 模型，尝试转换为字典
-    if hasattr(msg, 'model_dump'):
-        msg_dict = msg.model_dump(exclude_none=True)
-        return msg_dict.get("role"), msg_dict.get("content", ""), msg_dict
-    
-    # 其他情况，尝试访问属性
-    if hasattr(msg, 'role') and hasattr(msg, 'content'):
-        return getattr(msg, 'role', None), getattr(msg, 'content', ""), None
-    
-    return None, None, None
-
-
-def _serialize_history(history: List[Any]) -> List[Dict[str, Any]]:
+def _serialize_history(history: List[Any], template_title: str, where: str) -> List[Dict[str, Any]]:
     """
     将 history 转换为可序列化的格式（JSON 兼容）。
     过滤掉 RewardHistoryItem 等非聊天消息，并将 Pydantic 模型转换为字典。
     关键：必须过滤掉本轮插入的记忆内容，只保留原始的交互。
+
+    Args:
+        history: 对话历史
+        template_title: 模板标题（用于识别记忆内容）
+        where: 插入位置（"tail" 或 "front"）
     """
-    template_prefix = "Based on your previous interactions, here are relevant memories:"
+    template_titles = [template_title]
     serialized = []
+
     for msg in history:
-        role, content, msg_dict = _extract_message_info(msg)
+        role, content, msg_dict = extract_message_info(msg)
 
         # 跳过无法提取 role 的消息（如 RewardHistoryItem）
         if role is None:
             continue
 
-        # 如果是user消息且包含模板标题，只取模板标题之前的内容
-        if role == "user" and content and template_prefix in str(content):
-            content = str(content).split(template_prefix)[0].strip()
+        # 如果是第一个user消息且包含记忆内容，提取原始问题
+        if role == "user" and content:
+            # 检查是否包含记忆（使用公共工具的逻辑）
+            from src.utils.message_schema import ORIGINAL_QUESTION_SEPARATOR
+            has_memory = (
+                ORIGINAL_QUESTION_SEPARATOR in str(content) or
+                any(title in str(content) for title in template_titles)
+            )
+
+            if has_memory:
+                # 提取原始问题
+                question = extract_original_question([msg], where=where, template_titles=template_titles)
+                if question:
+                    content = question
 
         # 如果提取到了完整的消息字典，使用它
         if msg_dict is not None:
@@ -118,6 +97,7 @@ class Mem0Config:
     success_only: bool = True
     reward_bigger_than_zero: bool = False  # True: 只存储 reward>0 的样本，False: 都存储
     prompt_template: str = "Based on your previous interactions, here are relevant memories:\n{memories}"
+    where: str = "tail"  # "tail": 记忆放在 user question 后面 | "front": 记忆放在 user question 前面
     # 重试配置
     max_retries: int = -1  # -1 表示无限重试，0 表示不重试，>0 表示最大重试次数
     retry_delay: float = 1.0  # 重试延迟（秒），指数退避的初始值
@@ -145,6 +125,9 @@ class Mem0Memory(MemoryMechanism):
     def __init__(self, config: Mem0Config) -> None:
         self.config = config
         self._client: Any = None
+        # 提取 template title（从 prompt_template 中提取，用于识别增强后的消息）
+        # 例如: "Based on your previous interactions, here are relevant memories:\n{memories}" -> "Based on your previous interactions, here are relevant memories:"
+        self.template_title = self.config.prompt_template.split('{memories}')[0].strip()
         self._init_client()
     
     def _init_client(self) -> None:
@@ -164,19 +147,8 @@ class Mem0Memory(MemoryMechanism):
         从 messages 中提取第一个 user message 作为检索 query。
         需要过滤掉插入的记忆内容，只返回原始问题。
         """
-        if not messages:
-            return None
-        template_prefix = "Based on your previous interactions, here are relevant memories:"
-        for msg in messages:
-            role, content, _ = _extract_message_info(msg)
-            if role == "user":
-                content = str(content).strip() if content else ""
-                # 如果包含模板标题，只取模板标题之前的内容
-                if template_prefix in content:
-                    question = content.split(template_prefix)[0].strip()
-                    return question if question else None
-                return content
-        return None
+        template_titles = [self.template_title]
+        return extract_original_question(messages, where=self.config.where, template_titles=template_titles)
     
     def _format_memories(self, memories: Any) -> str:
         """格式化检索到的记忆为文本"""
@@ -218,27 +190,14 @@ class Mem0Memory(MemoryMechanism):
         memory_text: str
     ) -> List[Dict[str, Any]]:
         """将记忆注入到 messages 中，追加到第一个 user message 的末尾"""
-        enhanced = list(messages) if messages is not None else []
-
         if not memory_text:
-            return enhanced
+            return list(messages) if messages is not None else []
 
         # 格式化记忆内容
         memory_content = self.config.prompt_template.format(memories=memory_text)
 
-        # 找到第一个 user message，在其 content 末尾追加记忆
-        for i, msg in enumerate(enhanced):
-            role, content, _ = _extract_message_info(msg)
-            if role == "user":
-                content = content if content else ""
-                # 追加到 user message 末尾
-                enhanced[i] = {
-                    **msg,
-                    "content": content + "\n\n" + memory_content
-                }
-                break
-
-        return enhanced
+        # 使用公共工具插入记忆
+        return enhance_messages_with_memory(messages, memory_content, where=self.config.where)
     
     def use_memory(
         self,
@@ -322,7 +281,7 @@ class Mem0Memory(MemoryMechanism):
         }
         
         # 将 history 转换为可序列化的格式（过滤 RewardHistoryItem，转换 Pydantic 模型）
-        serialized_history = _serialize_history(history)
+        serialized_history = _serialize_history(history, self.template_title, self.config.where)
         
         # 过滤并规范化 messages：Mem0 API 要求每条消息必须有 role 和 content，且 content 不能为空
         # 同时确保消息格式严格符合 Mem0 的要求（只包含 role 和 content 字段）
@@ -576,6 +535,7 @@ def load_mem0_from_yaml(config_path: str) -> Mem0Memory:
         "prompt_template",
         "Based on your previous interactions, here are relevant memories:\n{memories}"
     )
+    where = raw.get("where", "tail")
     # 重试配置
     max_retries = int(raw.get("max_retries", -1))  # -1 表示无限重试（一直重试直到成功）
     retry_delay = float(raw.get("retry_delay", 1.0))  # 重试延迟（秒）
@@ -595,6 +555,7 @@ def load_mem0_from_yaml(config_path: str) -> Mem0Memory:
         success_only=success_only,
         reward_bigger_than_zero=reward_bigger_than_zero,
         prompt_template=prompt_template,
+        where=where,
         max_retries=max_retries,
         retry_delay=retry_delay,
         retry_backoff=retry_backoff,

@@ -8,6 +8,13 @@ import random
 import numpy as np
 import logging
 
+from src.utils.message_schema import (
+    extract_message_info,
+    enhance_messages_with_memory,
+    extract_original_question,
+    extract_question_from_history,
+)
+
 try:
     import torch
     import faiss
@@ -18,49 +25,7 @@ except ImportError:
     print("Warning: faiss, torch, or transformers not installed. StreamICL will not work.")
 
 from ..base import MemoryMechanism
-
-
-def _extract_message_info(msg: Any) -> tuple[Optional[str], Optional[str], Optional[Dict[str, Any]]]:
-    """
-    从消息对象中提取 role、content 和完整消息字典。
-    处理多种消息格式：
-    - 字典类型：直接使用
-    - RootModel 包装的对象：访问 .root 属性
-    - RewardHistoryItem 等非聊天消息：返回 None
-    - 其他 Pydantic 模型：尝试转换为字典
-    """
-    # 如果是字典，直接使用
-    if isinstance(msg, dict):
-        return msg.get("role"), msg.get("content", ""), msg
-    
-    # 如果是 RootModel 包装的对象，访问 .root 属性
-    if hasattr(msg, 'root'):
-        root = msg.root
-        # 检查是否是 RewardHistoryItem（有 reward 属性但没有 role 属性）
-        if hasattr(root, 'reward') and not hasattr(root, 'role'):
-            return None, None, None  # 跳过 RewardHistoryItem
-        # 如果是字典，直接使用
-        if isinstance(root, dict):
-            return root.get("role"), root.get("content", ""), root
-        # 如果是 Pydantic 模型，尝试转换为字典
-        if hasattr(root, 'model_dump'):
-            root_dict = root.model_dump(exclude_none=True)
-            return root_dict.get("role"), root_dict.get("content", ""), root_dict
-    
-    # 如果是 RewardHistoryItem 等非聊天消息对象（有 reward 属性但没有 role 属性），跳过
-    if hasattr(msg, 'reward') and not hasattr(msg, 'role'):
-        return None, None, None
-    
-    # 如果是 Pydantic 模型，尝试转换为字典
-    if hasattr(msg, 'model_dump'):
-        msg_dict = msg.model_dump(exclude_none=True)
-        return msg_dict.get("role"), msg_dict.get("content", ""), msg_dict
-    
-    # 其他情况，尝试访问属性
-    if hasattr(msg, 'role') and hasattr(msg, 'content'):
-        return getattr(msg, 'role', None), getattr(msg, 'content', ""), None
-    
-    return None, None, None
+from src.utils.message_schema import extract_message_info
 
 
 class RAG:
@@ -81,10 +46,11 @@ class RAG:
         
         self.tokenizer = AutoTokenizer.from_pretrained(embedding_model)
         self.embed_model = AutoModel.from_pretrained(embedding_model).eval()
-        
+
         self.index = None
         self.id2evidence = dict()
-        self.embed_dim = len(self.encode_data("Test embedding size"))
+        # 直接从模型配置读取 embedding 维度，避免不必要的推理
+        self.embed_dim = self.embed_model.config.hidden_size
         self.insert_acc = 0
         
         self.seed = seed
@@ -173,6 +139,7 @@ class StreamICLMemory(MemoryMechanism):
         success_only: bool = True,  # True: 只存储成功完成的样本（finish 或 status=="completed"），False: 都存储
         reward_bigger_than_zero: bool = False,  # True: 只存储 reward>0 的样本，False: 都存储
         prompt_template: str = "Here are some examples of the task you have completed:\n\n{examples}",
+        where: str = "tail",  # "tail": 记忆放在 user question 后面 | "front": 记忆放在 user question 前面
         seed: int = 42,
     ):
         """
@@ -184,7 +151,8 @@ class StreamICLMemory(MemoryMechanism):
             order: 检索结果的排序方式
             success_only: True 表示只存储成功完成的样本（finish 或 status=="completed"），False 表示都存储
             reward_bigger_than_zero: True 表示只存储 reward>0 的样本，False 表示都存储
-            prompt_template: 记忆内容的模板（会追加到 user question 末尾）
+            prompt_template: 记忆内容的模板
+            where: "tail" 表示记忆放在 user question 后面，"front" 表示记忆放在 user question 前面
             seed: 随机种子
         """
         if not HAS_DEPENDENCIES:
@@ -200,7 +168,12 @@ class StreamICLMemory(MemoryMechanism):
         self.success_only = success_only
         self.reward_bigger_than_zero = reward_bigger_than_zero
         self.prompt_template = prompt_template
-        
+        self.where = where
+
+        # 提取 template title（从 prompt_template 中提取，用于识别增强后的消息）
+        # 例如: "Here are some examples:\n\n{examples}" -> "Here are some examples:"
+        self.template_title = self.prompt_template.split('{examples}')[0].strip()
+
         # 全局单一向量库（不再按任务分组）
         self.rag: Optional[RAG] = None
         try:
@@ -208,90 +181,31 @@ class StreamICLMemory(MemoryMechanism):
         except Exception as e:
             raise ImportError(f"Failed to initialize RAG: {e}")
     
-    def _extract_question(self, messages: List[Dict[str, Any]]) -> Optional[str]:
-        """
-        从 messages 中提取第一个 user message 作为 question。
-        需要过滤掉插入的 few-shot examples，只返回原始问题。
-        """
-        for msg in messages:
-            role, content, _ = _extract_message_info(msg)
-            if role == "user":
-                content = content if content else ""
-                # 检查是否包含插入的模板标题
-                template_prefix = "Here are some examples of the task you have completed:"
-                if template_prefix in content:
-                    # 提取模板标题之前的内容（原始问题）
-                    question = content.split(template_prefix)[0].strip()
-                    return question
-                return content
-        return None
-    
-    def _is_fewshot_example(self, content: str) -> bool:
-        """
-        判断是否是插入的 few-shot examples。
-        few-shot examples 的特征：
-        1. 包含模板标题 "Here are some examples of the task you have completed:"
-        2. 包含多个 "Question:"（多个完整的对话示例）
-        3. 包含 "Assistant:" 和 "Tool:"（完整的对话历史）
-        真正的 question 通常只包含一个 "Question:"，且不包含 "Assistant:" 或 "Tool:"
-        """
-        if not content:
-            return False
-
-        # 检查是否包含模板标题（最直接的判断方式）
-        template_prefix = "Here are some examples of the task you have completed:"
-        if template_prefix in content:
-            return True
-
-        # 如果长度太短，不太可能是 few-shot examples
-        if len(content) < 100:
-            return False
-
-        # 检查是否包含多个 "Question:"（few-shot examples 通常包含多个）
-        question_count = content.count("Question:")
-        # 检查是否包含完整的对话历史标记
-        has_assistant = "Assistant:" in content
-        has_tool = "Tool:" in content
-        # 如果包含多个 Question 或者包含 Assistant/Tool，说明是 few-shot examples
-        return question_count > 1 or (has_assistant and has_tool)
-    
     def use_memory(self, task: str, messages: List[Dict[str, Any]]) -> List[Dict[str, Any]]:
         """
         基于当前任务名和原始 messages，返回改写后的 messages。
         记忆内容会追加到第一个 user message 的末尾。
         """
-        enhanced = list(messages) if messages is not None else []
-
-        # 提取当前 question
-        question = self._extract_question(messages)
+        # 提取当前 question（使用公共工具）
+        template_titles = [self.template_title]
+        question = extract_original_question(messages, where=self.where, template_titles=template_titles)
         if not question:
-            return enhanced
+            return list(messages) if messages is not None else []
 
         # 检索相似经验（全局向量库，不按任务隔离）
         if not self.rag:
-            return enhanced
+            return list(messages) if messages is not None else []
         shots = self.rag.retrieve(query=question, top_k=self.rag.top_k)
 
         if not shots:
-            return enhanced
+            return list(messages) if messages is not None else []
 
         # 格式化经验文本
         fewshot_text = "\n\n\n".join(shots).replace("\\", "\\\\")
         memory_content = self.prompt_template.format(examples=fewshot_text)
 
-        # 找到第一个 user message，在其 content 末尾追加记忆
-        for i, msg in enumerate(enhanced):
-            role, content, _ = _extract_message_info(msg)
-            if role == "user":
-                content = content if content else ""
-                # 追加到 user message 末尾
-                enhanced[i] = {
-                    **msg,
-                    "content": content + "\n\n" + memory_content
-                }
-                break
-
-        return enhanced
+        # 使用公共工具插入记忆
+        return enhance_messages_with_memory(messages, memory_content, where=self.where)
     
     def update_memory(self, task: str, history: List[Dict[str, Any]], result: Dict[str, Any]) -> None:
         """
@@ -316,8 +230,9 @@ class StreamICLMemory(MemoryMechanism):
                 logging.info(f"[StreamICL] Skipping sample storage: reward_bigger_than_zero=True but reward={reward} (task={task})")
                 return
         
-        # 提取 question（用于检索的 key）
-        question = self._extract_question(history)
+        # 提取 question（用于检索的 key，使用公共工具）
+        template_titles = [self.template_title]
+        question = extract_question_from_history(history, where=self.where, template_titles=template_titles)
         if not question:
             print(f"[StreamICL] Skipping sample storage: No question extracted from history (task={task})")
             logging.info(f"[StreamICL] Skipping sample storage: No question extracted from history (task={task})")
@@ -341,20 +256,11 @@ class StreamICLMemory(MemoryMechanism):
 
         关键：必须过滤掉本轮use_memory()插入的few-shot examples，只保留原始的question和answer。
         """
-        template_prefix = "Here are some examples of the task you have completed:"
+        template_prefix = self.template_title
 
-        # 1. 提取原始question（去除模板标题及其后的内容）
-        question = None
-        for msg in history:
-            role, content, _ = _extract_message_info(msg)
-            if role == "user":
-                content = content if content else ""
-                # 如果包含模板标题，只取模板标题之前的内容
-                if template_prefix in content:
-                    question = content.split(template_prefix)[0].strip()
-                else:
-                    question = content
-                break
+        # 1. 提取原始question（使用公共工具）
+        template_titles = [template_prefix]
+        question = extract_question_from_history(history, where=self.where, template_titles=template_titles)
 
         if not question:
             return ""
@@ -364,7 +270,7 @@ class StreamICLMemory(MemoryMechanism):
         skip_first_user = True
 
         for msg in history:
-            role, content, msg_dict = _extract_message_info(msg)
+            role, content, msg_dict = extract_message_info(msg) 
             if role is None or role == "system":
                 continue
 
@@ -428,6 +334,7 @@ def load_stream_icl_from_yaml(config_path: str) -> StreamICLMemory:
     success_only = bool(stream_icl_cfg.get("success_only", True))
     reward_bigger_than_zero = bool(stream_icl_cfg.get("reward_bigger_than_zero", False))
     prompt_template = stream_icl_cfg.get("prompt_template", "Here are some examples of the task you have completed:\n\n{examples}")
+    where = stream_icl_cfg.get("where", "tail")
 
     return StreamICLMemory(
         embedding_model=embedding_model,
@@ -436,6 +343,7 @@ def load_stream_icl_from_yaml(config_path: str) -> StreamICLMemory:
         success_only=success_only,
         reward_bigger_than_zero=reward_bigger_than_zero,
         prompt_template=prompt_template,
+        where=where,
         seed=seed,
     )
 

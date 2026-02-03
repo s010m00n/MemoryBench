@@ -70,54 +70,6 @@ def _schedule_sequential_shuffled(
     return schedule
 
 
-def _schedule_round_robin(
-    task_to_indices: Dict[TaskName, Sequence[SampleIndex]],
-    interval: int,
-) -> Schedule:
-    """
-    Cross-task, no shuffle: each task contributes up to `interval` consecutive
-    samples in turn, preserving the original order inside each task.
-    """
-    from collections import deque
-
-    # Work on mutable queues of indices per task
-    task_queues = {
-        task: deque(indices) for task, indices in task_to_indices.items() if indices
-    }
-    tasks = list(task_queues.keys())
-    if not tasks:
-        return []
-
-    schedule: Schedule = []
-    task_idx = 0
-
-    while task_queues:
-        task = tasks[task_idx % len(tasks)]
-        queue = task_queues.get(task)
-        if not queue:
-            # This task has been exhausted; remove it from rotation
-            tasks.remove(task)
-            if not tasks:
-                break
-            continue
-
-        # Take up to `interval` items from this task
-        for _ in range(interval):
-            if not queue:
-                break
-            sample_idx = queue.popleft()
-            schedule.append((task, sample_idx))
-
-        # Drop empty queues
-        if not queue:
-            task_queues.pop(task, None)
-            tasks = [t for t in tasks if t in task_queues]
-
-        task_idx += 1
-
-    return schedule
-
-
 def _schedule_global_shuffle(
     task_to_indices: Dict[TaskName, Sequence[SampleIndex]],
     seed: int | None,

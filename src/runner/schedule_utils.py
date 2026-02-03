@@ -105,12 +105,6 @@ def is_locomo_task(task_name: str) -> bool:
     return task_name in tuple(f"locomo-{i}" for i in range(10))
 
 
-# 特殊标记：用于表示 session 内容注入
-SESSION_INJECTION_MARKER = "__SESSION_INJECTION__"
-# 特殊标记：用于表示 replay 模式的测试样本
-REPLAY_TEST_MARKER = "__REPLAY_TEST__"
-
-
 def build_locomo_session_schedule(
     locomo_task_name: TaskName,
     locomo_task_instance: Any,
@@ -529,5 +523,62 @@ def build_mixed_schedule(
     print(f"  -> Locomo QAs: {sum(len(session_qa_map[sid]) for sid in session_ids)}")
     
     return mixed_schedule
+
+
+def build_offline_locomo_schedule(
+    locomo_task_name: TaskName,
+    locomo_task_instance: Any,
+    shuffle_enabled: bool,
+    seed: int | None,
+) -> Schedule:
+    """
+    构建 offline 模式的 locomo 任务调度：一次性注入所有 session，然后处理所有 QA。
+
+    Offline 模式的特点：
+    - 在开头一次性注入所有 session 的内容（使用 SESSION_INJECTION_MARKER）
+    - 然后按顺序（或 shuffle）处理所有 QA
+    - 这样可以在 train/test 分割时，所有 session 的信息都已经注入到 memory 中
+
+    Args:
+        locomo_task_name: locomo 任务名称
+        locomo_task_instance: locomo 任务实例
+        shuffle_enabled: 是否对 QA 进行 shuffle
+        seed: shuffle 的随机种子
+
+    Returns:
+        调度序列：先注入所有 session，再处理所有 QA
+    """
+    import random as rnd
+
+    schedule: Schedule = []
+    session_ids = locomo_task_instance.session_ids
+
+    print(f"[Offline Locomo Schedule] Processing {len(session_ids)} sessions: {session_ids}")
+
+    # 1. 在开头一次性注入所有 session
+    for session_id in session_ids:
+        schedule.append((SESSION_INJECTION_MARKER, session_id))
+    print(f"[Offline Locomo Schedule] Added {len(session_ids)} session injection markers at the beginning")
+
+    # 2. 收集所有 QA 索引
+    all_qa_indices: List[SampleIndex] = []
+    for session_id in session_ids:
+        qa_indices = locomo_task_instance.get_qa_indices_for_session(session_id)
+        all_qa_indices.extend(qa_indices)
+
+    # 3. 如果 shuffle=True，打乱所有 QA 的顺序
+    if shuffle_enabled:
+        rng = rnd.Random(seed)
+        rng.shuffle(all_qa_indices)
+        print(f"[Offline Locomo Schedule] Shuffled {len(all_qa_indices)} QAs")
+    else:
+        print(f"[Offline Locomo Schedule] {len(all_qa_indices)} QAs (original order)")
+
+    # 4. 添加所有 QA 到 schedule
+    for qa_idx in all_qa_indices:
+        schedule.append((locomo_task_name, qa_idx))
+
+    print(f"[Offline Locomo Schedule] Total schedule length: {len(schedule)} ({len(session_ids)} injections + {len(all_qa_indices)} QAs)")
+    return schedule
 
 

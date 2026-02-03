@@ -1,4 +1,4 @@
-# AgentMemoryBench: LLM 智能体终身学习基准测试
+# MemoryBench: LLM 智能体终身学习基准测试
 
 用于评估 LLM 智能体在终身学习场景中记忆机制的研究基准。
 
@@ -33,25 +33,31 @@
 │   └── locomo/                # 长对话记忆
 │
 ├── memory/                     # 已经实现的5种记忆机制
+│   ├── base.py                # 记忆机制基类
+│   ├── registry.py            # 记忆机制注册表
 │   ├── zero_shot/             # 基线（无记忆）
 │   ├── streamICL/             # 基于RAG的检索
 │   ├── awmPro/                # 系统记忆（工作流）
 │   ├── mem0/                  # 个人记忆（偏好）
 │   └── MEMs/                  # 多记忆系统（提出方法）
 │
-├── execution/                  # 4种执行引擎
-│   ├── single_agent/          # 单智能体执行
-│   └── multi_agent_*/         # 多智能体策略
-│       ├── voting/            # 多数投票
-│       ├── round_robin/       # 轮询执行
-│       └── bandit/            # 多臂老虎机
+├── execution/                  # 执行引擎
+│   ├── base.py                # 执行引擎基类
+│   └── single_agent/          # 单智能体执行
 │
 ├── src/                        # 核心实现
 │   ├── runner/                # 主入口
-│   │   └── main.py            # 实验运行器
+│   │   ├── main.py            # 实验运行器
+│   │   ├── builders.py        # 组件构建器
+│   │   ├── config.py          # 配置解析
+│   │   └── schedule_utils.py # 调度工具函数
 │   ├── client/                # 客户端调度
+│   │   ├── backend.py         # 后端接口
+│   │   └── scheduler.py       # 调度器
 │   ├── server/                # 后端任务服务器（Docker）
 │   └── utils/                 # 分析工具
+│       ├── message_schema.py  # 消息格式兼容层
+│       └── analyze_results_*.py # 结果分析脚本
 │
 ├── extra/                      # Docker 编排
 │   └── docker-compose.yml     # 服务定义
@@ -188,50 +194,44 @@ param1: value1
 param2: value2
 ```
 
-#### 步骤 2：在 src/runner/builders.py 中注册
+#### 步骤 2：在 memory/registry.py 中注册
 
-在 `src/runner/builders.py` 的 `build_memory_from_config()` 函数中添加新的分支：
+在 `memory/registry.py` 的 `_register_all_memories()` 函数中添加新的记忆机制：
 
 ```python
-def build_memory_from_config(cfg: ExperimentConfig):
-    mem_cfg = cfg.memory_mechanism or {}
-    name = mem_cfg.get("name", "zero_shot")
-    config_path = mem_cfg.get("config_path")
+# 在 _register_all_memories() 函数中添加
+def _register_all_memories():
+    # ... 现有的注册代码 ...
 
-    # ... 现有的 if/elif 分支 ...
-
-    elif name == "my_memory":  # 添加你的记忆机制
-        if not config_path:
-            config_path = ROOT_DIR / "memory" / "my_memory" / "my_memory.yaml"
-        else:
-            config_path = ROOT_DIR / config_path
-        from memory.my_memory.my_memory import load_my_memory_from_yaml
-        return load_my_memory_from_yaml(str(config_path))
-
-    else:
-        raise NotImplementedError(f"Memory mechanism '{name}' not implemented yet")
+    # 注册你的新记忆机制（使用 snake_case 命名）
+    from memory.my_memory.my_memory import load_my_memory_from_yaml
+    register_memory(
+        name="my_memory",  # 统一使用 snake_case
+        loader_func=load_my_memory_from_yaml,
+        default_config_path="memory/my_memory/my_memory.yaml",
+    )
 ```
 
-#### 使用新的记忆机制
+#### 步骤 3：使用新的记忆机制
 
 在 `configs/assignment/default.yaml` 中配置：
 
 ```yaml
 memory_mechanism:
-  name: my_memory
+  name: my_memory  # 使用 snake_case 命名
   config_path: memory/my_memory/my_memory.yaml
 ```
 
 ### 5. Configuration Experiment
 
-！！！实验主要在 `configs\assignment\default.yaml` 中配置，初步计划只需要师兄帮忙跑dualRAG在online模式下，seed=66时的DB、OS、KG、ALF、locomo-0、...、locomo-9单任务，注意不用跑WebShop任务！！！
+实验主要在 `configs\assignment\default.yaml` 中配置。
 
 ```yaml
 # Lifelong Learning Benchmark Configuration
 # 配置要测试的任务、记忆机制、执行方法和实验参数
 
 # ===== 任务配置 =====
-# 指定要测试的任务列表（5个system memory任务+2个user memory任务，共7个任务）
+# 指定要测试的任务列表（5个system memory任务+10个personal memory任务）
 tasks:
 
   # 一次选中一个即可！！！
@@ -248,7 +248,7 @@ tasks:
   # - name: webshop-std
   #   config_path: configs/tasks/webshop.yaml
 
-  # user memory任务
+  # personal memory任务
   # - name: locomo-0
   #   config_path: configs/tasks/locomo-0.yaml
   # - name: locomo-1
@@ -257,23 +257,17 @@ tasks:
   #   config_path: configs/tasks/locomo-2.yaml
   # - name: locomo-3
   #   config_path: configs/tasks/locomo-3.yaml
-  # - name: locomo-4
-  #   config_path: configs/tasks/locomo-4.yaml
-  # - name: locomo-5
-  #   config_path: configs/tasks/locomo-5.yaml
-  # - name: locomo-6
-  #   config_path: configs/tasks/locomo-6.yaml
-  # - name: locomo-7
-  #   config_path: configs/tasks/locomo-7.yaml
-  # - name: locomo-8
-  #   config_path: configs/tasks/locomo-8.yaml
-  # - name: locomo-9
-  #   config_path: configs/tasks/locomo-9.yaml
+  # ... (locomo-4 到 locomo-9)
 
 # ===== 记忆机制配置 =====
-# 从 memory 文件夹中选择记忆机制
+# 从 memory 文件夹中选择记忆机制（统一使用 snake_case 命名）
 memory_mechanism:
-  name: which_one_would_you_like  # 可选: zero_shot, streamICL, mem0 ,awmPro , mems, awmPro
+  name: stream_icl  # 可选: zero_shot, stream_icl, mem0, awm_pro, mems
+
+# ===== 记忆机制配置 =====
+# 从 memory 文件夹中选择记忆机制（统一使用 snake_case 命名）
+memory_mechanism:
+  name: stream_icl  # 可选: zero_shot, stream_icl, mem0, awm_pro, mems
   config_path: memory/streamICL/streamICL.yaml
 
 # ===== 执行方法配置 =====
@@ -284,19 +278,15 @@ execution_method:
 
 # ===== 实验参数 =====
 experiment:
-  # 训练模式: online (在线学习) 或 offline (离线学习) 或 replay (重放学习) 或 transfer (迁移学习) 
+  # 训练模式: online (在线学习) 或 offline (离线学习) 或 replay (重放学习) 或 transfer (迁移学习)
   training_mode: online  # online | offline | replay | transfer
-  
+
   ...
-  
+
   # 数据打乱: 是否打乱任务顺序，可以设置随机种子
   shuffle:
     enabled: True  # True | False
-    seed: 1  # 整数，如果 enabled 为 true 时使用
-  
-
-# ===== 输出配置 =====
-output: "outputs/{TIMESTAMP}"
+    seed: 66  # 整数，如果 enabled 为 true 时使用
 ```
 
 ### 6. Run Experiments
@@ -309,5 +299,5 @@ python src/runner/main.py
 ### 7. View Results
 
 分析实验结果的脚本共有两个，分别是 `src\utils\analyze_results_for_system_memory.py` 与 `src\utils\analyze_results_for_personal_memory.py`:
-- 对于DB、OS、KG、ALF、WebShop任务，使用前者，运行代码 `python -m src.utils.analyze_results_for_system_memory outputs\2026-02-01_20-27-15\os-std`
-- 对于Locomo任务，使用后者，运行代码 `python -m src.utils.analyze_results_for_system_memory outputs\2026-02-01_21-22-31\locomo-0`
+- 对于DB、OS、KG、ALF、WebShop任务，使用前者，运行代码 `python -m src.utils.analyze_results_for_system_memory outputs\YY-MM-DD_HH-MM-SS\os-std`
+- 对于Locomo任务，使用后者，运行代码 `python -m src.utils.analyze_results_for_system_memory outputs\YY-MM-DD_HH-MM-SS\locomo-0`

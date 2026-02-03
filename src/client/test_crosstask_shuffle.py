@@ -35,21 +35,25 @@ def is_locomo_task(task_name: str) -> bool:
 
 
 def load_task_instance(task_name: str, tasks_cfg: List[Dict[str, Any]]) -> Optional[Any]:
-    """根据 task_name 加载对应的 task 实例（用于 locomo 任务的特殊处理）"""
+    """根据 task_name 加载对应的 task 实例（用于 locomo 任务的特殊处理）
+
+    Note: This is a test-specific version that takes tasks_cfg as a list.
+    The production version in schedule_utils.py takes ExperimentConfig.
+    """
     # 查找任务配置
     task_cfg = None
     for t in tasks_cfg:
         if t.get("name") == task_name:
             task_cfg = t
             break
-    
+
     if not task_cfg:
         return None
-    
+
     config_path = task_cfg.get("config_path")
     if not config_path:
         return None
-    
+
     # 加载 YAML 配置
     config_path = ROOT_DIR / config_path
     try:
@@ -58,11 +62,11 @@ def load_task_instance(task_name: str, tasks_cfg: List[Dict[str, Any]]) -> Optio
     except Exception as e:
         print(f"[load_task_instance] Failed to load YAML from {config_path}: {e}")
         return None
-    
+
     # 获取任务特定的配置（如果有）
     default_cfg = task_yaml.get("default", {})
     task_specific_cfg = task_yaml.get(task_name, {})
-    
+
     # 合并配置
     merged_cfg = default_cfg.copy() if default_cfg else {}
     if task_specific_cfg:
@@ -72,14 +76,14 @@ def load_task_instance(task_name: str, tasks_cfg: List[Dict[str, Any]]) -> Optio
             merged_cfg["parameters"] = merged_params
         if "module" in task_specific_cfg:
             merged_cfg["module"] = task_specific_cfg["module"]
-    
+
     if not merged_cfg:
         print(f"[load_task_instance] No config found for {task_name} in {config_path}")
         return None
-    
+
     module_path = merged_cfg.get("module", "")
     parameters = merged_cfg.get("parameters", {}) or {}
-    
+
     # 动态导入并实例化
     try:
         # 支持所有 locomo 任务（locomo-0 到 locomo-9）
@@ -100,7 +104,7 @@ def load_task_instance(task_name: str, tasks_cfg: List[Dict[str, Any]]) -> Optio
                 task_class = task_classes.get(task_class_name)
                 if task_class:
                     return task_class(**parameters)
-        
+
         print(f"[load_task_instance] Unknown module_path: {module_path}")
         return None
     except Exception as e:

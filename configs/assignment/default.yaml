@@ -7,8 +7,8 @@ tasks:
   # system memory任务
   # - name: dbbench-std
   #   config_path: configs/tasks/dbbench.yaml
-  - name: os-std
-    config_path: configs/tasks/os.yaml
+  # - name: os-std
+  #   config_path: configs/tasks/os.yaml
   # - name: kg-std
   #   config_path: configs/tasks/kg.yaml
   # - name: alfworld-std
@@ -17,8 +17,8 @@ tasks:
   #   config_path: configs/tasks/webshop.yaml
 
   # user memory任务
-  # - name: locomo-0
-  #   config_path: configs/tasks/locomo-0.yaml
+  - name: locomo-0
+    config_path: configs/tasks/locomo-0.yaml
   # - name: locomo-1
   #   config_path: configs/tasks/locomo-1.yaml
   # - name: locomo-2
@@ -39,10 +39,9 @@ tasks:
   #   config_path: configs/tasks/locomo-9.yaml
 
 # ===== 记忆机制配置 =====
-# 从 memory 文件夹中选择记忆机制
+# 从 memory 文件夹中选择记忆机制（统一使用 snake_case 命名）
 memory_mechanism:
-  name: awmPro  # 可选: zero_shot, streamICL, mem0 ,awmPro , mems, awmPro
-  config_path: memory/awmPro/awmPro.yaml
+  name: zero_shot  # 可选: zero_shot, stream_icl, mem0, awm_pro, mems
 
 # ===== 执行方法配置 =====
 # 从 execution 文件夹中选择执行方法
@@ -79,7 +78,7 @@ experiment:
   #   * cross_task=False 时，必须只能选中一个数据集（否则会报错）
   #   * cross_task=True 时，必须选中大于一个数据集（否则会报错）
   # - transfer 模式（迁移学习）：
-  #   * 必须 cross_task=True（不支持 cross_task=False）
+  #   * 必须 cross_task=True（不支持 cross_task=False，不支持locomo）
   #   * 必须选中两个任务：transfer_task 和 transfer_after_task
   #   * 选中的任务必须包含 transfer_task 和 transfer_after_task
   #   * 如果 shuffle.enabled=True，两个任务各自 shuffle，都使用 shuffle.seed
@@ -89,12 +88,8 @@ experiment:
   #   * 如果 shuffle.enabled=True，训练样本使用 shuffle.seed 进行 shuffle
   #   * 测试样本随机抽样使用 replay_seed（不涉及 shuffle）
   cross_task: False  # True | False
-  
+
   # 数据打乱: 是否打乱任务顺序，可以设置随机种子
   shuffle:
     enabled: True  # True | False
-    seed: 1  # 整数，如果 enabled 为 true 时使用
-  
-
-# ===== 输出配置 =====
-output: "outputs/{TIMESTAMP}"
+    seed: 66  # 整数，如果 enabled 为 true 时使用

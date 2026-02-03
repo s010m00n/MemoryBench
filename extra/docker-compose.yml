@@ -108,7 +108,7 @@ services:
       context: ..
       dockerfile: extra/freebase.Dockerfile
     volumes:
-      - "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx/virtuoso_db:/database" #最好写绝对路径
+      - "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx/virtuoso_db:/database"
     init: true
 
   redis:

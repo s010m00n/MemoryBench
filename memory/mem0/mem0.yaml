@@ -1,11 +1,10 @@
 mem0:
-  # 师兄要尝试这个方法可以找刘师兄要呀，我发给他了
-  api_key: "m0-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+  api_key: "m0-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
 
   # ===== user_id 配置 =====
   # 用户自定义的 user_id，用于在 Mem0 Platform 中分组记忆
   # 例如："experiment_001", "dbbench_cross_task", "alfworld_online" 等
-  user_id: "exp_001"
+  user_id: "exp_013"
 
   # ===== 记忆操作配置 =====
   infer: true  # true: 自动提取结构化记忆，false: 存储原始消息
@@ -24,6 +23,7 @@ mem0:
   prompt_template: |
     Based on your previous interactions, here are relevant memories:
     {memories}
+  where: tail  # tail: 记忆放在 user question 后面 | front: 记忆放在 user question 前面
   
   # ===== 重试配置 =====
   # max_retries: -1 表示无限重试（一直重试直到成功），0 表示不重试，>0 表示最大重试次数
@@ -33,4 +33,4 @@ mem0:
   retry_backoff: 2.0  # 指数退避倍数（每次重试延迟 = 上次延迟 * retry_backoff）
   
   # ===== 等待配置 =====
-  wait_time: 150.0  # 每次成功添加记忆后等待的时间
+  wait_time: 90.0  # 每次成功添加记忆后等待的时间

@@ -14,51 +14,9 @@ import yaml
 from ..base import MemoryMechanism, parse_llm_json_response
 from ..streamICL.streamICL import RAG
 from ..mem0.mem0 import Mem0Memory, Mem0Config
+from src.utils.message_schema import extract_message_info
 
 logger = logging.getLogger(__name__)
-
-
-def _extract_message_info(msg: Any) -> tuple[Optional[str], Optional[str], Optional[Dict[str, Any]]]:
-    """
-    从消息对象中提取 role、content 和完整消息字典。
-    处理多种消息格式：
-    - 字典类型：直接使用
-    - RootModel 包装的对象：访问 .root 属性
-    - RewardHistoryItem 等非聊天消息：返回 None
-    - 其他 Pydantic 模型：尝试转换为字典
-    """
-    # 如果是字典，直接使用
-    if isinstance(msg, dict):
-        return msg.get("role"), msg.get("content", ""), msg
-    
-    # 如果是 RootModel 包装的对象，访问 .root 属性
-    if hasattr(msg, 'root'):
-        root = msg.root
-        # 检查是否是 RewardHistoryItem（有 reward 属性但没有 role 属性）
-        if hasattr(root, 'reward') and not hasattr(root, 'role'):
-            return None, None, None  # 跳过 RewardHistoryItem
-        # 如果是字典，直接使用
-        if isinstance(root, dict):
-            return root.get("role"), root.get("content", ""), root
-        # 如果是 Pydantic 模型，尝试转换为字典
-        if hasattr(root, 'model_dump'):
-            root_dict = root.model_dump(exclude_none=True)
-            return root_dict.get("role"), root_dict.get("content", ""), root_dict
-    
-    # 如果是 RewardHistoryItem 等非聊天消息对象（有 reward 属性但没有 role 属性），跳过
-    if hasattr(msg, 'reward') and not hasattr(msg, 'role'):
-        return None, None, None
-    
-    # 如果是 Pydantic 模型，尝试转换为字典
-    if hasattr(msg, 'model_dump'):
-        msg_dict = msg.model_dump(exclude_none=True)
-        return msg_dict.get("role"), msg_dict.get("content", ""), msg_dict
-    
-    # 其他情况，尝试访问属性
-    if hasattr(msg, 'role') and hasattr(msg, 'content'):
-        return getattr(msg, 'role', None), getattr(msg, 'content', ""), None
-    
-    return None, None, None
 
 
 def _serialize_history(history: List[Any]) -> List[Dict[str, Any]]:
@@ -68,7 +26,7 @@ def _serialize_history(history: List[Any]) -> List[Dict[str, Any]]:
     """
     serialized = []
     for msg in history:
-        role, content, msg_dict = _extract_message_info(msg)
+        role, content, msg_dict = extract_message_info(msg)
         
         # 跳过无法提取 role 的消息（如 RewardHistoryItem）
         if role is None:
@@ -115,6 +73,7 @@ class MEMsConfig:
     workflow_rag_order: str
     workflow_rag_seed: int
     workflow_rag_prompt_template: str  # 改为 prompt_template
+    workflow_rag_where: str  # "tail": 记忆放在 user question 后面 | "front": 记忆放在 user question 前面
     workflow_rag_success_only: bool
     workflow_rag_reward_bigger_than_zero: bool
 
@@ -814,16 +773,34 @@ class MEMs(MemoryMechanism):
         mem0_prefix = "Based on your previous interactions, here are relevant memories:"
 
         for msg in messages:
-            role, content, _ = _extract_message_info(msg)
+            role, content, _ = extract_message_info(msg)
             if role == "user":
                 content = str(content).strip() if content else ""
-                # 如果包含任一模板标题，只取第一个模板标题之前的内容
+                # 如果包含任一模板标题，根据 where 参数判断原始问题的位置
                 if workflow_prefix in content:
-                    question = content.split(workflow_prefix)[0].strip()
-                    return question if question else None
+                    if self.where == "front":
+                        # where=front: 记忆在前，原始问题在后（模板前缀之后）
+                        parts = content.split(workflow_prefix, 1)
+                        if len(parts) > 1:
+                            question = parts[1].strip()
+                            return question if question else None
+                        return None
+                    else:  # tail
+                        # where=tail: 原始问题在前，记忆在后（模板前缀之前）
+                        question = content.split(workflow_prefix)[0].strip()
+                        return question if question else None
                 if mem0_prefix in content:
-                    question = content.split(mem0_prefix)[0].strip()
-                    return question if question else None
+                    if self.where == "front":
+                        # where=front: 记忆在前，原始问题在后（模板前缀之后）
+                        parts = content.split(mem0_prefix, 1)
+                        if len(parts) > 1:
+                            question = parts[1].strip()
+                            return question if question else None
+                        return None
+                    else:  # tail
+                        # where=tail: 原始问题在前，记忆在后（模板前缀之前）
+                        question = content.split(mem0_prefix)[0].strip()
+                        return question if question else None
                 return content
         return None
 
@@ -891,13 +868,19 @@ class MEMs(MemoryMechanism):
 
         if combined_memory:
             for i, msg in enumerate(enhanced):
-                role, content, _ = _extract_message_info(msg)
+                role, content, msg_dict = extract_message_info(msg)
                 if role == "user":
                     content = content if content else ""
-                    # 追加到 user message 末尾
+                    # 根据 where 参数决定记忆放在前面还是后面
+                    # 注意：MEMs 使用 workflow_rag_where，因为它主要基于 workflow 配置
+                    # 如果需要考虑 mem0 的 where，需要在组合记忆时分别处理
+                    if self.config.workflow_rag_where == "front":
+                        new_content = combined_memory + "\n\n" + content
+                    else:  # tail
+                        new_content = content + "\n\n" + combined_memory
                     enhanced[i] = {
-                        **msg,
-                        "content": content + "\n\n" + combined_memory
+                        **msg_dict,
+                        "content": new_content
                     }
                     break
 
@@ -932,7 +915,7 @@ class MEMs(MemoryMechanism):
         parts: List[str] = [f"Task: {task}"]
 
         for msg in history:
-            role, content, msg_dict = _extract_message_info(msg)
+            role, content, msg_dict = extract_message_info(msg)
             if role is None:
                 continue
             content = str(content).strip() if content else ""
@@ -940,11 +923,29 @@ class MEMs(MemoryMechanism):
                 continue
 
             if role == "user":
-                # 如果包含任一模板标题，只取第一个模板标题之前的内容
+                # 如果包含任一模板标题，根据 where 参数判断原始问题的位置
                 if workflow_prefix in content:
-                    content = content.split(workflow_prefix)[0].strip()
+                    if self.where == "front":
+                        # where=front: 记忆在前，原始问题在后（模板前缀之后）
+                        parts_split = content.split(workflow_prefix, 1)
+                        if len(parts_split) > 1:
+                            content = parts_split[1].strip()
+                        else:
+                            content = ""
+                    else:  # tail
+                        # where=tail: 原始问题在前，记忆在后（模板前缀之前）
+                        content = content.split(workflow_prefix)[0].strip()
                 elif mem0_prefix in content:
-                    content = content.split(mem0_prefix)[0].strip()
+                    if self.where == "front":
+                        # where=front: 记忆在前，原始问题在后（模板前缀之后）
+                        parts_split = content.split(mem0_prefix, 1)
+                        if len(parts_split) > 1:
+                            content = parts_split[1].strip()
+                        else:
+                            content = ""
+                    else:  # tail
+                        # where=tail: 原始问题在前，记忆在后（模板前缀之前）
+                        content = content.split(mem0_prefix)[0].strip()
                 if content:  # 确保过滤后还有内容
                     parts.append(f"User: {content}")
             elif role == "assistant":
@@ -1195,6 +1196,7 @@ def load_mems_from_yaml(config_path: str) -> MEMs:
     workflow_rag_order = str(workflow_rag_raw.get("order", "similar_at_top"))
     workflow_rag_seed = int(workflow_rag_raw.get("seed", 42))
     workflow_rag_prompt_template = workflow_rag_raw.get("prompt_template", "") or ""
+    workflow_rag_where = workflow_rag_raw.get("where", "tail")
     workflow_rag_success_only = bool(workflow_rag_raw.get("success_only", True))
     workflow_rag_reward_bigger_than_zero = bool(workflow_rag_raw.get("reward_bigger_than_zero", True))
 
@@ -1220,6 +1222,7 @@ def load_mems_from_yaml(config_path: str) -> MEMs:
         workflow_rag_order=workflow_rag_order,
         workflow_rag_seed=workflow_rag_seed,
         workflow_rag_prompt_template=workflow_rag_prompt_template,
+        workflow_rag_where=workflow_rag_where,
         workflow_rag_success_only=workflow_rag_success_only,
         workflow_rag_reward_bigger_than_zero=workflow_rag_reward_bigger_than_zero,
         workflow_management_similarity_top_k=workflow_management_similarity_top_k,

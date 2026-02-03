@@ -1,9 +1,9 @@
 stream_icl:
   # RAG 配置
   rag:
-    # 下载同款 embedding 模型 `git clone https://huggingface.co/BAAI/bge-base-en-v1.5`
+
     # 如需离线/本地加载，填本地模型目录绝对路径，例如：
-    embedding_model: "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx/bge-base-en-v1.5"  # 用于编码的 embedding 模型
+    embedding_model: "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx/bge-base-en-v1.5"  # 用于编码的 embedding 模型
 
     top_k: 4  # 检索 top_k 个最相似的经验
     order: "similar_at_top"  # "similar_at_top" | "similar_at_bottom" | "random"
@@ -16,3 +16,4 @@ stream_icl:
   # ===== 提示模板 =====
   # 记忆内容会追加到 user question 末尾
   prompt_template: "Here are some examples of the task you have completed:\n\n{examples}"
+  where: tail  # tail: 记忆放在 user question 后面 | front: 记忆放在 user question 前面
