@@ -8,7 +8,10 @@
           "D1:2"
         ],
         "category": 2,
-        "where": 1
+        "where": 1,
+        "where_ground_truth": [
+          1
+        ]
       },
       {
         "question": "When Gina has lost her job at Door Dash?",
@@ -17,7 +20,10 @@
           "D1:3"
         ],
         "category": 2,
-        "where": 1
+        "where": 1,
+        "where_ground_truth": [
+          1
+        ]
       },
       {
         "question": "How do Jon and Gina both like to destress?",
@@ -27,7 +33,10 @@
           "D1:6"
         ],
         "category": 4,
-        "where": 1
+        "where": 1,
+        "where_ground_truth": [
+          1
+        ]
       },
       {
         "question": "What do Jon and Gina both have in common?",
@@ -39,7 +48,11 @@
           "D2:1"
         ],
         "category": 1,
-        "where": 2
+        "where": 2,
+        "where_ground_truth": [
+          1,
+          2
+        ]
       },
       {
         "question": "Why did Jon decide to start his dance studio?",
@@ -49,7 +62,10 @@
           "D1:4"
         ],
         "category": 4,
-        "where": 1
+        "where": 1,
+        "where_ground_truth": [
+          1
+        ]
       },
       {
         "question": "What Jon thinks the ideal dance studio should look like?",
@@ -60,7 +76,11 @@
           "D2:8"
         ],
         "category": 1,
-        "where": 2
+        "where": 2,
+        "where_ground_truth": [
+          1,
+          2
+        ]
       },
       {
         "question": "When is Jon's group performing at a festival?",
@@ -69,7 +89,10 @@
           "D1:24"
         ],
         "category": 2,
-        "where": 1
+        "where": 1,
+        "where_ground_truth": [
+          1
+        ]
       },
       {
         "question": "When did Gina launch an ad campaign for her store?",
@@ -78,7 +101,10 @@
           "D2:1"
         ],
         "category": 2,
-        "where": 2
+        "where": 2,
+        "where_ground_truth": [
+          2
+        ]
       },
       {
         "question": "When was Jon in Paris?",
@@ -87,7 +113,10 @@
           "D2:4"
         ],
         "category": 2,
-        "where": 2
+        "where": 2,
+        "where_ground_truth": [
+          2
+        ]
       },
       {
         "question": "Which city have both Jean and John visited?",
@@ -97,7 +126,11 @@
           "D15:1"
         ],
         "category": 1,
-        "where": 15
+        "where": 15,
+        "where_ground_truth": [
+          2,
+          15
+        ]
       },
       {
         "question": "When did Gina team up with a local artist for some cool designs?",
@@ -106,7 +139,10 @@
           "D5:5"
         ],
         "category": 2,
-        "where": 5
+        "where": 5,
+        "where_ground_truth": [
+          5
+        ]
       },
       {
         "question": "When did Gina get her tattoo?",
@@ -115,7 +151,10 @@
           "D5:15"
         ],
         "category": 2,
-        "where": 5
+        "where": 5,
+        "where_ground_truth": [
+          5
+        ]
       },
       {
         "question": "When did Jon start to go to the gym?",
@@ -124,7 +163,10 @@
           "D6:1"
         ],
         "category": 2,
-        "where": 6
+        "where": 6,
+        "where_ground_truth": [
+          6
+        ]
       },
       {
         "question": "When did Gina open her online clothing store?",
@@ -133,7 +175,10 @@
           "D6:6"
         ],
         "category": 2,
-        "where": 6
+        "where": 6,
+        "where_ground_truth": [
+          6
+        ]
       },
       {
         "question": "When did Jon start expanding his studio's social media presence?",
@@ -142,7 +187,10 @@
           "D8:13"
         ],
         "category": 2,
-        "where": 8
+        "where": 8,
+        "where_ground_truth": [
+          8
+        ]
       },
       {
         "question": "When did Jon host a dance competition?",
@@ -151,7 +199,10 @@
           "D8:13"
         ],
         "category": 2,
-        "where": 8
+        "where": 8,
+        "where_ground_truth": [
+          8
+        ]
       },
       {
         "question": "When did Jon go to a fair to get more exposure for his dance studio?",
@@ -160,7 +211,10 @@
           "D10:1"
         ],
         "category": 2,
-        "where": 10
+        "where": 10,
+        "where_ground_truth": [
+          10
+        ]
       },
       {
         "question": "Why did Gina decide to start her own clothing store?",
@@ -170,7 +224,11 @@
           "D1:3"
         ],
         "category": 1,
-        "where": 6
+        "where": 6,
+        "where_ground_truth": [
+          1,
+          6
+        ]
       },
       {
         "question": "Do Jon and Gina start businesses out of what they love?",
@@ -180,7 +238,11 @@
           "D6:8"
         ],
         "category": 1,
-        "where": 6
+        "where": 6,
+        "where_ground_truth": [
+          1,
+          6
+        ]
       },
       {
         "question": "When did Gina interview for a design internship?",
@@ -189,7 +251,10 @@
           "D11:14"
         ],
         "category": 2,
-        "where": 11
+        "where": 11,
+        "where_ground_truth": [
+          11
+        ]
       },
       {
         "question": "When did Gina get accepted for the design internship?",
@@ -198,7 +263,10 @@
           "D12:1"
         ],
         "category": 2,
-        "where": 12
+        "where": 12,
+        "where_ground_truth": [
+          12
+        ]
       },
       {
         "question": "When did Jon start reading \"The Lean Startup\"?",
@@ -207,7 +275,10 @@
           "D12:6"
         ],
         "category": 2,
-        "where": 12
+        "where": 12,
+        "where_ground_truth": [
+          12
+        ]
       },
       {
         "question": "When did Gina develop a video presentation to teach how to style her fashion pieces? ",
@@ -216,7 +287,10 @@
           "D13:4"
         ],
         "category": 2,
-        "where": 13
+        "where": 13,
+        "where_ground_truth": [
+          13
+        ]
       },
       {
         "question": "How did Gina promote her clothes store?",
@@ -228,7 +302,13 @@
           "D13:4"
         ],
         "category": 1,
-        "where": 16
+        "where": 16,
+        "where_ground_truth": [
+          5,
+          8,
+          13,
+          16
+        ]
       },
       {
         "question": "Which events has Jon participated in to promote his business venture?",
@@ -239,7 +319,12 @@
           "D8:4"
         ],
         "category": 1,
-        "where": 16
+        "where": 16,
+        "where_ground_truth": [
+          8,
+          10,
+          16
+        ]
       },
       {
         "question": "What does Jon's dance studio offer?",
@@ -249,7 +334,11 @@
           "D8:13"
         ],
         "category": 1,
-        "where": 13
+        "where": 13,
+        "where_ground_truth": [
+          8,
+          13
+        ]
       },
       {
         "question": "When did Jon receive mentorship to promote his venture?",
@@ -258,7 +347,10 @@
           "D14:1"
         ],
         "category": 2,
-        "where": 14
+        "where": 14,
+        "where_ground_truth": [
+          14
+        ]
       },
       {
         "question": "Did Jon and Gina both participate in dance competitions?",
@@ -271,7 +363,12 @@
           "D9:10"
         ],
         "category": 1,
-        "where": 14
+        "where": 14,
+        "where_ground_truth": [
+          1,
+          9,
+          14
+        ]
       },
       {
         "question": "When was Jon in Rome?",
@@ -280,7 +377,10 @@
           "D15:1"
         ],
         "category": 2,
-        "where": 15
+        "where": 15,
+        "where_ground_truth": [
+          15
+        ]
       },
       {
         "question": "Which cities has Jon visited?",
@@ -290,7 +390,11 @@
           "D15:1"
         ],
         "category": 1,
-        "where": 15
+        "where": 15,
+        "where_ground_truth": [
+          2,
+          15
+        ]
       },
       {
         "question": "When Jon is planning to open his dance studio?",
@@ -299,7 +403,10 @@
           "D15:5"
         ],
         "category": 2,
-        "where": 15
+        "where": 15,
+        "where_ground_truth": [
+          15
+        ]
       },
       {
         "question": "How long did it take for Jon to open his studio?",
@@ -309,7 +416,11 @@
           "D15:13"
         ],
         "category": 1,
-        "where": 15
+        "where": 15,
+        "where_ground_truth": [
+          1,
+          15
+        ]
       },
       {
         "question": "When did Gina design a limited collection of hoodies?",
@@ -318,7 +429,10 @@
           "D16:3"
         ],
         "category": 2,
-        "where": 16
+        "where": 16,
+        "where_ground_truth": [
+          16
+        ]
       },
       {
         "question": "When did Jon visit networking events for his store?",
@@ -327,7 +441,10 @@
           "D16:6"
         ],
         "category": 2,
-        "where": 16
+        "where": 16,
+        "where_ground_truth": [
+          16
+        ]
       },
       {
         "question": "When did Gina start being recognized by fashion editors?",
@@ -336,7 +453,10 @@
           "D17:1"
         ],
         "category": 2,
-        "where": 17
+        "where": 17,
+        "where_ground_truth": [
+          17
+        ]
       },
       {
         "question": "When did Jon start learning marketing and analytics tools?",
@@ -345,7 +465,10 @@
           "D17:4"
         ],
         "category": 2,
-        "where": 17
+        "where": 17,
+        "where_ground_truth": [
+          17
+        ]
       },
       {
         "question": "When did Jon and Gina decide to collaborate to create dance content?",
@@ -354,7 +477,10 @@
           "D18:18"
         ],
         "category": 2,
-        "where": 18
+        "where": 18,
+        "where_ground_truth": [
+          18
+        ]
       },
       {
         "question": "When did Gina mention Shia Labeouf?",
@@ -363,7 +489,10 @@
           "D19:4"
         ],
         "category": 2,
-        "where": 19
+        "where": 19,
+        "where_ground_truth": [
+          19
+        ]
       },
       {
         "question": "When did Gina go to a dance class with a group of friends?",
@@ -372,7 +501,10 @@
           "D19:6"
         ],
         "category": 2,
-        "where": 19
+        "where": 19,
+        "where_ground_truth": [
+          19
+        ]
       },
       {
         "question": "What is Gina's favorite style of dance?",
@@ -381,7 +513,10 @@
           "D1:9"
         ],
         "category": 4,
-        "where": 1
+        "where": 1,
+        "where_ground_truth": [
+          1
+        ]
       },
       {
         "question": "What is Jon's favorite style of dance?",
@@ -390,7 +525,10 @@
           "D1:8"
         ],
         "category": 4,
-        "where": 1
+        "where": 1,
+        "where_ground_truth": [
+          1
+        ]
       },
       {
         "question": "What was Gina's favorite dancing memory?",
@@ -399,7 +537,10 @@
           "D1:17"
         ],
         "category": 4,
-        "where": 1
+        "where": 1,
+        "where_ground_truth": [
+          1
+        ]
       },
       {
         "question": "What kind of dance piece did Gina's team perform to win first place?",
@@ -408,7 +549,10 @@
           "D1:19"
         ],
         "category": 4,
-        "where": 1
+        "where": 1,
+        "where_ground_truth": [
+          1
+        ]
       },
       {
         "question": "What do the dancers in the photo represent?",
@@ -417,7 +561,10 @@
           "D1:25"
         ],
         "category": 4,
-        "where": 1
+        "where": 1,
+        "where_ground_truth": [
+          1
+        ]
       },
       {
         "question": "What does Gina say about the dancers in the photo?",
@@ -426,7 +573,10 @@
           "D1:26"
         ],
         "category": 4,
-        "where": 1
+        "where": 1,
+        "where_ground_truth": [
+          1
+        ]
       },
       {
         "question": "What is Jon's attitude towards being part of the dance festival?",
@@ -435,7 +585,10 @@
           "D1:28"
         ],
         "category": 4,
-        "where": 1
+        "where": 1,
+        "where_ground_truth": [
+          1
+        ]
       },
       {
         "question": "What kind of flooring is Jon looking for in his dance studio?",
@@ -444,7 +597,10 @@
           "D2:8"
         ],
         "category": 4,
-        "where": 2
+        "where": 2,
+        "where_ground_truth": [
+          2
+        ]
       },
       {
         "question": "What did Gina find for her clothing store on 1 February, 2023?",
@@ -453,7 +609,10 @@
           "D3:2"
         ],
         "category": 4,
-        "where": 3
+        "where": 3,
+        "where_ground_truth": [
+          3
+        ]
       },
       {
         "question": "What did Gina design for her store?",
@@ -462,7 +621,10 @@
           "D3:4"
         ],
         "category": 4,
-        "where": 3
+        "where": 3,
+        "where_ground_truth": [
+          3
+        ]
       },
       {
         "question": "What did Gina want her customers to feel in her store?",
@@ -472,7 +634,10 @@
           "D3:8"
         ],
         "category": 4,
-        "where": 3
+        "where": 3,
+        "where_ground_truth": [
+          3
+        ]
       },
       {
         "question": "What did Jon say about Gina's progress with her store?",
@@ -481,7 +646,10 @@
           "D3:3"
         ],
         "category": 4,
-        "where": 3
+        "where": 3,
+        "where_ground_truth": [
+          3
+        ]
       },
       {
         "question": "What made Gina choose the furniture and decor for her store?",
@@ -490,7 +658,10 @@
           "D3:6"
         ],
         "category": 4,
-        "where": 3
+        "where": 3,
+        "where_ground_truth": [
+          3
+        ]
       },
       {
         "question": "What did Jon say about creating a special experience for customers?",
@@ -499,7 +670,10 @@
           "D3:9"
         ],
         "category": 4,
-        "where": 3
+        "where": 3,
+        "where_ground_truth": [
+          3
+        ]
       },
       {
         "question": "What did Gina say about creating an experience for her customers?",
@@ -508,7 +682,10 @@
           "D3:8"
         ],
         "category": 4,
-        "where": 3
+        "where": 3,
+        "where_ground_truth": [
+          3
+        ]
       },
       {
         "question": "How is Gina's store doing?",
@@ -517,7 +694,10 @@
           "D4:2"
         ],
         "category": 4,
-        "where": 4
+        "where": 4,
+        "where_ground_truth": [
+          4
+        ]
       },
       {
         "question": "What does Gina's tattoo symbolize?",
@@ -526,7 +706,10 @@
           "D5:15"
         ],
         "category": 4,
-        "where": 5
+        "where": 5,
+        "where_ground_truth": [
+          5
+        ]
       },
       {
         "question": "What did Jon and Gina compare their entrepreneurial journeys to?",
@@ -536,7 +719,10 @@
           "D6:16"
         ],
         "category": 4,
-        "where": 6
+        "where": 6,
+        "where_ground_truth": [
+          6
+        ]
       },
       {
         "question": "What advice does Gina give to Jon about running a successful business?",
@@ -545,7 +731,10 @@
           "D7:5"
         ],
         "category": 4,
-        "where": 7
+        "where": 7,
+        "where_ground_truth": [
+          7
+        ]
       },
       {
         "question": "Why did Jon shut down his bank account?",
@@ -554,7 +743,10 @@
           "D8:1"
         ],
         "category": 4,
-        "where": 8
+        "where": 8,
+        "where_ground_truth": [
+          8
+        ]
       },
       {
         "question": "Why did Gina combine her clothing business with dance?",
@@ -563,7 +755,10 @@
           "D8:8"
         ],
         "category": 4,
-        "where": 8
+        "where": 8,
+        "where_ground_truth": [
+          8
+        ]
       },
       {
         "question": "What does Jon's dance make him?",
@@ -572,7 +767,10 @@
           "D9:5"
         ],
         "category": 4,
-        "where": 9
+        "where": 9,
+        "where_ground_truth": [
+          9
+        ]
       },
       {
         "question": "What did Gina receive from a dance contest?",
@@ -581,7 +779,10 @@
           "D9:10"
         ],
         "category": 4,
-        "where": 9
+        "where": 9,
+        "where_ground_truth": [
+          9
+        ]
       },
       {
         "question": "How does Gina stay confident in her business?",
@@ -590,7 +791,10 @@
           "D10:8"
         ],
         "category": 4,
-        "where": 10
+        "where": 10,
+        "where_ground_truth": [
+          10
+        ]
       },
       {
         "question": "What kind of professional experience did Gina get accepted for on May 23, 2023?",
@@ -599,7 +803,10 @@
           "D12:1"
         ],
         "category": 4,
-        "where": 12
+        "where": 12,
+        "where_ground_truth": [
+          12
+        ]
       },
       {
         "question": "Where is Gina's fashion internship?",
@@ -608,7 +815,10 @@
           "D12:3"
         ],
         "category": 4,
-        "where": 12
+        "where": 12,
+        "where_ground_truth": [
+          12
+        ]
       },
       {
         "question": "What book is Jon currently reading?",
@@ -617,7 +827,10 @@
           "D12:6"
         ],
         "category": 4,
-        "where": 12
+        "where": 12,
+        "where_ground_truth": [
+          12
+        ]
       },
       {
         "question": "What is Jon offering to the dancers at his dance studio?",
@@ -626,7 +839,10 @@
           "D13:7"
         ],
         "category": 4,
-        "where": 13
+        "where": 13,
+        "where_ground_truth": [
+          13
+        ]
       },
       {
         "question": "How does Jon use the clipboard with a notepad attached to it?",
@@ -635,7 +851,10 @@
           "D13:11"
         ],
         "category": 4,
-        "where": 13
+        "where": 13,
+        "where_ground_truth": [
+          13
+        ]
       },
       {
         "question": "What does Jon tell Gina he won't do?",
@@ -644,7 +863,10 @@
           "D14:17"
         ],
         "category": 4,
-        "where": 14
+        "where": 14,
+        "where_ground_truth": [
+          14
+        ]
       },
       {
         "question": "What did Jon take a trip to Rome for?",
@@ -653,7 +875,10 @@
           "D15:1"
         ],
         "category": 4,
-        "where": 15
+        "where": 15,
+        "where_ground_truth": [
+          15
+        ]
       },
       {
         "question": "What is Jon working on opening?",
@@ -662,7 +887,10 @@
           "D15:3"
         ],
         "category": 4,
-        "where": 15
+        "where": 15,
+        "where_ground_truth": [
+          15
+        ]
       },
       {
         "question": "How does Gina describe the studio that Jon has opened?",
@@ -671,7 +899,10 @@
           "D15:6"
         ],
         "category": 4,
-        "where": 15
+        "where": 15,
+        "where_ground_truth": [
+          15
+        ]
       },
       {
         "question": "How does Jon feel about the opening night of his dance studio?",
@@ -680,7 +911,10 @@
           "D15:7"
         ],
         "category": 4,
-        "where": 15
+        "where": 15,
+        "where_ground_truth": [
+          15
+        ]
       },
       {
         "question": "How does Gina describe the feeling that dance brings?",
@@ -689,7 +923,10 @@
           "D15:8"
         ],
         "category": 4,
-        "where": 15
+        "where": 15,
+        "where_ground_truth": [
+          15
+        ]
       },
       {
         "question": "What does Jon plan to do at the grand opening of his dance studio?",
@@ -698,7 +935,10 @@
           "D15:9"
         ],
         "category": 4,
-        "where": 15
+        "where": 15,
+        "where_ground_truth": [
+          15
+        ]
       },
       {
         "question": "What does Gina say to Jon about the grand opening?",
@@ -707,7 +947,10 @@
           "D15:12"
         ],
         "category": 4,
-        "where": 15
+        "where": 15,
+        "where_ground_truth": [
+          15
+        ]
       },
       {
         "question": "What is the general sentiment about the upcoming grand opening?",
@@ -717,7 +960,10 @@
           "D15:19"
         ],
         "category": 4,
-        "where": 15
+        "where": 15,
+        "where_ground_truth": [
+          15
+        ]
       },
       {
         "question": "What did Gina make a limited edition line of?",
@@ -726,7 +972,10 @@
           "D16:3"
         ],
         "category": 4,
-        "where": 16
+        "where": 16,
+        "where_ground_truth": [
+          16
+        ]
       },
       {
         "question": "According to Gina, what makes Jon a perfect mentor and guide?",
@@ -735,7 +984,10 @@
           "D17:7"
         ],
         "category": 4,
-        "where": 17
+        "where": 17,
+        "where_ground_truth": [
+          17
+        ]
       },
       {
         "question": "What temporary job did Jon take to cover expenses?",
@@ -744,7 +996,10 @@
         ],
         "category": 5,
         "adversarial_answer": "Not mentioned",
-        "where": 18
+        "where": 18,
+        "where_ground_truth": [
+          18
+        ]
       },
       {
         "question": "What plans does Jon have after receiving advice at the networking event?",
@@ -753,7 +1008,10 @@
           "D18:10"
         ],
         "category": 4,
-        "where": 18
+        "where": 18,
+        "where_ground_truth": [
+          18
+        ]
       },
       {
         "question": "What offer does Gina make to Jon regarding social media?",
@@ -762,7 +1020,10 @@
           "D18:13"
         ],
         "category": 4,
-        "where": 18
+        "where": 18,
+        "where_ground_truth": [
+          18
+        ]
       },
       {
         "question": "What is Jon's favorite style of painting?",
@@ -771,7 +1032,10 @@
         ],
         "category": 5,
         "adversarial_answer": "Contemporary",
-        "where": 1
+        "where": 1,
+        "where_ground_truth": [
+          1
+        ]
       },
       {
         "question": "What was Jon's favorite dancing memory?",
@@ -780,7 +1044,10 @@
         ],
         "category": 5,
         "adversarial_answer": "Winning first place at a regionals dance competition",
-        "where": 1
+        "where": 1,
+        "where_ground_truth": [
+          1
+        ]
       },
       {
         "question": "What kind of dance piece did Jon's team perform to win first place?",
@@ -789,7 +1056,10 @@
         ],
         "category": 5,
         "adversarial_answer": "\"Finding Freedom\"",
-        "where": 1
+        "where": 1,
+        "where_ground_truth": [
+          1
+        ]
       },
       {
         "question": "What is Gina's attitude towards participating in the dance festival?",
@@ -798,7 +1068,10 @@
         ],
         "category": 5,
         "adversarial_answer": "Glad",
-        "where": 1
+        "where": 1,
+        "where_ground_truth": [
+          1
+        ]
       },
       {
         "question": "What kind of flooring is Gina looking for in her dance studio?",
@@ -807,7 +1080,10 @@
         ],
         "category": 5,
         "adversarial_answer": "Marley flooring",
-        "where": 2
+        "where": 2,
+        "where_ground_truth": [
+          2
+        ]
       },
       {
         "question": "What did Jon find for his clothing store on 1 February, 2023?",
@@ -816,7 +1092,10 @@
         ],
         "category": 5,
         "adversarial_answer": "The perfect spot for her store",
-        "where": 3
+        "where": 3,
+        "where_ground_truth": [
+          3
+        ]
       },
       {
         "question": "What did Jon design for his store?",
@@ -825,7 +1104,10 @@
         ],
         "category": 5,
         "adversarial_answer": "the space, furniture, and decor",
-        "where": 3
+        "where": 3,
+        "where_ground_truth": [
+          3
+        ]
       },
       {
         "question": "What did Jon want his customers to feel in her store?",
@@ -835,7 +1117,10 @@
         ],
         "category": 5,
         "adversarial_answer": "cozy and comfortable",
-        "where": 3
+        "where": 3,
+        "where_ground_truth": [
+          3
+        ]
       },
       {
         "question": "What made Jon choose the furniture and decor for his store?",
@@ -844,7 +1129,10 @@
         ],
         "category": 5,
         "adversarial_answer": "personal style and customer comfort",
-        "where": 3
+        "where": 3,
+        "where_ground_truth": [
+          3
+        ]
       },
       {
         "question": "How is Jon's store doing?",
@@ -853,7 +1141,10 @@
         ],
         "category": 5,
         "adversarial_answer": "The store is doing great.",
-        "where": 4
+        "where": 4,
+        "where_ground_truth": [
+          4
+        ]
       },
       {
         "question": "What does Jon's tattoo symbolize?",
@@ -862,7 +1153,10 @@
         ],
         "category": 5,
         "adversarial_answer": "Freedom and expressing himself through dance",
-        "where": 5
+        "where": 5,
+        "where_ground_truth": [
+          5
+        ]
       },
       {
         "question": "Why did Gina shut down her bank account?",
@@ -871,7 +1165,10 @@
         ],
         "category": 5,
         "adversarial_answer": "for her business",
-        "where": 8
+        "where": 8,
+        "where_ground_truth": [
+          8
+        ]
       },
       {
         "question": "Why did Jon combine his clothing business with dance?",
@@ -880,7 +1177,10 @@
         ],
         "category": 5,
         "adversarial_answer": "he is passionate about dance and fashion",
-        "where": 8
+        "where": 8,
+        "where_ground_truth": [
+          8
+        ]
       },
       {
         "question": "What did Gina receive from a dance contest?",
@@ -889,7 +1189,10 @@
         ],
         "category": 5,
         "adversarial_answer": "a trophy",
-        "where": 9
+        "where": 9,
+        "where_ground_truth": [
+          9
+        ]
       },
       {
         "question": "What kind of professional experience did Jon get accepted for on May 23, 2023?",
@@ -898,7 +1201,10 @@
         ],
         "category": 5,
         "adversarial_answer": "fashion internship",
-        "where": 12
+        "where": 12,
+        "where_ground_truth": [
+          12
+        ]
       },
       {
         "question": "Where is Gina's HR internship?",
@@ -907,7 +1213,10 @@
         ],
         "category": 5,
         "adversarial_answer": "fashion department of an international company",
-        "where": 12
+        "where": 12,
+        "where_ground_truth": [
+          12
+        ]
       },
       {
         "question": "Where is Jon's fashion internship?",
@@ -916,7 +1225,10 @@
         ],
         "category": 5,
         "adversarial_answer": "fashion department of an international company",
-        "where": 12
+        "where": 12,
+        "where_ground_truth": [
+          12
+        ]
       },
       {
         "question": "What book is Gina currently reading?",
@@ -925,7 +1237,10 @@
         ],
         "category": 5,
         "adversarial_answer": "The Lean Startup",
-        "where": 12
+        "where": 12,
+        "where_ground_truth": [
+          12
+        ]
       },
       {
         "question": "How does Gina use the clipboard with a notepad attached to it?",
@@ -934,7 +1249,10 @@
         ],
         "category": 5,
         "adversarial_answer": "To set goals, track achievements, and find areas for improvement",
-        "where": 13
+        "where": 13,
+        "where_ground_truth": [
+          13
+        ]
       },
       {
         "question": "What did Jon take a trip to Barcelona for?",
@@ -943,7 +1261,10 @@
         ],
         "category": 5,
         "adversarial_answer": "To clear his mind",
-        "where": 15
+        "where": 15,
+        "where_ground_truth": [
+          15
+        ]
       },
       {
         "question": "What did Jon make a limited edition line of?",
@@ -952,7 +1273,10 @@
         ],
         "category": 5,
         "adversarial_answer": "Hoodies",
-        "where": 16
+        "where": 16,
+        "where_ground_truth": [
+          16
+        ]
       },
       {
         "question": "What temporary job did Gina take to cover expenses?",
@@ -961,7 +1285,10 @@
         ],
         "category": 5,
         "adversarial_answer": "Not mentioned",
-        "where": 18
+        "where": 18,
+        "where_ground_truth": [
+          18
+        ]
       },
       {
         "question": "What plans does Gina have after receiving advice at the networking event?",
@@ -970,7 +1297,10 @@
         ],
         "category": 5,
         "adversarial_answer": "Sprucing up her business plan, tweaking her pitch to investors, and working on an online platform.",
-        "where": 18
+        "where": 18,
+        "where_ground_truth": [
+          18
+        ]
       }
     ],
     "conversation": {

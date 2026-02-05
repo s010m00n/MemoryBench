@@ -10,6 +10,12 @@
 
 支持 4 种学习范式：在线学习、离线学习、迁移学习和重放学习。
 
+## 方法对比公平度分析
+
+- streamICL 方法采用的是论文中的最佳实践（https://arxiv.org/abs/2406.08747），即topk=4
+- awmPro 是在 AWM（https://arxiv.org/abs/2409.07429）方法的基础上，受到mem0管理记忆的方法启发设计的，选择topk=8，是因为实验下来，平均每次诱导工作流都是两条。在消融实验部分，我们也就streamICL和awmPro对于在不同任务下的topk的取值做了详尽分析
+- mem0 方法采用的是论文中的最佳实践（https://arxiv.org/abs/2504.19413）
+
 ## 项目结构
 
 ```
@@ -72,9 +78,56 @@
 
 ## Quick Start
 
-### 1. Data installation
+### 1. DATA and MODEL installation
 
-从网站 `https://www.dropbox.com/scl/fi/ai9pm3wgs8gt09gwdav81/virtuoso_db.zip` 下载 virtuoso_db.zip 并解压，然后根据 virtuoso_db文件夹 的路径，将 `xxx/virtuoso_db:/database` 配置至 `extra\docker-compose.yml` 第111行代码
+#### Knowledge Graph (Freebase) Database
+
+Knowledge Graph任务需要Freebase数据库支持。请按以下步骤安装：
+
+1. **下载数据库文件**：
+  ```bash
+  # 从OneDrive下载 virtuoso_db.zip (约 50 GB)，最好不要从浏览器直接下载，推荐使用Free download manager
+  # 下载链接: https://buckeyemailosu-my.sharepoint.com/:u:/g/personal/su_809_osu_edu/Ed0SY7sAS_ZGqNTovDYhVCcBxEmZfhL3B-chAiuoZCrpVg?e=vpHUei
+  ```
+
+2. **解压数据库**
+
+3. **配置数据库路径**：
+
+   编辑 `extra/docker-compose.yml` 文件，修改第114行的volumes配置：
+
+  ```yaml
+  freebase:
+    build:
+      context: ..
+      dockerfile: extra/freebase.Dockerfile
+    volumes:
+      - "B:/desktop/python/agent/lifeLongLearning (ACL2026/aa-LifelongLearningBench/virtuoso_db:/database"
+    init: true
+  ```
+
+   **注意**：
+   - 使用绝对路径
+   - Windows路径使用正斜杠 `/` 而不是反斜杠 `\`
+   - 路径示例：`B:/desktop/python/agent/lifeLongLearning (ACL2026/aa-LifelongLearningBench/virtuoso_db:/database`
+
+#### LOCOMO（为保证公平，最好一致使用xlm-roberta-base）
+  ```bash
+  # 从HF下载 FacebookAI/xlm-roberta-base （https://huggingface.co/FacebookAI/xlm-roberta-base）
+  # 并在 src\server\tasks\locomo\task.py 第47行代码，配置好 tokenizer 的路径
+  ```
+
+#### streamICL、awmPro、MEMs（为保证公平，最好一致使用bge-base-en-v1.5）
+  ```bash
+  # 从HF下载 BAAI/bge-base-en-v1.5 （https://huggingface.co/BAAI/bge-base-en-v1.5）
+  # 并在 memory\MEMs\MEMs.yaml、memory\streamICL\streamICL.yaml、memory\awmPro\awmPro.yaml ，配置好 embedding model 的路径
+  ```
+
+#### mem0
+  ```bash
+  # 若要浮现本项目中的mem0方法，需要在mem0官方注册一个api-key（https://app.mem0.ai/）
+  # 并在 memory\mem0\mem0.yaml 配置好 api-key，注意，由于使用mem0 api进行记忆添加是存在着较大的延迟，对于system memory任务，推荐使用 wait_time=60.0s 的配置，personal memory任务推荐使用 wait_time=150.0s，混合任务使用 wait_time=150.0s
+  ```
 
 ### 2. Requirements installation
 
@@ -96,6 +149,8 @@ docker-compose build local-os-default
 docker-compose build local-os-packages
 
 docker-compose build local-os-ubuntu
+
+docker-compose build freebase
 
 docker-compose up
 ```
@@ -270,11 +325,7 @@ memory_mechanism:
   name: stream_icl  # 可选: zero_shot, stream_icl, mem0, awm_pro, mems
   config_path: memory/streamICL/streamICL.yaml
 
-# ===== 执行方法配置 =====
-# 从 execution 文件夹中选择执行方法
-execution_method:
-  name: single_agent  # 当前版本仅支持 single_agent
-  config_path: execution/single_agent/single_agent.yaml
+  ...
 
 # ===== 实验参数 =====
 experiment:

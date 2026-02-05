@@ -5,5 +5,5 @@ Pro/Qwen/Qwen2.5-7B-Instruct:
     name: "Pro/Qwen/Qwen2.5-7B-Instruct"
     body:
       model: "Pro/Qwen/Qwen2.5-7B-Instruct"
-      max_tokens: 512
+      max_tokens: 4096
       temperature: 0

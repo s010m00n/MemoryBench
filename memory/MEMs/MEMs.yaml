@@ -177,7 +177,7 @@ mems:
 
   # ===== 工作流 RAG 配置 =====
   workflow_rag:
-    embedding_model: "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx/bge-base-en-v1.5"
+    embedding_model: "B:/desktop/python/agent/lifeLongLearning (ACL2026/bge-base-en-v1.5"
     top_k: 50
     order: "similar_at_top"  # "similar_at_top" | "similar_at_bottom" | "random"
     seed: 42

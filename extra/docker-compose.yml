@@ -108,7 +108,7 @@ services:
       context: ..
       dockerfile: extra/freebase.Dockerfile
     volumes:
-      - "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx/virtuoso_db:/database"
+      - "B:/desktop/python/agent/lifeLongLearning (ACL2026/aa-LifelongLearningBench/virtuoso_db:/database"
     init: true
 
   redis:

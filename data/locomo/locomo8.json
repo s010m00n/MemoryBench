@@ -12,7 +12,12 @@
           "D22:2"
         ],
         "category": 1,
-        "where": 22
+        "where": 22,
+        "where_ground_truth": [
+          1,
+          18,
+          22
+        ]
       },
       {
         "question": "What kinds of things did Evan have broken?",
@@ -25,7 +30,11 @@
           "D1:4"
         ],
         "category": 1,
-        "where": 18
+        "where": 18,
+        "where_ground_truth": [
+          1,
+          18
+        ]
       },
       {
         "question": "Where has Evan been on roadtrips with his family?",
@@ -36,7 +45,11 @@
           "D2:1"
         ],
         "category": 1,
-        "where": 2
+        "where": 2,
+        "where_ground_truth": [
+          1,
+          2
+        ]
       },
       {
         "question": "How many Prius has Evan owned?",
@@ -46,7 +59,10 @@
           "D1:4"
         ],
         "category": 1,
-        "where": 1
+        "where": 1,
+        "where_ground_truth": [
+          1
+        ]
       },
       {
         "question": "Which hobby did Sam take up in May 2023?",
@@ -55,7 +71,10 @@
           "D1:11"
         ],
         "category": 2,
-        "where": 1
+        "where": 1,
+        "where_ground_truth": [
+          1
+        ]
       },
       {
         "question": "Which country was Evan visiting in May 2023?",
@@ -64,7 +83,10 @@
           "D2:1"
         ],
         "category": 3,
-        "where": 2
+        "where": 2,
+        "where_ground_truth": [
+          2
+        ]
       },
       {
         "question": "How many roadtrips did Evan take in May 2023?",
@@ -74,7 +96,11 @@
           "D2:1"
         ],
         "category": 1,
-        "where": 2
+        "where": 2,
+        "where_ground_truth": [
+          1,
+          2
+        ]
       },
       {
         "question": "What new hobbies did Sam consider trying?",
@@ -92,7 +118,16 @@
           "D21:19"
         ],
         "category": 1,
-        "where": 21
+        "where": 21,
+        "where_ground_truth": [
+          1,
+          2,
+          7,
+          10,
+          13,
+          20,
+          21
+        ]
       },
       {
         "question": "What hobby did Evan start practicing a few years ago that he enjoys?",
@@ -104,7 +139,11 @@
           "D8:14"
         ],
         "category": 1,
-        "where": 8
+        "where": 8,
+        "where_ground_truth": [
+          1,
+          8
+        ]
       },
       {
         "question": "When did Evan go to Jasper with his family?",
@@ -113,7 +152,10 @@
           "D2:1"
         ],
         "category": 2,
-        "where": 2
+        "where": 2,
+        "where_ground_truth": [
+          2
+        ]
       },
       {
         "question": "Which type of vacation would Evan prefer with his family, walking tours in metropolitan cities or camping trip in the outdoors?",
@@ -125,7 +167,11 @@
           "D19:3"
         ],
         "category": 3,
-        "where": 19
+        "where": 19,
+        "where_ground_truth": [
+          2,
+          19
+        ]
       },
       {
         "question": "What health issue did Sam face that motivated him to change his lifestyle?",
@@ -152,7 +198,24 @@
           "D25:3"
         ],
         "category": 1,
-        "where": 25
+        "where": 25,
+        "where_ground_truth": [
+          2,
+          3,
+          5,
+          6,
+          7,
+          8,
+          10,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17,
+          24,
+          25
+        ]
       },
       {
         "question": "When did Sam first go to the doctor and find out he had a weight problem?",
@@ -161,7 +224,10 @@
           "D2:6"
         ],
         "category": 2,
-        "where": 2
+        "where": 2,
+        "where_ground_truth": [
+          2
+        ]
       },
       {
         "question": "When did Evan have his sudden heart palpitation incident that really shocked him up?",
@@ -170,7 +236,10 @@
           "D3:1"
         ],
         "category": 2,
-        "where": 3
+        "where": 3,
+        "where_ground_truth": [
+          3
+        ]
       },
       {
         "question": "What is Evan's favorite food?",
@@ -182,7 +251,13 @@
           "D22:12"
         ],
         "category": 1,
-        "where": 23
+        "where": 23,
+        "where_ground_truth": [
+          3,
+          5,
+          22,
+          23
+        ]
       },
       {
         "question": "What kind of unhealthy snacks does Sam enjoy eating?",
@@ -191,7 +266,10 @@
           "D3:4"
         ],
         "category": 1,
-        "where": 3
+        "where": 3,
+        "where_ground_truth": [
+          3
+        ]
       },
       {
         "question": "What recurring issue frustrates Sam at the grocery store?",
@@ -201,7 +279,11 @@
           "D22:19"
         ],
         "category": 1,
-        "where": 22
+        "where": 22,
+        "where_ground_truth": [
+          3,
+          22
+        ]
       },
       {
         "question": "When did Sam's friends mock him for being overweight?",
@@ -210,7 +292,10 @@
           "D4:1"
         ],
         "category": 2,
-        "where": 4
+        "where": 4,
+        "where_ground_truth": [
+          4
+        ]
       },
       {
         "question": "What kind of healthy food suggestions has Evan given to Sam?",
@@ -223,7 +308,13 @@
           "D24:15"
         ],
         "category": 1,
-        "where": 24
+        "where": 24,
+        "where_ground_truth": [
+          3,
+          4,
+          22,
+          24
+        ]
       },
       {
         "question": "Considering their conversations and personal growth, what advice might Evan and Sam give to someone facing a major life transition or challenge?",
@@ -242,7 +333,15 @@
           "D12:11"
         ],
         "category": 3,
-        "where": 22
+        "where": 22,
+        "where_ground_truth": [
+          3,
+          8,
+          9,
+          12,
+          14,
+          22
+        ]
       },
       {
         "question": "In light of the health and dietary changes discussed, what would be an appropriate gift for both Evan and Sam to encourage their healthy lifestyles?",
@@ -267,7 +366,17 @@
           "D9:1"
         ],
         "category": 3,
-        "where": 14
+        "where": 14,
+        "where_ground_truth": [
+          2,
+          3,
+          4,
+          5,
+          7,
+          8,
+          9,
+          14
+        ]
       },
       {
         "question": "How does Evan describe the woman and his feelings for her that he met in Canada?",
@@ -278,7 +387,11 @@
           "D23:3"
         ],
         "category": 1,
-        "where": 23
+        "where": 23,
+        "where_ground_truth": [
+          5,
+          23
+        ]
       },
       {
         "question": "When Evan did meet his future wife?",
@@ -287,7 +400,10 @@
           "D5:1"
         ],
         "category": 2,
-        "where": 5
+        "where": 5,
+        "where_ground_truth": [
+          5
+        ]
       },
       {
         "question": "When did Sam start working out at the gym?",
@@ -296,7 +412,10 @@
           "D4:15"
         ],
         "category": 2,
-        "where": 4
+        "where": 4,
+        "where_ground_truth": [
+          4
+        ]
       },
       {
         "question": "What significant event happened in Sam's life towards the end of summer 2023?",
@@ -305,7 +424,10 @@
           "D5:1"
         ],
         "category": 2,
-        "where": 5
+        "where": 5,
+        "where_ground_truth": [
+          5
+        ]
       },
       {
         "question": "Which year did Evan start taking care of his health seriously?",
@@ -315,7 +437,10 @@
           "D5:7"
         ],
         "category": 2,
-        "where": 5
+        "where": 5,
+        "where_ground_truth": [
+          5
+        ]
       },
       {
         "question": "What motivates Evan to take care of his health?",
@@ -326,7 +451,10 @@
           "D5:13"
         ],
         "category": 1,
-        "where": 5
+        "where": 5,
+        "where_ground_truth": [
+          5
+        ]
       },
       {
         "question": "What electronic device could Evan gift Sam to help him keep up with his fitness goals?",
@@ -335,7 +463,10 @@
           "D5:7"
         ],
         "category": 3,
-        "where": 5
+        "where": 5,
+        "where_ground_truth": [
+          5
+        ]
       },
       {
         "question": "What kind of writing does Sam do to relax and cope with his health issues?",
@@ -345,7 +476,11 @@
           "D11:7"
         ],
         "category": 1,
-        "where": 11
+        "where": 11,
+        "where_ground_truth": [
+          6,
+          11
+        ]
       },
       {
         "question": "Who did Evan meet on his trip to Canada, and who did he come back from Canada with?",
@@ -355,7 +490,11 @@
           "D6:1"
         ],
         "category": 1,
-        "where": 6
+        "where": 6,
+        "where_ground_truth": [
+          5,
+          6
+        ]
       },
       {
         "question": "When Evan get back from a vacation with his SO?",
@@ -364,7 +503,10 @@
           "D6:1"
         ],
         "category": 2,
-        "where": 6
+        "where": 6,
+        "where_ground_truth": [
+          6
+        ]
       },
       {
         "question": "How might Evan and Sam's experiences with health and lifestyle changes influence their approach to stress and challenges?",
@@ -373,7 +515,10 @@
           "D9:1 D4:4 D4:6"
         ],
         "category": 3,
-        "where": 9
+        "where": 9,
+        "where_ground_truth": [
+          9
+        ]
       },
       {
         "question": "What recurring frustration does Evan experience?",
@@ -383,7 +528,11 @@
           "D21:20"
         ],
         "category": 1,
-        "where": 21
+        "where": 21,
+        "where_ground_truth": [
+          6,
+          21
+        ]
       },
       {
         "question": "What is the recurring dream that Sam keeps having?",
@@ -393,7 +542,11 @@
           "D24:22"
         ],
         "category": 1,
-        "where": 24
+        "where": 24,
+        "where_ground_truth": [
+          6,
+          24
+        ]
       },
       {
         "question": "What accidents has Evan's son faced lately?",
@@ -403,7 +556,11 @@
           "D20:3"
         ],
         "category": 1,
-        "where": 20
+        "where": 20,
+        "where_ground_truth": [
+          7,
+          20
+        ]
       },
       {
         "question": "When was Evan's son injured at soccer?",
@@ -412,7 +569,10 @@
           "D7:1"
         ],
         "category": 2,
-        "where": 7
+        "where": 7,
+        "where_ground_truth": [
+          7
+        ]
       },
       {
         "question": "What kind of foods or recipes has Sam recommended to Evan?",
@@ -423,7 +583,12 @@
           "D23:26"
         ],
         "category": 1,
-        "where": 23
+        "where": 23,
+        "where_ground_truth": [
+          7,
+          8,
+          23
+        ]
       },
       {
         "question": "What kind of healthy meals did Sam start eating after getting a health scare?",
@@ -438,7 +603,15 @@
           "D18:6"
         ],
         "category": 1,
-        "where": 18
+        "where": 18,
+        "where_ground_truth": [
+          3,
+          7,
+          8,
+          10,
+          11,
+          18
+        ]
       },
       {
         "question": "What role does nature and the outdoors play in Evan and Sam's mental well-being?",
@@ -447,7 +620,10 @@
           "D22:1 D22:2 D9:10 D9:11"
         ],
         "category": 3,
-        "where": 22
+        "where": 22,
+        "where_ground_truth": [
+          22
+        ]
       },
       {
         "question": "How many months lapsed between Sam's first and second doctor's appointment?",
@@ -457,7 +633,11 @@
           "D7:2"
         ],
         "category": 2,
-        "where": 7
+        "where": 7,
+        "where_ground_truth": [
+          2,
+          7
+        ]
       },
       {
         "question": "When did Evan start taking painting classes?",
@@ -466,7 +646,10 @@
           "D8:12"
         ],
         "category": 2,
-        "where": 8
+        "where": 8,
+        "where_ground_truth": [
+          8
+        ]
       },
       {
         "question": "Which classes did Evan join in mid-August 2023?",
@@ -475,7 +658,10 @@
           "D8:12"
         ],
         "category": 2,
-        "where": 8
+        "where": 8,
+        "where_ground_truth": [
+          8
+        ]
       },
       {
         "question": "How did Evan get into painting?",
@@ -487,7 +673,11 @@
           "D8:14"
         ],
         "category": 1,
-        "where": 8
+        "where": 8,
+        "where_ground_truth": [
+          1,
+          8
+        ]
       },
       {
         "question": "How often does Sam get health checkups?",
@@ -498,7 +688,12 @@
           "D12:1"
         ],
         "category": 3,
-        "where": 12
+        "where": 12,
+        "where_ground_truth": [
+          2,
+          7,
+          12
+        ]
       },
       {
         "question": "What kind of subjects does Evan enjoy painting?",
@@ -511,7 +706,12 @@
           "D21:14"
         ],
         "category": 1,
-        "where": 21
+        "where": 21,
+        "where_ground_truth": [
+          8,
+          20,
+          21
+        ]
       },
       {
         "question": "Which places in Canada was Evan visiting in July 2023?",
@@ -522,7 +722,11 @@
           "D9:10"
         ],
         "category": 2,
-        "where": 9
+        "where": 9,
+        "where_ground_truth": [
+          8,
+          9
+        ]
       },
       {
         "question": "How do Evan and Sam use creative outlets to cope with life's challenges?",
@@ -531,7 +735,10 @@
           "D21:18 D21:22 D11:15 D11:19"
         ],
         "category": 3,
-        "where": 21
+        "where": 21,
+        "where_ground_truth": [
+          21
+        ]
       },
       {
         "question": "When did Evan go skiing in Banff?",
@@ -542,7 +749,10 @@
           "D8:28"
         ],
         "category": 2,
-        "where": 8
+        "where": 8,
+        "where_ground_truth": [
+          8
+        ]
       },
       {
         "question": "What new diet and lifestyle change did Sam adopt over time?",
@@ -554,7 +764,13 @@
           "D22:1"
         ],
         "category": 1,
-        "where": 22
+        "where": 22,
+        "where_ground_truth": [
+          8,
+          9,
+          21,
+          22
+        ]
       },
       {
         "question": "Who was injured in Evan's family?",
@@ -568,7 +784,12 @@
           "D11:3"
         ],
         "category": 1,
-        "where": 11
+        "where": 11,
+        "where_ground_truth": [
+          7,
+          9,
+          11
+        ]
       },
       {
         "question": "What kind of hobbies does Evan pursue?",
@@ -584,7 +805,15 @@
           "D25:10"
         ],
         "category": 1,
-        "where": 25
+        "where": 25,
+        "where_ground_truth": [
+          1,
+          4,
+          6,
+          8,
+          9,
+          25
+        ]
       },
       {
         "question": "What challenges does Sam face in his quest for a healthier lifestyle, and how does he address them?",
@@ -596,7 +825,11 @@
           "D14:2"
         ],
         "category": 3,
-        "where": 14
+        "where": 14,
+        "where_ground_truth": [
+          4,
+          14
+        ]
       },
       {
         "question": "Which activity do Evan and Sam plan on doing together during September 2023?",
@@ -607,7 +840,10 @@
           "D10:14"
         ],
         "category": 2,
-        "where": 10
+        "where": 10,
+        "where_ground_truth": [
+          10
+        ]
       },
       {
         "question": "When did Evan and Sam decide to paint together?",
@@ -618,7 +854,10 @@
           "D10:14"
         ],
         "category": 2,
-        "where": 10
+        "where": 10,
+        "where_ground_truth": [
+          10
+        ]
       },
       {
         "question": "What personal health incidents does Evan face in 2023?",
@@ -629,7 +868,12 @@
           "D11:2"
         ],
         "category": 1,
-        "where": 11
+        "where": 11,
+        "where_ground_truth": [
+          3,
+          9,
+          11
+        ]
       },
       {
         "question": "What recurring adventure does Evan have with strangers?",
@@ -639,7 +883,11 @@
           "D14:2"
         ],
         "category": 1,
-        "where": 14
+        "where": 14,
+        "where_ground_truth": [
+          11,
+          14
+        ]
       },
       {
         "question": "What is Sam's persistent problem with his phone?",
@@ -649,7 +897,11 @@
           "D14:1"
         ],
         "category": 1,
-        "where": 14
+        "where": 14,
+        "where_ground_truth": [
+          11,
+          14
+        ]
       },
       {
         "question": "Which US state was Sam travelling in during October 2023?",
@@ -658,7 +910,10 @@
           "D13:14"
         ],
         "category": 3,
-        "where": 13
+        "where": 13,
+        "where_ground_truth": [
+          13
+        ]
       },
       {
         "question": "When did Evan start lifting weights?",
@@ -667,7 +922,10 @@
           "D12:2"
         ],
         "category": 2,
-        "where": 12
+        "where": 12,
+        "where_ground_truth": [
+          12
+        ]
       },
       {
         "question": "When did Sam and his friend decide to try kayaking?",
@@ -676,7 +934,10 @@
           "D13:10"
         ],
         "category": 2,
-        "where": 13
+        "where": 13,
+        "where_ground_truth": [
+          13
+        ]
       },
       {
         "question": "Which new activity does Sam take up in October 2023?",
@@ -685,7 +946,10 @@
           "D13:8"
         ],
         "category": 2,
-        "where": 13
+        "where": 13,
+        "where_ground_truth": [
+          13
+        ]
       },
       {
         "question": "What kind of stress was Sam dealing with in October 2023?",
@@ -694,7 +958,10 @@
           "D13:4"
         ],
         "category": 2,
-        "where": 13
+        "where": 13,
+        "where_ground_truth": [
+          13
+        ]
       },
       {
         "question": "What health scares did Sam and Evan experience?",
@@ -706,7 +973,12 @@
           "D17:2"
         ],
         "category": 1,
-        "where": 17
+        "where": 17,
+        "where_ground_truth": [
+          3,
+          14,
+          17
+        ]
       },
       {
         "question": "When was Sam in the ER?",
@@ -715,7 +987,10 @@
           "D14:1"
         ],
         "category": 2,
-        "where": 14
+        "where": 14,
+        "where_ground_truth": [
+          14
+        ]
       },
       {
         "question": "Which ailment does Sam have to face due to his weight?",
@@ -727,7 +1002,13 @@
           "D14:1"
         ],
         "category": 1,
-        "where": 14
+        "where": 14,
+        "where_ground_truth": [
+          2,
+          7,
+          12,
+          14
+        ]
       },
       {
         "question": "Does Evan live close to a beach or mountains?",
@@ -738,7 +1019,10 @@
           "D16:20"
         ],
         "category": 3,
-        "where": 16
+        "where": 16,
+        "where_ground_truth": [
+          16
+        ]
       },
       {
         "question": "When did Evan lose his job?",
@@ -747,7 +1031,10 @@
           "D16:10"
         ],
         "category": 2,
-        "where": 16
+        "where": 16,
+        "where_ground_truth": [
+          16
+        ]
       },
       {
         "question": "When did Evan and Sam planned a trip to the beach together?",
@@ -756,7 +1043,10 @@
           "D16:24"
         ],
         "category": 2,
-        "where": 16
+        "where": 16,
+        "where_ground_truth": [
+          16
+        ]
       },
       {
         "question": "What was Sam doing on December 4, 2023?",
@@ -765,7 +1055,10 @@
           "D18:6"
         ],
         "category": 2,
-        "where": 18
+        "where": 18,
+        "where_ground_truth": [
+          18
+        ]
       },
       {
         "question": "Which two significant life events occur in Evan's life in December 2023 with his partner?",
@@ -775,7 +1068,11 @@
           "D21:2"
         ],
         "category": 1,
-        "where": 21
+        "where": 21,
+        "where_ground_truth": [
+          19,
+          21
+        ]
       },
       {
         "question": "How long did Evan and his partner date before getting married?",
@@ -785,7 +1082,11 @@
           "D21:1"
         ],
         "category": 2,
-        "where": 21
+        "where": 21,
+        "where_ground_truth": [
+          5,
+          21
+        ]
       },
       {
         "question": "Which major holiday season conincides with Evan's wedding?",
@@ -794,7 +1095,10 @@
           "D21:2"
         ],
         "category": 3,
-        "where": 21
+        "where": 21,
+        "where_ground_truth": [
+          21
+        ]
       },
       {
         "question": "Which activity did Sam resume in December 2023 after a long time?",
@@ -804,7 +1108,11 @@
           "D22:1"
         ],
         "category": 1,
-        "where": 22
+        "where": 22,
+        "where_ground_truth": [
+          20,
+          22
+        ]
       },
       {
         "question": "When is Evan planning a big family reunion?",
@@ -813,7 +1121,10 @@
           "D19:11"
         ],
         "category": 2,
-        "where": 19
+        "where": 19,
+        "where_ground_truth": [
+          19
+        ]
       },
       {
         "question": "When did Evan's son fall off his bike?",
@@ -822,7 +1133,10 @@
           "D20:3"
         ],
         "category": 2,
-        "where": 20
+        "where": 20,
+        "where_ground_truth": [
+          20
+        ]
       },
       {
         "question": "When did Evan announce his marriage to his extended family?",
@@ -831,7 +1145,10 @@
           "D23:1"
         ],
         "category": 2,
-        "where": 23
+        "where": 23,
+        "where_ground_truth": [
+          23
+        ]
       },
       {
         "question": "When did Evan finish the painting that's hanging in the exhibit?",
@@ -841,7 +1158,10 @@
           "D20:15"
         ],
         "category": 2,
-        "where": 20
+        "where": 20,
+        "where_ground_truth": [
+          20
+        ]
       },
       {
         "question": "How does Evan spend his time with his bride after the wedding?",
@@ -853,7 +1173,11 @@
           "D24:9"
         ],
         "category": 1,
-        "where": 24
+        "where": 24,
+        "where_ground_truth": [
+          23,
+          24
+        ]
       },
       {
         "question": "Who did Evan tell about his marriage?",
@@ -866,7 +1190,12 @@
           "D23:5"
         ],
         "category": 1,
-        "where": 23
+        "where": 23,
+        "where_ground_truth": [
+          21,
+          22,
+          23
+        ]
       },
       {
         "question": "When will Evan and his partner have their honeymoon in Canada?",
@@ -875,7 +1204,10 @@
           "D23:23"
         ],
         "category": 2,
-        "where": 23
+        "where": 23,
+        "where_ground_truth": [
+          23
+        ]
       },
       {
         "question": "When did Evan have a drunken night with his friends?",
@@ -884,7 +1216,10 @@
           "D24:3"
         ],
         "category": 2,
-        "where": 24
+        "where": 24,
+        "where_ground_truth": [
+          24
+        ]
       },
       {
         "question": "What is a stress reliever for Evan?",
@@ -903,7 +1238,17 @@
           "D24:21"
         ],
         "category": 1,
-        "where": 24
+        "where": 24,
+        "where_ground_truth": [
+          1,
+          2,
+          8,
+          10,
+          11,
+          16,
+          18,
+          24
+        ]
       },
       {
         "question": "What is a stress reliever for Sam?",
@@ -917,7 +1262,13 @@
           "D18:8"
         ],
         "category": 1,
-        "where": 18
+        "where": 18,
+        "where_ground_truth": [
+          10,
+          13,
+          16,
+          18
+        ]
       },
       {
         "question": "What type of car did Evan get after his old Prius broke down?",
@@ -926,7 +1277,10 @@
           "D1:2"
         ],
         "category": 4,
-        "where": 1
+        "where": 1,
+        "where_ground_truth": [
+          1
+        ]
       },
       {
         "question": "How did Evan get into watercolor painting?",
@@ -935,7 +1289,10 @@
           "D1:16"
         ],
         "category": 4,
-        "where": 1
+        "where": 1,
+        "where_ground_truth": [
+          1
+        ]
       },
       {
         "question": "What did Evan start doing a few years back as a stress-buster?",
@@ -944,7 +1301,10 @@
           "D1:14"
         ],
         "category": 4,
-        "where": 1
+        "where": 1,
+        "where_ground_truth": [
+          1
+        ]
       },
       {
         "question": "What advice did Evan give Sam about finding a passion?",
@@ -953,7 +1313,10 @@
           "D1:18"
         ],
         "category": 4,
-        "where": 1
+        "where": 1,
+        "where_ground_truth": [
+          1
+        ]
       },
       {
         "question": "Where did Evan take his family for a road trip on 24 May, 2023?",
@@ -962,7 +1325,10 @@
           "D2:1"
         ],
         "category": 4,
-        "where": 2
+        "where": 2,
+        "where_ground_truth": [
+          2
+        ]
       },
       {
         "question": "What did Evan find relaxing about his road trip to Jasper?",
@@ -971,7 +1337,10 @@
           "D2:3"
         ],
         "category": 4,
-        "where": 2
+        "where": 2,
+        "where_ground_truth": [
+          2
+        ]
       },
       {
         "question": "What habit is Sam trying to change in terms of diet?",
@@ -980,7 +1349,10 @@
           "D3:4"
         ],
         "category": 4,
-        "where": 3
+        "where": 3,
+        "where_ground_truth": [
+          3
+        ]
       },
       {
         "question": "What new suggestion did Evan give to Sam regarding his soda and candy consumption?",
@@ -989,7 +1361,10 @@
           "D3:5"
         ],
         "category": 4,
-        "where": 3
+        "where": 3,
+        "where_ground_truth": [
+          3
+        ]
       },
       {
         "question": "What did Sam agree to try instead of soda and candy?",
@@ -998,7 +1373,10 @@
           "D3:6"
         ],
         "category": 4,
-        "where": 3
+        "where": 3,
+        "where_ground_truth": [
+          3
+        ]
       },
       {
         "question": "What frustrating issue did Sam face at the supermarket?",
@@ -1007,7 +1385,10 @@
           "D3:16"
         ],
         "category": 4,
-        "where": 3
+        "where": 3,
+        "where_ground_truth": [
+          3
+        ]
       },
       {
         "question": "What novel is Evan reading that he finds gripping?",
@@ -1016,7 +1397,10 @@
           "D4:10"
         ],
         "category": 4,
-        "where": 4
+        "where": 4,
+        "where_ground_truth": [
+          4
+        ]
       },
       {
         "question": "What kind of water does Evan suggest Sam try as an alternative to soda?",
@@ -1025,7 +1409,10 @@
           "D4:8"
         ],
         "category": 4,
-        "where": 4
+        "where": 4,
+        "where_ground_truth": [
+          4
+        ]
       },
       {
         "question": "What does the smartwatch help Evan with?",
@@ -1034,7 +1421,10 @@
           "D5:9"
         ],
         "category": 4,
-        "where": 5
+        "where": 5,
+        "where_ground_truth": [
+          5
+        ]
       },
       {
         "question": "What does the bonsai tree symbolize for Evan?",
@@ -1043,7 +1433,10 @@
           "D5:17"
         ],
         "category": 4,
-        "where": 5
+        "where": 5,
+        "where_ground_truth": [
+          5
+        ]
       },
       {
         "question": "Why did Evan decide to get the bonsai tree?",
@@ -1052,7 +1445,10 @@
           "D5:17"
         ],
         "category": 4,
-        "where": 5
+        "where": 5,
+        "where_ground_truth": [
+          5
+        ]
       },
       {
         "question": "According to Sam, what is more important than perfection?",
@@ -1061,7 +1457,10 @@
           "D6:6"
         ],
         "category": 4,
-        "where": 6
+        "where": 6,
+        "where_ground_truth": [
+          6
+        ]
       },
       {
         "question": "What did Evan suggest Sam to check out for insights into his dream?",
@@ -1070,7 +1469,10 @@
           "D6:15"
         ],
         "category": 4,
-        "where": 6
+        "where": 6,
+        "where_ground_truth": [
+          6
+        ]
       },
       {
         "question": "What did Evan mention he had been searching for fruitlessly for half an hour?",
@@ -1079,7 +1481,10 @@
           "D6:13"
         ],
         "category": 4,
-        "where": 6
+        "where": 6,
+        "where_ground_truth": [
+          6
+        ]
       },
       {
         "question": "What class is Sam taking to learn how to make healthier meals?",
@@ -1088,7 +1493,10 @@
           "D7:2"
         ],
         "category": 4,
-        "where": 7
+        "where": 7,
+        "where_ground_truth": [
+          7
+        ]
       },
       {
         "question": "What dish did Sam make on 18 August, 2023 that turned out flavorful?",
@@ -1097,7 +1505,10 @@
           "D7:4"
         ],
         "category": 4,
-        "where": 7
+        "where": 7,
+        "where_ground_truth": [
+          7
+        ]
       },
       {
         "question": "What kind of recipe did Evan request from Sam on 19 August, 2023?",
@@ -1106,7 +1517,10 @@
           "D7:7"
         ],
         "category": 4,
-        "where": 7
+        "where": 7,
+        "where_ground_truth": [
+          7
+        ]
       },
       {
         "question": "What food did Sam share a photo of on 19 August, 2023?",
@@ -1115,7 +1529,10 @@
           "D8:1"
         ],
         "category": 4,
-        "where": 8
+        "where": 8,
+        "where_ground_truth": [
+          8
+        ]
       },
       {
         "question": "What type of painting classes did Evan start taking in 2023?",
@@ -1124,7 +1541,10 @@
           "D8:12"
         ],
         "category": 4,
-        "where": 8
+        "where": 8,
+        "where_ground_truth": [
+          8
+        ]
       },
       {
         "question": "What did Evan start painting years ago due to being inspired by a friend's gift?",
@@ -1133,7 +1553,10 @@
           "D8:14"
         ],
         "category": 4,
-        "where": 8
+        "where": 8,
+        "where_ground_truth": [
+          8
+        ]
       },
       {
         "question": "What nature concept do watercolor painting classes emphasize according to Evan?",
@@ -1142,7 +1565,10 @@
           "D8:18"
         ],
         "category": 4,
-        "where": 8
+        "where": 8,
+        "where_ground_truth": [
+          8
+        ]
       },
       {
         "question": "What type of landscapes does Evan love painting the most?",
@@ -1151,7 +1577,10 @@
           "D8:20"
         ],
         "category": 4,
-        "where": 8
+        "where": 8,
+        "where_ground_truth": [
+          8
+        ]
       },
       {
         "question": "What fun activity did Evan mention doing in July 2023?",
@@ -1160,7 +1589,10 @@
           "D8:26"
         ],
         "category": 4,
-        "where": 8
+        "where": 8,
+        "where_ground_truth": [
+          8
+        ]
       },
       {
         "question": "What injury did Evan suffer from in August 2023?",
@@ -1169,7 +1601,10 @@
           "D9:2"
         ],
         "category": 4,
-        "where": 9
+        "where": 9,
+        "where_ground_truth": [
+          9
+        ]
       },
       {
         "question": "What sports activity has Evan been doing to stay active while dealing with the knee injury?",
@@ -1178,7 +1613,10 @@
           "D9:6"
         ],
         "category": 4,
-        "where": 9
+        "where": 9,
+        "where_ground_truth": [
+          9
+        ]
       },
       {
         "question": "What suggestion did Sam give to Evan to help with his knee issue?",
@@ -1187,7 +1625,10 @@
           "D9:5"
         ],
         "category": 4,
-        "where": 9
+        "where": 9,
+        "where_ground_truth": [
+          9
+        ]
       },
       {
         "question": "What did Evan suggest Sam try as a calming hobby?",
@@ -1196,7 +1637,10 @@
           "D10:8"
         ],
         "category": 4,
-        "where": 10
+        "where": 10,
+        "where_ground_truth": [
+          10
+        ]
       },
       {
         "question": "What did Evan recommend Sam acquire to get started with painting?",
@@ -1205,7 +1649,10 @@
           "D10:11"
         ],
         "category": 4,
-        "where": 10
+        "where": 10,
+        "where_ground_truth": [
+          10
+        ]
       },
       {
         "question": "What activity does Evan do to keep himself busy while healing his knee?",
@@ -1214,7 +1661,10 @@
           "D11:6"
         ],
         "category": 4,
-        "where": 11
+        "where": 11,
+        "where_ground_truth": [
+          11
+        ]
       },
       {
         "question": "What painting did Evan share with Sam in October?",
@@ -1223,7 +1673,10 @@
           "D11:8"
         ],
         "category": 4,
-        "where": 11
+        "where": 11,
+        "where_ground_truth": [
+          11
+        ]
       },
       {
         "question": "What kind of writing does Sam enjoy as a form of expression?",
@@ -1232,7 +1685,10 @@
           "D11:17"
         ],
         "category": 4,
-        "where": 11
+        "where": 11,
+        "where_ground_truth": [
+          11
+        ]
       },
       {
         "question": "What electronics issue has been frustrating Sam lately?",
@@ -1241,7 +1697,10 @@
           "D11:15"
         ],
         "category": 4,
-        "where": 11
+        "where": 11,
+        "where_ground_truth": [
+          11
+        ]
       },
       {
         "question": "What activity did Evan start one year ago?",
@@ -1250,7 +1709,10 @@
           "D12:2"
         ],
         "category": 4,
-        "where": 12
+        "where": 12,
+        "where_ground_truth": [
+          12
+        ]
       },
       {
         "question": "What advice did Evan give to Sam to avoid injuries while starting weightlifting?",
@@ -1259,7 +1721,10 @@
           "D12:4"
         ],
         "category": 4,
-        "where": 12
+        "where": 12,
+        "where_ground_truth": [
+          12
+        ]
       },
       {
         "question": "Where did Sam and his mate plan to try kayaking?",
@@ -1268,7 +1733,10 @@
           "D13:14"
         ],
         "category": 4,
-        "where": 13
+        "where": 13,
+        "where_ground_truth": [
+          13
+        ]
       },
       {
         "question": "What digestive issue did Sam experience lately?",
@@ -1277,7 +1745,10 @@
           "D14:1"
         ],
         "category": 4,
-        "where": 14
+        "where": 14,
+        "where_ground_truth": [
+          14
+        ]
       },
       {
         "question": "What adventurous theme is emerging in Evan's life as mentioned by Sam?",
@@ -1286,7 +1757,10 @@
           "D14:2"
         ],
         "category": 4,
-        "where": 14
+        "where": 14,
+        "where_ground_truth": [
+          14
+        ]
       },
       {
         "question": "What does Evan mention about his progress at the gym to Sam?",
@@ -1295,7 +1769,10 @@
           "D14:8"
         ],
         "category": 4,
-        "where": 14
+        "where": 14,
+        "where_ground_truth": [
+          14
+        ]
       },
       {
         "question": "How did Evan start his transformation journey two years ago?",
@@ -1304,7 +1781,10 @@
           "D15:8"
         ],
         "category": 4,
-        "where": 15
+        "where": 15,
+        "where_ground_truth": [
+          15
+        ]
       },
       {
         "question": "What gift did Evan receive from a close friend?",
@@ -1313,7 +1793,10 @@
           "D16:10"
         ],
         "category": 4,
-        "where": 16
+        "where": 16,
+        "where_ground_truth": [
+          16
+        ]
       },
       {
         "question": "Why had Evan been going through a tough time lately?",
@@ -1322,7 +1805,10 @@
           "D16:10"
         ],
         "category": 4,
-        "where": 16
+        "where": 16,
+        "where_ground_truth": [
+          16
+        ]
       },
       {
         "question": "How does Evan describe the island he grew up on?",
@@ -1331,7 +1817,10 @@
           "D17:18"
         ],
         "category": 4,
-        "where": 17
+        "where": 17,
+        "where_ground_truth": [
+          17
+        ]
       },
       {
         "question": "What was the main reason for Evan's frustration with his new Prius breaking down?",
@@ -1340,7 +1829,10 @@
           "D18:1"
         ],
         "category": 4,
-        "where": 18
+        "where": 18,
+        "where_ground_truth": [
+          18
+        ]
       },
       {
         "question": "How did Sam suggest Evan view the setback with his broken Prius?",
@@ -1349,7 +1841,10 @@
           "D18:5"
         ],
         "category": 4,
-        "where": 18
+        "where": 18,
+        "where_ground_truth": [
+          18
+        ]
       },
       {
         "question": "What did Sam suggest Evan try for stress relief and flexibility?",
@@ -1358,7 +1853,10 @@
           "D18:8"
         ],
         "category": 4,
-        "where": 18
+        "where": 18,
+        "where_ground_truth": [
+          18
+        ]
       },
       {
         "question": "What did Sam offer Evan regarding yoga?",
@@ -1367,7 +1865,10 @@
           "D18:10"
         ],
         "category": 4,
-        "where": 18
+        "where": 18,
+        "where_ground_truth": [
+          18
+        ]
       },
       {
         "question": "What news did Evan share with Sam on 9th December 2023?",
@@ -1376,7 +1877,10 @@
           "D19:1"
         ],
         "category": 4,
-        "where": 19
+        "where": 19,
+        "where_ground_truth": [
+          19
+        ]
       },
       {
         "question": "What family event is Evan planning for next summer?",
@@ -1385,7 +1889,10 @@
           "D19:11"
         ],
         "category": 4,
-        "where": 19
+        "where": 19,
+        "where_ground_truth": [
+          19
+        ]
       },
       {
         "question": "What is the motto of Evan's family?",
@@ -1394,7 +1901,10 @@
           "D19:7"
         ],
         "category": 4,
-        "where": 19
+        "where": 19,
+        "where_ground_truth": [
+          19
+        ]
       },
       {
         "question": "According to Evan, what is important for Sam to believe in concerning his weight?",
@@ -1403,7 +1913,10 @@
           "D20:9"
         ],
         "category": 4,
-        "where": 20
+        "where": 20,
+        "where_ground_truth": [
+          20
+        ]
       },
       {
         "question": "Who helped Evan get the painting published in the exhibition?",
@@ -1412,7 +1925,10 @@
           "D20:17"
         ],
         "category": 4,
-        "where": 20
+        "where": 20,
+        "where_ground_truth": [
+          20
+        ]
       },
       {
         "question": "What did Sam recently start enjoying to clear his head?",
@@ -1421,7 +1937,10 @@
           "D21:9"
         ],
         "category": 4,
-        "where": 21
+        "where": 21,
+        "where_ground_truth": [
+          21
+        ]
       },
       {
         "question": "What did Sam suggest Evan should do with his keys?",
@@ -1430,7 +1949,10 @@
           "D21:21"
         ],
         "category": 4,
-        "where": 21
+        "where": 21,
+        "where_ground_truth": [
+          21
+        ]
       },
       {
         "question": "How did Evan feel when he painted the piece with the bird flying over it?",
@@ -1439,7 +1961,10 @@
           "D21:16"
         ],
         "category": 4,
-        "where": 21
+        "where": 21,
+        "where_ground_truth": [
+          21
+        ]
       },
       {
         "question": "What did Evan suggest Sam should keep doing to find his own version of love?",
@@ -1448,7 +1973,10 @@
           "D21:10"
         ],
         "category": 4,
-        "where": 21
+        "where": 21,
+        "where_ground_truth": [
+          21
+        ]
       },
       {
         "question": "How did Evan describe the process of creating the painting with the bird flying over it?",
@@ -1457,7 +1985,10 @@
           "D21:16"
         ],
         "category": 4,
-        "where": 21
+        "where": 21,
+        "where_ground_truth": [
+          21
+        ]
       },
       {
         "question": "What did Evan want to share with his work friends?",
@@ -1466,7 +1997,10 @@
           "D22:4"
         ],
         "category": 4,
-        "where": 22
+        "where": 22,
+        "where_ground_truth": [
+          22
+        ]
       },
       {
         "question": "What did Evan share with Sam after their hiking trip?",
@@ -1475,7 +2009,10 @@
           "D22:1"
         ],
         "category": 4,
-        "where": 22
+        "where": 22,
+        "where_ground_truth": [
+          22
+        ]
       },
       {
         "question": "What did Evan offer to share with Sam after talking about healthy snacks?",
@@ -1484,7 +2021,10 @@
           "D22:12"
         ],
         "category": 4,
-        "where": 22
+        "where": 22,
+        "where_ground_truth": [
+          22
+        ]
       },
       {
         "question": "What did Evan and his partner share with their extended family on January 5, 2024?",
@@ -1493,7 +2033,10 @@
           "D23:1"
         ],
         "category": 4,
-        "where": 23
+        "where": 23,
+        "where_ground_truth": [
+          23
+        ]
       },
       {
         "question": "What was Evan limiting himself to on his new diet?",
@@ -1502,7 +2045,10 @@
           "D23:15"
         ],
         "category": 4,
-        "where": 23
+        "where": 23,
+        "where_ground_truth": [
+          23
+        ]
       },
       {
         "question": "What sports activity did Evan and his partner try in a recent weekend?",
@@ -1511,7 +2057,10 @@
           "D24:9"
         ],
         "category": 4,
-        "where": 24
+        "where": 24,
+        "where_ground_truth": [
+          24
+        ]
       },
       {
         "question": "What advice did Evan suggest Sam seek from a doctor?",
@@ -1521,7 +2070,10 @@
           "D24:14"
         ],
         "category": 4,
-        "where": 24
+        "where": 24,
+        "where_ground_truth": [
+          24
+        ]
       },
       {
         "question": "What suggestions did Evan give for low-impact exercises?",
@@ -1530,7 +2082,10 @@
           "D24:17"
         ],
         "category": 4,
-        "where": 24
+        "where": 24,
+        "where_ground_truth": [
+          24
+        ]
       },
       {
         "question": "What movie did Sam watch that motivated him to keep up with his routine?",
@@ -1539,7 +2094,10 @@
           "D24:18"
         ],
         "category": 4,
-        "where": 24
+        "where": 24,
+        "where_ground_truth": [
+          24
+        ]
       },
       {
         "question": "What activity helped Evan with stress and flexibility?",
@@ -1548,7 +2106,10 @@
           "D24:19"
         ],
         "category": 4,
-        "where": 24
+        "where": 24,
+        "where_ground_truth": [
+          24
+        ]
       },
       {
         "question": "What did Evan share a photo of that was taken on a camping trip?",
@@ -1557,7 +2118,10 @@
           "D25:8"
         ],
         "category": 4,
-        "where": 25
+        "where": 25,
+        "where_ground_truth": [
+          25
+        ]
       },
       {
         "question": "Why did Evan apologize to his partner?",
@@ -1566,7 +2130,10 @@
           "D25:2"
         ],
         "category": 4,
-        "where": 25
+        "where": 25,
+        "where_ground_truth": [
+          25
+        ]
       },
       {
         "question": "How does Evan describe being out on the water while kayaking and watching the sunset?",
@@ -1575,7 +2142,10 @@
           "D25:10"
         ],
         "category": 4,
-        "where": 25
+        "where": 25,
+        "where_ground_truth": [
+          25
+        ]
       },
       {
         "question": "What type of car did Sam get after his old Prius broke down?",
@@ -1584,7 +2154,10 @@
         ],
         "category": 5,
         "adversarial_answer": "new Prius",
-        "where": 1
+        "where": 1,
+        "where_ground_truth": [
+          1
+        ]
       },
       {
         "question": "How did Sam get into watercolor painting?",
@@ -1593,7 +2166,10 @@
         ],
         "category": 5,
         "adversarial_answer": "friend's advice",
-        "where": 1
+        "where": 1,
+        "where_ground_truth": [
+          1
+        ]
       },
       {
         "question": "What did Sam start doing a few years back as a stress-buster?",
@@ -1602,7 +2178,10 @@
         ],
         "category": 5,
         "adversarial_answer": "watercolor painting",
-        "where": 1
+        "where": 1,
+        "where_ground_truth": [
+          1
+        ]
       },
       {
         "question": "Where did Sam take his family for a road trip on 24 May, 2023?",
@@ -1611,7 +2190,10 @@
         ],
         "category": 5,
         "adversarial_answer": "Jasper",
-        "where": 2
+        "where": 2,
+        "where_ground_truth": [
+          2
+        ]
       },
       {
         "question": "What did Sam find relaxing about his road trip to Jasper?",
@@ -1620,7 +2202,10 @@
         ],
         "category": 5,
         "adversarial_answer": "fresh air, peacefulness, cozy cabin surrounded by mountains and forests",
-        "where": 2
+        "where": 2,
+        "where_ground_truth": [
+          2
+        ]
       },
       {
         "question": "What habit is Evan trying to change in terms of diet?",
@@ -1629,7 +2214,10 @@
         ],
         "category": 5,
         "adversarial_answer": "consuming soda and candy",
-        "where": 3
+        "where": 3,
+        "where_ground_truth": [
+          3
+        ]
       },
       {
         "question": "What frustrating issue did Evan face at the supermarket?",
@@ -1638,7 +2226,10 @@
         ],
         "category": 5,
         "adversarial_answer": "broken self-checkout machines",
-        "where": 3
+        "where": 3,
+        "where_ground_truth": [
+          3
+        ]
       },
       {
         "question": "What novel is Sam reading that he finds gripping?",
@@ -1647,7 +2238,10 @@
         ],
         "category": 5,
         "adversarial_answer": "The Great Gatsby",
-        "where": 4
+        "where": 4,
+        "where_ground_truth": [
+          4
+        ]
       },
       {
         "question": "What does the smartwatch help Sam with?",
@@ -1656,7 +2250,10 @@
         ],
         "category": 5,
         "adversarial_answer": "tracks progress and serves as a constant reminder to keep going",
-        "where": 5
+        "where": 5,
+        "where_ground_truth": [
+          5
+        ]
       },
       {
         "question": "Why did Sam decide to get the bonsai tree?",
@@ -1665,7 +2262,10 @@
         ],
         "category": 5,
         "adversarial_answer": "motivates him to keep going through tough times",
-        "where": 5
+        "where": 5,
+        "where_ground_truth": [
+          5
+        ]
       },
       {
         "question": "What did Sam mention he had been searching for fruitlessly for half an hour?",
@@ -1674,7 +2274,10 @@
         ],
         "category": 5,
         "adversarial_answer": "his keys",
-        "where": 6
+        "where": 6,
+        "where_ground_truth": [
+          6
+        ]
       },
       {
         "question": "What class is Evan taking to learn how to make healthier meals?",
@@ -1683,7 +2286,10 @@
         ],
         "category": 5,
         "adversarial_answer": "cooking class",
-        "where": 7
+        "where": 7,
+        "where_ground_truth": [
+          7
+        ]
       },
       {
         "question": "What dish did Sam make on 18 August, 2023 that turned out bland?",
@@ -1692,7 +2298,10 @@
         ],
         "category": 5,
         "adversarial_answer": "grilled dish with salmon and vegetables",
-        "where": 7
+        "where": 7,
+        "where_ground_truth": [
+          7
+        ]
       },
       {
         "question": "What food did Evan share a photo of on 19 August, 2023?",
@@ -1701,7 +2310,10 @@
         ],
         "category": 5,
         "adversarial_answer": "bowl of spinach, avocado, and strawberries",
-        "where": 8
+        "where": 8,
+        "where_ground_truth": [
+          8
+        ]
       },
       {
         "question": "What did Evan start sculpting years ago due to being inspired by a friend's gift?",
@@ -1710,7 +2322,10 @@
         ],
         "category": 5,
         "adversarial_answer": "forest scene",
-        "where": 8
+        "where": 8,
+        "where_ground_truth": [
+          8
+        ]
       },
       {
         "question": "What nature concept do watercolor painting classes emphasize according to Sam?",
@@ -1719,7 +2334,10 @@
         ],
         "category": 5,
         "adversarial_answer": "observing nature and painting what is seen",
-        "where": 8
+        "where": 8,
+        "where_ground_truth": [
+          8
+        ]
       },
       {
         "question": "What type of landscapes does Sam love painting the most?",
@@ -1728,7 +2346,10 @@
         ],
         "category": 5,
         "adversarial_answer": "sunsets over the ocean",
-        "where": 8
+        "where": 8,
+        "where_ground_truth": [
+          8
+        ]
       },
       {
         "question": "What sports activity has Sam been doing to stay active while dealing with the knee injury?",
@@ -1737,7 +2358,10 @@
         ],
         "category": 5,
         "adversarial_answer": "Swimming",
-        "where": 9
+        "where": 9,
+        "where_ground_truth": [
+          9
+        ]
       },
       {
         "question": "What activity does Sam do to keep himself busy while healing his knee?",
@@ -1746,7 +2370,10 @@
         ],
         "category": 5,
         "adversarial_answer": "Watercolor painting",
-        "where": 11
+        "where": 11,
+        "where_ground_truth": [
+          11
+        ]
       },
       {
         "question": "What kind of writing does Evan enjoy as a form of expression?",
@@ -1755,7 +2382,10 @@
         ],
         "category": 5,
         "adversarial_answer": "creative writing",
-        "where": 11
+        "where": 11,
+        "where_ground_truth": [
+          11
+        ]
       },
       {
         "question": "What electronics issue has been frustrating Evan lately?",
@@ -1764,7 +2394,10 @@
         ],
         "category": 5,
         "adversarial_answer": "malfunctioning navigation app on the new phone",
-        "where": 11
+        "where": 11,
+        "where_ground_truth": [
+          11
+        ]
       },
       {
         "question": "What activity did Evan quit one year ago?",
@@ -1773,7 +2406,10 @@
         ],
         "category": 5,
         "adversarial_answer": "lifting weights",
-        "where": 12
+        "where": 12,
+        "where_ground_truth": [
+          12
+        ]
       },
       {
         "question": "Where did Sam and his mate plan to try skydiving?",
@@ -1782,7 +2418,10 @@
         ],
         "category": 5,
         "adversarial_answer": "Lake Tahoe",
-        "where": 13
+        "where": 13,
+        "where_ground_truth": [
+          13
+        ]
       },
       {
         "question": "What digestive issue did Evan experience lately?",
@@ -1791,7 +2430,10 @@
         ],
         "category": 5,
         "adversarial_answer": "Gastritis",
-        "where": 14
+        "where": 14,
+        "where_ground_truth": [
+          14
+        ]
       },
       {
         "question": "How did Sam start his transformation journey two years ago?",
@@ -1800,7 +2442,10 @@
         ],
         "category": 5,
         "adversarial_answer": "Changed his diet and started walking regularly",
-        "where": 15
+        "where": 15,
+        "where_ground_truth": [
+          15
+        ]
       },
       {
         "question": "What gift did Sam receive from a close friend?",
@@ -1809,7 +2454,10 @@
         ],
         "category": 5,
         "adversarial_answer": "1968 Kustom K-200A vintage guitar",
-        "where": 16
+        "where": 16,
+        "where_ground_truth": [
+          16
+        ]
       },
       {
         "question": "How does Sam describe the island he grew up on?",
@@ -1818,7 +2466,10 @@
         ],
         "category": 5,
         "adversarial_answer": "A happy place",
-        "where": 17
+        "where": 17,
+        "where_ground_truth": [
+          17
+        ]
       },
       {
         "question": "What was the main reason for Evan's frustration with his new Prius getting stolen?",
@@ -1827,7 +2478,10 @@
         ],
         "category": 5,
         "adversarial_answer": "He relied on it for his active lifestyle and road trips",
-        "where": 18
+        "where": 18,
+        "where_ground_truth": [
+          18
+        ]
       },
       {
         "question": "What family event is Sam planning for next summer?",
@@ -1836,7 +2490,10 @@
         ],
         "category": 5,
         "adversarial_answer": "big family reunion",
-        "where": 19
+        "where": 19,
+        "where_ground_truth": [
+          19
+        ]
       },
       {
         "question": "What is the motto of Sam's family?",
@@ -1845,7 +2502,10 @@
         ],
         "category": 5,
         "adversarial_answer": "'Bring it on Home'",
-        "where": 19
+        "where": 19,
+        "where_ground_truth": [
+          19
+        ]
       },
       {
         "question": "Who helped Sam get the painting published in the exhibition?",
@@ -1854,7 +2514,10 @@
         ],
         "category": 5,
         "adversarial_answer": "a close friend",
-        "where": 20
+        "where": 20,
+        "where_ground_truth": [
+          20
+        ]
       },
       {
         "question": "How did Sam feel when he painted the piece with the bird flying over it?",
@@ -1863,7 +2526,10 @@
         ],
         "category": 5,
         "adversarial_answer": "a sense of joy and freedom",
-        "where": 21
+        "where": 21,
+        "where_ground_truth": [
+          21
+        ]
       },
       {
         "question": "How did Sam describe the process of creating the painting with the bird flying over it?",
@@ -1872,7 +2538,10 @@
         ],
         "category": 5,
         "adversarial_answer": "embracing the creative process without restraint",
-        "where": 21
+        "where": 21,
+        "where_ground_truth": [
+          21
+        ]
       },
       {
         "question": "What did Evan and his partner keep from their extended family on January 5, 2024?",
@@ -1881,7 +2550,10 @@
         ],
         "category": 5,
         "adversarial_answer": "their marriage",
-        "where": 23
+        "where": 23,
+        "where_ground_truth": [
+          23
+        ]
       },
       {
         "question": "What was Sam limiting himself to on his new diet?",
@@ -1890,7 +2562,10 @@
         ],
         "category": 5,
         "adversarial_answer": "just two ginger snaps a day",
-        "where": 23
+        "where": 23,
+        "where_ground_truth": [
+          23
+        ]
       },
       {
         "question": "What dance activity did Evan and his partner try in a recent weekend?",
@@ -1899,7 +2574,10 @@
         ],
         "category": 5,
         "adversarial_answer": "Snowshoeing",
-        "where": 24
+        "where": 24,
+        "where_ground_truth": [
+          24
+        ]
       },
       {
         "question": "What suggestions did Evan give for high-impact exercises?",
@@ -1908,7 +2586,10 @@
         ],
         "category": 5,
         "adversarial_answer": "swimming, yoga, walking",
-        "where": 24
+        "where": 24,
+        "where_ground_truth": [
+          24
+        ]
       },
       {
         "question": "What movie did Evan watch that motivated him to keep up with his routine?",
@@ -1917,7 +2598,10 @@
         ],
         "category": 5,
         "adversarial_answer": "The Godfather",
-        "where": 24
+        "where": 24,
+        "where_ground_truth": [
+          24
+        ]
       },
       {
         "question": "What activity hindered Evan's stress and flexibility?",
@@ -1926,7 +2610,10 @@
         ],
         "category": 5,
         "adversarial_answer": "Yoga",
-        "where": 24
+        "where": 24,
+        "where_ground_truth": [
+          24
+        ]
       },
       {
         "question": "What did Sam share a photo of that was taken on a camping trip?",
@@ -1935,7 +2622,10 @@
         ],
         "category": 5,
         "adversarial_answer": "a kayak",
-        "where": 25
+        "where": 25,
+        "where_ground_truth": [
+          25
+        ]
       }
     ],
     "conversation": {

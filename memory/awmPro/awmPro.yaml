@@ -158,14 +158,14 @@ awmpro:
 
   # ===== 工作流 RAG 配置 =====
   workflow_rag:
-    embedding_model: "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx/bge-base-en-v1.5"
-    top_k: 10
+    embedding_model: "B:/desktop/python/agent/lifeLongLearning (ACL2026/bge-base-en-v1.5"
+    top_k: 8
     order: "similar_at_top"  # "similar_at_top" | "similar_at_bottom" | "random"
     seed: 42
     # 记忆内容会追加到 user question 末尾
     prompt_template: |
       Here are some useful workflows learned from past similar episodes, you can use them to help you complete the task:
       {workflows}
-    where: tail  # tail: 记忆放在 user question 后面 | front: 记忆放在 user question 前面
+    where: front  # tail: 记忆放在 user question 后面 | front: 记忆放在 user question 前面
     success_only: true
     reward_bigger_than_zero: true

@@ -345,13 +345,81 @@ def main() -> None:
                                     msg = item
                                 else:
                                     continue
-                                
+
                                 # 只包含聊天消息，排除 RewardHistoryItem
                                 if msg.get("role") in ["system", "user", "assistant"]:
                                     messages.append(msg)
 
-                            # 通过 memory_for_enhance 增强 messages（与普通任务保持一致）
+                            # 对于 zero-shot + locomo 任务，需要特殊处理：
+                            # 将当前 QA 所属的 session 以 user 角色插入到 system prompt 和当前问题之间
                             if self.memory_for_enhance is not None:
+                                from memory.zero_shot.zero_shot import ZeroShotMemory
+
+                                # 检查是否是 zero-shot 方法
+                                is_zero_shot = isinstance(self.memory_for_enhance, ZeroShotMemory)
+
+                                if is_zero_shot and is_locomo_task(self.task_name) and locomo_task_instance is not None:
+                                    # Zero-shot + locomo：根据 where_ground_truth 插入对应的 session(s)
+                                    # where_ground_truth 是一个 list，包含该问题需要参考的所有 session id
+                                    if sample_index < len(locomo_task_instance.qa_list):
+                                        qa_item = locomo_task_instance.qa_list[sample_index]
+                                        where_ground_truth = qa_item.get("where_ground_truth", [])
+
+                                        # 如果没有 where_ground_truth，回退到使用 where（单个 session）
+                                        if not where_ground_truth:
+                                            current_session_id = qa_item.get("where")
+                                            if current_session_id is not None:
+                                                where_ground_truth = [current_session_id]
+
+                                        if where_ground_truth:
+                                            # 构造插入的 session messages（可能来自多个 session）
+                                            session_messages = []
+                                            for session_id in where_ground_truth:
+                                                # 获取该 session 的历史对话
+                                                session_history = locomo_task_instance.get_session_history(session_id)
+
+                                                # 将历史对话以 user 角色插入
+                                                for hist_item in session_history:
+                                                    session_messages.append({
+                                                        "role": "user",
+                                                        "content": hist_item.get("content", "")
+                                                    })
+
+                                            # 插入位置：system prompt 之后，当前问题之前
+                                            # messages 结构：[system_prompt, current_question]
+                                            if len(messages) >= 2 and messages[0].get("role") == "system":
+                                                # 在 system prompt 和 question 之间插入 session(s)
+                                                messages = [messages[0]] + session_messages + messages[1:]
+                                                print(f"  -> [Zero-shot + Locomo] Injected {len(where_ground_truth)} session(s) {where_ground_truth} ({len(session_messages)} messages) for QA {sample_index}")
+
+                                                # 同时将这些历史session消息注入到self.history中，以便保存时包含它们
+                                                # 插入位置：在system prompt之后，current question之前
+                                                from openai.types.chat import ChatCompletionUserMessageParam
+
+                                                # 找到self.history中system prompt的位置
+                                                system_idx = -1
+                                                for i, item in enumerate(self.history):
+                                                    if hasattr(item, 'root'):
+                                                        msg = item.root
+                                                    elif isinstance(item, dict):
+                                                        msg = item
+                                                    else:
+                                                        continue
+
+                                                    if msg.get("role") == "system":
+                                                        system_idx = i
+                                                        break
+
+                                                # 在system prompt之后插入历史session消息
+                                                if system_idx >= 0:
+                                                    insert_position = system_idx + 1
+                                                    for session_msg in session_messages:
+                                                        self.history.insert(insert_position, ChatCompletionUserMessageParam(
+                                                            role="user",
+                                                            content=session_msg.get("content", "")
+                                                        ))
+                                                        insert_position += 1
+
                                 # single_agent
                                 enhanced_messages = self.memory_for_enhance.use_memory(self.task_name, messages)
 
@@ -1068,13 +1136,81 @@ def main() -> None:
                                     msg = item
                                 else:
                                     continue
-                                
+
                                 # 只包含聊天消息，排除 RewardHistoryItem
                                 if msg.get("role") in ["system", "user", "assistant"]:
                                     messages.append(msg)
 
-                            # 通过 memory_for_enhance 增强 messages（与普通任务保持一致）
+                            # 对于 zero-shot + locomo 任务，需要特殊处理：
+                            # 将当前 QA 所属的 session 以 user 角色插入到 system prompt 和当前问题之间
                             if self.memory_for_enhance is not None:
+                                from memory.zero_shot.zero_shot import ZeroShotMemory
+
+                                # 检查是否是 zero-shot 方法
+                                is_zero_shot = isinstance(self.memory_for_enhance, ZeroShotMemory)
+
+                                if is_zero_shot and is_locomo_task(self.task_name) and locomo_task_instance is not None:
+                                    # Zero-shot + locomo：根据 where_ground_truth 插入对应的 session(s)
+                                    # where_ground_truth 是一个 list，包含该问题需要参考的所有 session id
+                                    if sample_index < len(locomo_task_instance.qa_list):
+                                        qa_item = locomo_task_instance.qa_list[sample_index]
+                                        where_ground_truth = qa_item.get("where_ground_truth", [])
+
+                                        # 如果没有 where_ground_truth，回退到使用 where（单个 session）
+                                        if not where_ground_truth:
+                                            current_session_id = qa_item.get("where")
+                                            if current_session_id is not None:
+                                                where_ground_truth = [current_session_id]
+
+                                        if where_ground_truth:
+                                            # 构造插入的 session messages（可能来自多个 session）
+                                            session_messages = []
+                                            for session_id in where_ground_truth:
+                                                # 获取该 session 的历史对话
+                                                session_history = locomo_task_instance.get_session_history(session_id)
+
+                                                # 将历史对话以 user 角色插入
+                                                for hist_item in session_history:
+                                                    session_messages.append({
+                                                        "role": "user",
+                                                        "content": hist_item.get("content", "")
+                                                    })
+
+                                            # 插入位置：system prompt 之后，当前问题之前
+                                            # messages 结构：[system_prompt, current_question]
+                                            if len(messages) >= 2 and messages[0].get("role") == "system":
+                                                # 在 system prompt 和 question 之间插入 session(s)
+                                                messages = [messages[0]] + session_messages + messages[1:]
+                                                print(f"  -> [Zero-shot + Locomo] Injected {len(where_ground_truth)} session(s) {where_ground_truth} ({len(session_messages)} messages) for QA {sample_index}")
+
+                                                # 同时将这些历史session消息注入到self.history中，以便保存时包含它们
+                                                # 插入位置：在system prompt之后，current question之前
+                                                from openai.types.chat import ChatCompletionUserMessageParam
+
+                                                # 找到self.history中system prompt的位置
+                                                system_idx = -1
+                                                for i, item in enumerate(self.history):
+                                                    if hasattr(item, 'root'):
+                                                        msg = item.root
+                                                    elif isinstance(item, dict):
+                                                        msg = item
+                                                    else:
+                                                        continue
+
+                                                    if msg.get("role") == "system":
+                                                        system_idx = i
+                                                        break
+
+                                                # 在system prompt之后插入历史session消息
+                                                if system_idx >= 0:
+                                                    insert_position = system_idx + 1
+                                                    for session_msg in session_messages:
+                                                        self.history.insert(insert_position, ChatCompletionUserMessageParam(
+                                                            role="user",
+                                                            content=session_msg.get("content", "")
+                                                        ))
+                                                        insert_position += 1
+
                                 # single_agent
                                 enhanced_messages = self.memory_for_enhance.use_memory(self.task_name, messages)
 

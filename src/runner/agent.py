@@ -142,4 +142,8 @@ class SimpleHTTPChatAgent:
             message["role"] = "assistant"
         if "content" not in message:
             message["content"] = ""
+        # 保存推理内容（如果存在）
+        if "reasoning_content" in message:
+            # reasoning_content 已经在 message 中，直接返回即可
+            pass
         return message

@@ -8,7 +8,10 @@
           "D1:27"
         ],
         "category": 3,
-        "where": 1
+        "where": 1,
+        "where_ground_truth": [
+          1
+        ]
       },
       {
         "question": "Which recreational activity was James pursuing on March 16, 2022?",
@@ -17,7 +20,10 @@
           "D1:26"
         ],
         "category": 2,
-        "where": 1
+        "where": 1,
+        "where_ground_truth": [
+          1
+        ]
       },
       {
         "question": "Which places or events have John and James planned to meet at?",
@@ -29,7 +35,12 @@
           "D23:6"
         ],
         "category": 1,
-        "where": 23
+        "where": 23,
+        "where_ground_truth": [
+          1,
+          21,
+          23
+        ]
       },
       {
         "question": "Do both James and John have pets?",
@@ -39,7 +50,11 @@
           "D2:18"
         ],
         "category": 1,
-        "where": 2
+        "where": 2,
+        "where_ground_truth": [
+          1,
+          2
+        ]
       },
       {
         "question": "When did John resume playing drums in his adulthood?",
@@ -48,7 +63,10 @@
           "D3:5"
         ],
         "category": 2,
-        "where": 3
+        "where": 3,
+        "where_ground_truth": [
+          3
+        ]
       },
       {
         "question": "What are John and James' favorite games?",
@@ -58,7 +76,11 @@
           "D4:16"
         ],
         "category": 1,
-        "where": 4
+        "where": 4,
+        "where_ground_truth": [
+          3,
+          4
+        ]
       },
       {
         "question": "Does James live in Connecticut?",
@@ -67,7 +89,10 @@
           "D5:1"
         ],
         "category": 3,
-        "where": 5
+        "where": 5,
+        "where_ground_truth": [
+          5
+        ]
       },
       {
         "question": "In which state is the shelter from which James adopted the puppy?",
@@ -76,7 +101,10 @@
           "D5:1"
         ],
         "category": 3,
-        "where": 5
+        "where": 5,
+        "where_ground_truth": [
+          5
+        ]
       },
       {
         "question": "How many pets does James have?",
@@ -87,7 +115,11 @@
           "D5:1"
         ],
         "category": 1,
-        "where": 5
+        "where": 5,
+        "where_ground_truth": [
+          1,
+          5
+        ]
       },
       {
         "question": "What are the names of James's dogs?",
@@ -97,7 +129,11 @@
           "D5:1"
         ],
         "category": 1,
-        "where": 5
+        "where": 5,
+        "where_ground_truth": [
+          1,
+          5
+        ]
       },
       {
         "question": "When did James adopt Ned?",
@@ -106,7 +142,10 @@
           "D5:1"
         ],
         "category": 2,
-        "where": 5
+        "where": 5,
+        "where_ground_truth": [
+          5
+        ]
       },
       {
         "question": "How was John feeling on April 10, 2022?",
@@ -115,7 +154,10 @@
           "D6:7"
         ],
         "category": 2,
-        "where": 6
+        "where": 6,
+        "where_ground_truth": [
+          6
+        ]
       },
       {
         "question": "Did James have a girlfriend during April 2022?",
@@ -124,7 +166,10 @@
           "D6:6"
         ],
         "category": 3,
-        "where": 6
+        "where": 6,
+        "where_ground_truth": [
+          6
+        ]
       },
       {
         "question": "When did James visit Italy?",
@@ -133,7 +178,10 @@
           "D6:12"
         ],
         "category": 2,
-        "where": 6
+        "where": 6,
+        "where_ground_truth": [
+          6
+        ]
       },
       {
         "question": "When did James buy himself a new adventure book?",
@@ -142,7 +190,10 @@
           "D8:11"
         ],
         "category": 2,
-        "where": 8
+        "where": 8,
+        "where_ground_truth": [
+          8
+        ]
       },
       {
         "question": "When did James start playing Civilization VI?",
@@ -151,7 +202,10 @@
           "D8:29"
         ],
         "category": 2,
-        "where": 8
+        "where": 8,
+        "where_ground_truth": [
+          8
+        ]
       },
       {
         "question": "What is the game with different colored cards that was John talking about with James?",
@@ -160,7 +214,10 @@
           "D8:34"
         ],
         "category": 3,
-        "where": 8
+        "where": 8,
+        "where_ground_truth": [
+          8
+        ]
       },
       {
         "question": "What is the board game where you have to find the imposter that John mentions to James?",
@@ -169,7 +226,10 @@
           "D8:36"
         ],
         "category": 3,
-        "where": 8
+        "where": 8,
+        "where_ground_truth": [
+          8
+        ]
       },
       {
         "question": "Which books has John recommended to James?",
@@ -179,7 +239,11 @@
           "D14:10"
         ],
         "category": 1,
-        "where": 14
+        "where": 14,
+        "where_ground_truth": [
+          8,
+          14
+        ]
       },
       {
         "question": "Was James feeling lonely before meeting Samantha?",
@@ -188,7 +252,10 @@
           "D9:16"
         ],
         "category": 3,
-        "where": 9
+        "where": 9,
+        "where_ground_truth": [
+          9
+        ]
       },
       {
         "question": "How many charity tournaments has John organized till date?",
@@ -198,7 +265,11 @@
           "D29:1"
         ],
         "category": 1,
-        "where": 29
+        "where": 29,
+        "where_ground_truth": [
+          10,
+          29
+        ]
       },
       {
         "question": "When did John first organize a charity tournament with his friends?",
@@ -207,7 +278,10 @@
           "D10:2"
         ],
         "category": 2,
-        "where": 10
+        "where": 10,
+        "where_ground_truth": [
+          10
+        ]
       },
       {
         "question": "Who or which organizations have been the beneficiaries of John's charity tournaments?",
@@ -218,7 +292,11 @@
           "D29:1"
         ],
         "category": 1,
-        "where": 29
+        "where": 29,
+        "where_ground_truth": [
+          10,
+          29
+        ]
       },
       {
         "question": "When will John start his new job?",
@@ -227,7 +305,10 @@
           "D13:5"
         ],
         "category": 2,
-        "where": 13
+        "where": 13,
+        "where_ground_truth": [
+          13
+        ]
       },
       {
         "question": "What kind of games has James tried to develop?",
@@ -238,7 +319,12 @@
           "D27:2"
         ],
         "category": 1,
-        "where": 27
+        "where": 27,
+        "where_ground_truth": [
+          1,
+          13,
+          27
+        ]
       },
       {
         "question": "Are John and James fans of the same football team?",
@@ -248,7 +334,10 @@
           "D13:15"
         ],
         "category": 3,
-        "where": 13
+        "where": 13,
+        "where_ground_truth": [
+          13
+        ]
       },
       {
         "question": "Which countries has James visited?",
@@ -260,7 +349,12 @@
           "D17:22"
         ],
         "category": 1,
-        "where": 17
+        "where": 17,
+        "where_ground_truth": [
+          6,
+          16,
+          17
+        ]
       },
       {
         "question": "What kind of classes has James joined?",
@@ -270,7 +364,11 @@
           "D23:13"
         ],
         "category": 1,
-        "where": 23
+        "where": 23,
+        "where_ground_truth": [
+          13,
+          23
+        ]
       },
       {
         "question": "When did James volunteer at an organization?",
@@ -279,7 +377,10 @@
           "D15:9"
         ],
         "category": 2,
-        "where": 15
+        "where": 15,
+        "where_ground_truth": [
+          15
+        ]
       },
       {
         "question": "When did James depart for his trip to Canada?",
@@ -288,7 +389,10 @@
           "D16:9"
         ],
         "category": 2,
-        "where": 16
+        "where": 16,
+        "where_ground_truth": [
+          16
+        ]
       },
       {
         "question": "Which country did James book tickets for in July 2022?",
@@ -298,7 +402,10 @@
           "D16:11"
         ],
         "category": 3,
-        "where": 16
+        "where": 16,
+        "where_ground_truth": [
+          16
+        ]
       },
       {
         "question": "How many days did James plan to spend on his trip in Canada?",
@@ -308,7 +415,10 @@
           "D16:13"
         ],
         "category": 2,
-        "where": 16
+        "where": 16,
+        "where_ground_truth": [
+          16
+        ]
       },
       {
         "question": "Where was James at on July 12, 2022?",
@@ -317,7 +427,10 @@
           "D16:9"
         ],
         "category": 2,
-        "where": 16
+        "where": 16,
+        "where_ground_truth": [
+          16
+        ]
       },
       {
         "question": "Did John and James study together?",
@@ -326,7 +439,10 @@
           "D17:13"
         ],
         "category": 3,
-        "where": 17
+        "where": 17,
+        "where_ground_truth": [
+          17
+        ]
       },
       {
         "question": "Which countries did James visit in July 2022?",
@@ -336,7 +452,11 @@
           "D17:22"
         ],
         "category": 1,
-        "where": 17
+        "where": 17,
+        "where_ground_truth": [
+          16,
+          17
+        ]
       },
       {
         "question": "What additional country did James visit during his trip to Canada?",
@@ -345,7 +465,10 @@
           "D17:22"
         ],
         "category": 3,
-        "where": 17
+        "where": 17,
+        "where_ground_truth": [
+          17
+        ]
       },
       {
         "question": "Who is Jill?",
@@ -354,7 +477,10 @@
           "D17:24"
         ],
         "category": 3,
-        "where": 17
+        "where": 17,
+        "where_ground_truth": [
+          17
+        ]
       },
       {
         "question": "When did John spend time with his sister and dogs?",
@@ -363,7 +489,10 @@
           "D17:28"
         ],
         "category": 2,
-        "where": 17
+        "where": 17,
+        "where_ground_truth": [
+          17
+        ]
       },
       {
         "question": "What happened to John's job situation in 2022?",
@@ -374,7 +503,11 @@
           "D18:7"
         ],
         "category": 1,
-        "where": 18
+        "where": 18,
+        "where_ground_truth": [
+          4,
+          18
+        ]
       },
       {
         "question": "When did John start his job in IT?",
@@ -383,7 +516,10 @@
           "D18:1"
         ],
         "category": 2,
-        "where": 18
+        "where": 18,
+        "where_ground_truth": [
+          18
+        ]
       },
       {
         "question": "What kind of tricks do James's pets know?",
@@ -395,7 +531,12 @@
           "D17:16"
         ],
         "category": 1,
-        "where": 17
+        "where": 17,
+        "where_ground_truth": [
+          2,
+          14,
+          17
+        ]
       },
       {
         "question": "When did James meet Samantha?",
@@ -404,7 +545,10 @@
           "D19:12"
         ],
         "category": 2,
-        "where": 19
+        "where": 19,
+        "where_ground_truth": [
+          19
+        ]
       },
       {
         "question": "When did James take his 3 dogs to the beach?",
@@ -413,7 +557,10 @@
           "D19:12"
         ],
         "category": 2,
-        "where": 19
+        "where": 19,
+        "where_ground_truth": [
+          19
+        ]
       },
       {
         "question": "When did John plan his next meeting with his siblings?",
@@ -422,7 +569,10 @@
           "D20:17"
         ],
         "category": 2,
-        "where": 20
+        "where": 20,
+        "where_ground_truth": [
+          20
+        ]
       },
       {
         "question": "Why didn't John want to go to Starbucks?",
@@ -432,7 +582,10 @@
           "D21:14"
         ],
         "category": 3,
-        "where": 21
+        "where": 21,
+        "where_ground_truth": [
+          21
+        ]
       },
       {
         "question": "What kind of beer does McGee's bar serve?",
@@ -443,7 +596,11 @@
           "D23:3"
         ],
         "category": 1,
-        "where": 23
+        "where": 23,
+        "where_ground_truth": [
+          21,
+          23
+        ]
       },
       {
         "question": "When did John and James meet at McGee's bar?",
@@ -452,7 +609,10 @@
           "D21:18"
         ],
         "category": 2,
-        "where": 21
+        "where": 21,
+        "where_ground_truth": [
+          21
+        ]
       },
       {
         "question": "When did James ask Samantha to be his girlfriend?",
@@ -461,7 +621,10 @@
           "D23:1"
         ],
         "category": 2,
-        "where": 23
+        "where": 23,
+        "where_ground_truth": [
+          23
+        ]
       },
       {
         "question": "When did James, Samantha and John go to the baseball game together?",
@@ -471,7 +634,10 @@
           "D23:6"
         ],
         "category": 2,
-        "where": 23
+        "where": 23,
+        "where_ground_truth": [
+          23
+        ]
       },
       {
         "question": "What gaming equipments did John buy or refurbish?",
@@ -482,7 +648,11 @@
           "D20:9"
         ],
         "category": 1,
-        "where": 23
+        "where": 23,
+        "where_ground_truth": [
+          20,
+          23
+        ]
       },
       {
         "question": "When did James start taking cooking classes?",
@@ -491,7 +661,10 @@
           "D23:13"
         ],
         "category": 2,
-        "where": 23
+        "where": 23,
+        "where_ground_truth": [
+          23
+        ]
       },
       {
         "question": "Which new games did John start play during the course of the conversation with James?",
@@ -505,7 +678,14 @@
           "D8:20"
         ],
         "category": 1,
-        "where": 30
+        "where": 30,
+        "where_ground_truth": [
+          5,
+          8,
+          19,
+          24,
+          30
+        ]
       },
       {
         "question": "When did John start working on his 2D Adventure mobile game?",
@@ -514,7 +694,10 @@
           "D25:9"
         ],
         "category": 2,
-        "where": 25
+        "where": 25,
+        "where_ground_truth": [
+          25
+        ]
       },
       {
         "question": "How long did it take for James to complete his Witcher-inspired game?",
@@ -524,7 +707,11 @@
           "D27:2"
         ],
         "category": 2,
-        "where": 27
+        "where": 27,
+        "where_ground_truth": [
+          6,
+          27
+        ]
       },
       {
         "question": "What kind of programming-related events has John hosted?",
@@ -534,7 +721,11 @@
           "D28:6"
         ],
         "category": 1,
-        "where": 28
+        "where": 28,
+        "where_ground_truth": [
+          27,
+          28
+        ]
       },
       {
         "question": "When did John and his programming friends host an online programming competition?",
@@ -543,7 +734,10 @@
           "D27:1"
         ],
         "category": 2,
-        "where": 27
+        "where": 27,
+        "where_ground_truth": [
+          27
+        ]
       },
       {
         "question": "Which of James's family members have visited him in the last year?",
@@ -553,7 +747,11 @@
           "D28:19"
         ],
         "category": 1,
-        "where": 28
+        "where": 28,
+        "where_ground_truth": [
+          17,
+          28
+        ]
       },
       {
         "question": "When did James' mother and her friend visit him?",
@@ -562,7 +760,10 @@
           "D28:19"
         ],
         "category": 2,
-        "where": 28
+        "where": 28,
+        "where_ground_truth": [
+          28
+        ]
       },
       {
         "question": "When did James try Cyberpunk 2077 game?",
@@ -571,7 +772,10 @@
           "D28:27"
         ],
         "category": 2,
-        "where": 28
+        "where": 28,
+        "where_ground_truth": [
+          28
+        ]
       },
       {
         "question": "When did John and his gaming friends organize the charity tournament?",
@@ -580,7 +784,10 @@
           "D29:1"
         ],
         "category": 2,
-        "where": 29
+        "where": 29,
+        "where_ground_truth": [
+          29
+        ]
       },
       {
         "question": "What games has John played with his friends at charity tournaments?",
@@ -591,7 +798,11 @@
           "D29:3"
         ],
         "category": 1,
-        "where": 29
+        "where": 29,
+        "where_ground_truth": [
+          10,
+          29
+        ]
       },
       {
         "question": "What was James' big moment with Samantha in October 2023?",
@@ -601,7 +812,10 @@
           "D29:10"
         ],
         "category": 2,
-        "where": 29
+        "where": 29,
+        "where_ground_truth": [
+          29
+        ]
       },
       {
         "question": "How long did James and Samantha date for before deciding to move in together?",
@@ -612,7 +826,11 @@
           "D29:10"
         ],
         "category": 2,
-        "where": 29
+        "where": 29,
+        "where_ground_truth": [
+          19,
+          29
+        ]
       },
       {
         "question": "When did James, his family and his dogs start on a road trip together?",
@@ -621,7 +839,10 @@
           "D30:1"
         ],
         "category": 2,
-        "where": 30
+        "where": 30,
+        "where_ground_truth": [
+          30
+        ]
       },
       {
         "question": "How long did John practice chess for before winning the chess tournament?",
@@ -632,7 +853,11 @@
           "D30:4"
         ],
         "category": 2,
-        "where": 30
+        "where": 30,
+        "where_ground_truth": [
+          17,
+          30
+        ]
       },
       {
         "question": "When did James and his family visit Mark and Josh?",
@@ -641,7 +866,10 @@
           "D31:1"
         ],
         "category": 2,
-        "where": 31
+        "where": 31,
+        "where_ground_truth": [
+          31
+        ]
       },
       {
         "question": "When did John work with a game developer on a project?",
@@ -650,7 +878,10 @@
           "D31:2"
         ],
         "category": 2,
-        "where": 31
+        "where": 31,
+        "where_ground_truth": [
+          31
+        ]
       },
       {
         "question": "What programming languages has James worked with?",
@@ -659,7 +890,10 @@
           "D1:8"
         ],
         "category": 4,
-        "where": 1
+        "where": 1,
+        "where_ground_truth": [
+          1
+        ]
       },
       {
         "question": "What type of mobile application does James plan to build with John?",
@@ -668,7 +902,10 @@
           "D1:14"
         ],
         "category": 4,
-        "where": 1
+        "where": 1,
+        "where_ground_truth": [
+          1
+        ]
       },
       {
         "question": "How does James plan to make his dog-sitting app unique?",
@@ -677,7 +914,10 @@
           "D1:16"
         ],
         "category": 4,
-        "where": 1
+        "where": 1,
+        "where_ground_truth": [
+          1
+        ]
       },
       {
         "question": "What has John mostly found with the metal detector so far?",
@@ -686,7 +926,10 @@
           "D2:12"
         ],
         "category": 4,
-        "where": 2
+        "where": 2,
+        "where_ground_truth": [
+          2
+        ]
       },
       {
         "question": "What did James offer to do for John regarding pets?",
@@ -695,7 +938,10 @@
           "D2:19"
         ],
         "category": 4,
-        "where": 2
+        "where": 2,
+        "where_ground_truth": [
+          2
+        ]
       },
       {
         "question": "What instrument is John learning to play as of 27 March, 2022?",
@@ -705,7 +951,10 @@
           "D3:3"
         ],
         "category": 4,
-        "where": 3
+        "where": 3,
+        "where_ground_truth": [
+          3
+        ]
       },
       {
         "question": "How long has John been playing the drums as of 27 March, 2022?",
@@ -714,7 +963,10 @@
           "D3:5"
         ],
         "category": 4,
-        "where": 3
+        "where": 3,
+        "where_ground_truth": [
+          3
+        ]
       },
       {
         "question": "What game did John play in an intense tournament at the gaming convention in March 2022?",
@@ -723,7 +975,10 @@
           "D3:11"
         ],
         "category": 4,
-        "where": 3
+        "where": 3,
+        "where_ground_truth": [
+          3
+        ]
       },
       {
         "question": "What game was James playing in the online gaming tournament in April 2022?",
@@ -732,7 +987,10 @@
           "D4:16"
         ],
         "category": 4,
-        "where": 4
+        "where": 4,
+        "where_ground_truth": [
+          4
+        ]
       },
       {
         "question": "How does James communicate with his gaming team?",
@@ -741,7 +999,10 @@
           "D4:14"
         ],
         "category": 4,
-        "where": 4
+        "where": 4,
+        "where_ground_truth": [
+          4
+        ]
       },
       {
         "question": "What advice did James receive from the famous players he met at the tournament?",
@@ -750,7 +1011,10 @@
           "D4:12"
         ],
         "category": 4,
-        "where": 4
+        "where": 4,
+        "where_ground_truth": [
+          4
+        ]
       },
       {
         "question": "What did James adopt in April 2022?",
@@ -759,7 +1023,10 @@
           "D5:1"
         ],
         "category": 4,
-        "where": 5
+        "where": 5,
+        "where_ground_truth": [
+          5
+        ]
       },
       {
         "question": "What is the name of the pup that was adopted by James?",
@@ -768,7 +1035,10 @@
           "D5:1"
         ],
         "category": 4,
-        "where": 5
+        "where": 5,
+        "where_ground_truth": [
+          5
+        ]
       },
       {
         "question": "Why did James embody the appearance of the game character from the woman he saw during a walk?",
@@ -777,7 +1047,10 @@
           "D6:6"
         ],
         "category": 4,
-        "where": 6
+        "where": 6,
+        "where_ground_truth": [
+          6
+        ]
       },
       {
         "question": "What inspired James to create the game character in the virtual world?",
@@ -786,7 +1059,10 @@
           "D6:6"
         ],
         "category": 4,
-        "where": 6
+        "where": 6,
+        "where_ground_truth": [
+          6
+        ]
       },
       {
         "question": "Which country did James visit in 2021?",
@@ -795,7 +1071,10 @@
           "D6:12"
         ],
         "category": 4,
-        "where": 6
+        "where": 6,
+        "where_ground_truth": [
+          6
+        ]
       },
       {
         "question": "What impresses John about Japan?",
@@ -804,7 +1083,10 @@
           "D6:15"
         ],
         "category": 4,
-        "where": 6
+        "where": 6,
+        "where_ground_truth": [
+          6
+        ]
       },
       {
         "question": "What kind of assignment was giving John a hard time at work?",
@@ -813,7 +1095,10 @@
           "D7:13"
         ],
         "category": 4,
-        "where": 7
+        "where": 7,
+        "where_ground_truth": [
+          7
+        ]
       },
       {
         "question": "What breed is Daisy, one of James' dogs?",
@@ -822,7 +1107,10 @@
           "D9:12"
         ],
         "category": 4,
-        "where": 9
+        "where": 9,
+        "where_ground_truth": [
+          9
+        ]
       },
       {
         "question": "What type of pizza is James' favorite?",
@@ -831,7 +1119,10 @@
           "D9:18"
         ],
         "category": 4,
-        "where": 9
+        "where": 9,
+        "where_ground_truth": [
+          9
+        ]
       },
       {
         "question": "What type of pizza is John's favorite?",
@@ -840,7 +1131,10 @@
           "D9:19"
         ],
         "category": 4,
-        "where": 9
+        "where": 9,
+        "where_ground_truth": [
+          9
+        ]
       },
       {
         "question": "What did John organize with his friends on May 8, 2022?",
@@ -849,7 +1143,10 @@
           "D10:4"
         ],
         "category": 4,
-        "where": 10
+        "where": 10,
+        "where_ground_truth": [
+          10
+        ]
       },
       {
         "question": "What did John and his friends do with the remaining money after helping the dog shelter?",
@@ -858,7 +1155,10 @@
           "D10:12"
         ],
         "category": 4,
-        "where": 10
+        "where": 10,
+        "where_ground_truth": [
+          10
+        ]
       },
       {
         "question": "What was the main goal of the money raised from the charity tournament organized by John and his friends in May 2022?",
@@ -867,7 +1167,10 @@
           "D10:10"
         ],
         "category": 4,
-        "where": 10
+        "where": 10,
+        "where_ground_truth": [
+          10
+        ]
       },
       {
         "question": "What did the system John created help the charitable foundation with?",
@@ -876,7 +1179,10 @@
           "D11:5"
         ],
         "category": 4,
-        "where": 11
+        "where": 11,
+        "where_ground_truth": [
+          11
+        ]
       },
       {
         "question": "What did John create for the charitable foundation that helped generate reports for analysis?",
@@ -885,7 +1191,10 @@
           "D11:3"
         ],
         "category": 4,
-        "where": 11
+        "where": 11,
+        "where_ground_truth": [
+          11
+        ]
       },
       {
         "question": "What did John receive for achieving second place in the tournament?",
@@ -895,7 +1204,10 @@
           "D12:6"
         ],
         "category": 4,
-        "where": 12
+        "where": 12,
+        "where_ground_truth": [
+          12
+        ]
       },
       {
         "question": "What project is James working on in his game design course?",
@@ -904,7 +1216,10 @@
           "D13:8"
         ],
         "category": 4,
-        "where": 13
+        "where": 13,
+        "where_ground_truth": [
+          13
+        ]
       },
       {
         "question": "Who does James support in football matches?",
@@ -913,7 +1228,10 @@
           "D13:12"
         ],
         "category": 4,
-        "where": 13
+        "where": 13,
+        "where_ground_truth": [
+          13
+        ]
       },
       {
         "question": "Which football club does John support?",
@@ -922,7 +1240,10 @@
           "D13:15"
         ],
         "category": 4,
-        "where": 13
+        "where": 13,
+        "where_ground_truth": [
+          13
+        ]
       },
       {
         "question": "What disagreement do James and John have about their football teams?",
@@ -931,7 +1252,10 @@
           "D13:15"
         ],
         "category": 4,
-        "where": 13
+        "where": 13,
+        "where_ground_truth": [
+          13
+        ]
       },
       {
         "question": "What is Max good at doing according to James?",
@@ -940,7 +1264,10 @@
           "D14:23"
         ],
         "category": 4,
-        "where": 14
+        "where": 14,
+        "where_ground_truth": [
+          14
+        ]
       },
       {
         "question": "What is the main focus of the organization that James volunteered with?",
@@ -949,7 +1276,10 @@
           "D15:11"
         ],
         "category": 4,
-        "where": 15
+        "where": 15,
+        "where_ground_truth": [
+          15
+        ]
       },
       {
         "question": "Will there be an interview required to volunteer with the organization James volunteered for?",
@@ -958,7 +1288,10 @@
           "D15:15"
         ],
         "category": 4,
-        "where": 15
+        "where": 15,
+        "where_ground_truth": [
+          15
+        ]
       },
       {
         "question": "How did John relax in his free time on 9 July, 2022?",
@@ -967,7 +1300,10 @@
           "D16:8"
         ],
         "category": 4,
-        "where": 16
+        "where": 16,
+        "where_ground_truth": [
+          16
+        ]
       },
       {
         "question": "What did James enjoy doing on cold winter days?",
@@ -976,7 +1312,10 @@
           "D16:9"
         ],
         "category": 4,
-        "where": 16
+        "where": 16,
+        "where_ground_truth": [
+          16
+        ]
       },
       {
         "question": "What new hobby did James become interested in on 9 July, 2022?",
@@ -985,7 +1324,10 @@
           "D16:5"
         ],
         "category": 4,
-        "where": 16
+        "where": 16,
+        "where_ground_truth": [
+          16
+        ]
       },
       {
         "question": "Where did James plan to visit after Toronto?",
@@ -994,7 +1336,10 @@
           "D16:11"
         ],
         "category": 4,
-        "where": 16
+        "where": 16,
+        "where_ground_truth": [
+          16
+        ]
       },
       {
         "question": "When did James plan to return from his trip to Toronto and Vancouver?",
@@ -1003,7 +1348,10 @@
           "D16:13"
         ],
         "category": 4,
-        "where": 16
+        "where": 16,
+        "where_ground_truth": [
+          16
+        ]
       },
       {
         "question": "What online game did John start playing recently for improving strategy?",
@@ -1012,7 +1360,10 @@
           "D17:1"
         ],
         "category": 4,
-        "where": 17
+        "where": 17,
+        "where_ground_truth": [
+          17
+        ]
       },
       {
         "question": "What made John leave his IT job?",
@@ -1021,7 +1372,10 @@
           "D18:3"
         ],
         "category": 4,
-        "where": 18
+        "where": 18,
+        "where_ground_truth": [
+          18
+        ]
       },
       {
         "question": "Which game tournaments does John plan to organize besides CS:GO?",
@@ -1030,7 +1384,10 @@
           "D18:9"
         ],
         "category": 4,
-        "where": 18
+        "where": 18,
+        "where_ground_truth": [
+          18
+        ]
       },
       {
         "question": "What happened to James's puppy during the recent visit to the clinic?",
@@ -1039,7 +1396,10 @@
           "D18:16"
         ],
         "category": 4,
-        "where": 18
+        "where": 18,
+        "where_ground_truth": [
+          18
+        ]
       },
       {
         "question": "What game genre did John start exploring instead of shooters?",
@@ -1048,7 +1408,10 @@
           "D19:3"
         ],
         "category": 4,
-        "where": 19
+        "where": 19,
+        "where_ground_truth": [
+          19
+        ]
       },
       {
         "question": "Which RPG game is John playing and enjoying on 10 August, 2022?",
@@ -1057,7 +1420,10 @@
           "D19:7"
         ],
         "category": 4,
-        "where": 19
+        "where": 19,
+        "where_ground_truth": [
+          19
+        ]
       },
       {
         "question": "What aspect of \"The Witcher 3\" does John find immersive?",
@@ -1066,7 +1432,10 @@
           "D19:7"
         ],
         "category": 4,
-        "where": 19
+        "where": 19,
+        "where_ground_truth": [
+          19
+        ]
       },
       {
         "question": "Whose phone number did James receive during the beach outing?",
@@ -1075,7 +1444,10 @@
           "D19:14"
         ],
         "category": 4,
-        "where": 19
+        "where": 19,
+        "where_ground_truth": [
+          19
+        ]
       },
       {
         "question": "What is James planning to do after receiving Samantha's phone number?",
@@ -1084,7 +1456,10 @@
           "D19:14"
         ],
         "category": 4,
-        "where": 19
+        "where": 19,
+        "where_ground_truth": [
+          19
+        ]
       },
       {
         "question": "What is John organizing with his siblings?",
@@ -1093,7 +1468,10 @@
           "D20:17"
         ],
         "category": 4,
-        "where": 20
+        "where": 20,
+        "where_ground_truth": [
+          20
+        ]
       },
       {
         "question": "What type of beer does John not like?",
@@ -1102,7 +1480,10 @@
           "D21:16"
         ],
         "category": 4,
-        "where": 21
+        "where": 21,
+        "where_ground_truth": [
+          21
+        ]
       },
       {
         "question": "What were some difficulties James faced during the development of his game?",
@@ -1111,7 +1492,10 @@
           "D22:7"
         ],
         "category": 4,
-        "where": 22
+        "where": 22,
+        "where_ground_truth": [
+          22
+        ]
       },
       {
         "question": "What has John been teaching his siblings?",
@@ -1120,7 +1504,10 @@
           "D22:10"
         ],
         "category": 4,
-        "where": 22
+        "where": 22,
+        "where_ground_truth": [
+          22
+        ]
       },
       {
         "question": "What kind of programs are John's siblings making?",
@@ -1129,7 +1516,10 @@
           "D22:12"
         ],
         "category": 4,
-        "where": 22
+        "where": 22,
+        "where_ground_truth": [
+          22
+        ]
       },
       {
         "question": "Which company's headphones did John choose for gaming?",
@@ -1138,7 +1528,10 @@
           "D23:10"
         ],
         "category": 4,
-        "where": 23
+        "where": 23,
+        "where_ground_truth": [
+          23
+        ]
       },
       {
         "question": "What did James and Samantha discover they both enjoy at McGee's bar?",
@@ -1147,7 +1540,10 @@
           "D23:3"
         ],
         "category": 4,
-        "where": 23
+        "where": 23,
+        "where_ground_truth": [
+          23
+        ]
       },
       {
         "question": "How much does James pay per cooking class?",
@@ -1156,7 +1552,10 @@
           "D23:15"
         ],
         "category": 4,
-        "where": 23
+        "where": 23,
+        "where_ground_truth": [
+          23
+        ]
       },
       {
         "question": "What did James learn to make in the cooking class besides omelette and meringue?",
@@ -1165,7 +1564,10 @@
           "D23:15"
         ],
         "category": 4,
-        "where": 23
+        "where": 23,
+        "where_ground_truth": [
+          23
+        ]
       },
       {
         "question": "Why did James sign up for a cooking class?",
@@ -1174,7 +1576,10 @@
           "D23:13"
         ],
         "category": 4,
-        "where": 23
+        "where": 23,
+        "where_ground_truth": [
+          23
+        ]
       },
       {
         "question": "What did James prepare for the first time in the cooking class?",
@@ -1183,7 +1588,10 @@
           "D23:13"
         ],
         "category": 4,
-        "where": 23
+        "where": 23,
+        "where_ground_truth": [
+          23
+        ]
       },
       {
         "question": "What is the name of the board game John tried in September 2022?",
@@ -1192,7 +1600,10 @@
           "D24:3"
         ],
         "category": 4,
-        "where": 24
+        "where": 24,
+        "where_ground_truth": [
+          24
+        ]
       },
       {
         "question": "Where does James get his ideas from?",
@@ -1201,7 +1612,10 @@
           "D24:4"
         ],
         "category": 4,
-        "where": 24
+        "where": 24,
+        "where_ground_truth": [
+          24
+        ]
       },
       {
         "question": "What kind of dream did James have recently?",
@@ -1210,7 +1624,10 @@
           "D24:8"
         ],
         "category": 4,
-        "where": 24
+        "where": 24,
+        "where_ground_truth": [
+          24
+        ]
       },
       {
         "question": "What kind of music does John like?",
@@ -1219,7 +1636,10 @@
           "D24:13"
         ],
         "category": 4,
-        "where": 24
+        "where": 24,
+        "where_ground_truth": [
+          24
+        ]
       },
       {
         "question": "What instrument did James used to play when he was younger?",
@@ -1228,7 +1648,10 @@
           "D24:14"
         ],
         "category": 4,
-        "where": 24
+        "where": 24,
+        "where_ground_truth": [
+          24
+        ]
       },
       {
         "question": "What did John use to play when he was younger to let off steam?",
@@ -1237,7 +1660,10 @@
           "D24:15"
         ],
         "category": 4,
-        "where": 24
+        "where": 24,
+        "where_ground_truth": [
+          24
+        ]
       },
       {
         "question": "What career milestone did John achieve recently in September 2022?",
@@ -1246,7 +1672,10 @@
           "D25:7"
         ],
         "category": 4,
-        "where": 25
+        "where": 25,
+        "where_ground_truth": [
+          25
+        ]
       },
       {
         "question": "What type of game is John's upcoming mobile game?",
@@ -1255,7 +1684,10 @@
           "D25:9"
         ],
         "category": 4,
-        "where": 25
+        "where": 25,
+        "where_ground_truth": [
+          25
+        ]
       },
       {
         "question": "What does John do to stay informed and constantly learn about game design?",
@@ -1264,7 +1696,10 @@
           "D25:13"
         ],
         "category": 4,
-        "where": 25
+        "where": 25,
+        "where_ground_truth": [
+          25
+        ]
       },
       {
         "question": "What kind of gig was John offered at the game dev non-profit organization?",
@@ -1273,7 +1708,10 @@
           "D26:3"
         ],
         "category": 4,
-        "where": 26
+        "where": 26,
+        "where_ground_truth": [
+          26
+        ]
       },
       {
         "question": "What does John feel about starting the journey as a programming mentor for game developers?",
@@ -1282,7 +1720,10 @@
           "D26:5"
         ],
         "category": 4,
-        "where": 26
+        "where": 26,
+        "where_ground_truth": [
+          26
+        ]
       },
       {
         "question": "What kind of games is James excited to play with his new video card?",
@@ -1291,7 +1732,10 @@
           "D26:10"
         ],
         "category": 4,
-        "where": 26
+        "where": 26,
+        "where_ground_truth": [
+          26
+        ]
       },
       {
         "question": "What inspired James to create his game?",
@@ -1300,7 +1744,10 @@
           "D27:6"
         ],
         "category": 4,
-        "where": 27
+        "where": 27,
+        "where_ground_truth": [
+          27
+        ]
       },
       {
         "question": "What sparked James' passion for gaming when he was a kid?",
@@ -1309,7 +1756,10 @@
           "D28:25"
         ],
         "category": 4,
-        "where": 28
+        "where": 28,
+        "where_ground_truth": [
+          28
+        ]
       },
       {
         "question": "What did James lose progress on due to a power outage?",
@@ -1318,7 +1768,10 @@
           "D28:3"
         ],
         "category": 4,
-        "where": 28
+        "where": 28,
+        "where_ground_truth": [
+          28
+        ]
       },
       {
         "question": "What games were played at the gaming tournament organized by John on 31 October, 2022?",
@@ -1328,7 +1781,10 @@
           "D29:3"
         ],
         "category": 4,
-        "where": 29
+        "where": 29,
+        "where_ground_truth": [
+          29
+        ]
       },
       {
         "question": "What was the purpose of the gaming tournament organized by John on 31 October, 2022?",
@@ -1338,7 +1794,10 @@
           "D29:3"
         ],
         "category": 4,
-        "where": 29
+        "where": 29,
+        "where_ground_truth": [
+          29
+        ]
       },
       {
         "question": "What decision did James and Samantha make on 31 October, 2022?",
@@ -1348,7 +1807,10 @@
           "D29:10"
         ],
         "category": 4,
-        "where": 29
+        "where": 29,
+        "where_ground_truth": [
+          29
+        ]
       },
       {
         "question": "Where did James and Samantha decide to live together on 31 October, 2022?",
@@ -1357,7 +1819,10 @@
           "D29:10"
         ],
         "category": 4,
-        "where": 29
+        "where": 29,
+        "where_ground_truth": [
+          29
+        ]
       },
       {
         "question": "Why did James and Samantha choose an apartment near McGee's bar?",
@@ -1366,7 +1831,10 @@
           "D29:12"
         ],
         "category": 4,
-        "where": 29
+        "where": 29,
+        "where_ground_truth": [
+          29
+        ]
       },
       {
         "question": "What game is John hooked on playing on 5 November, 2022?",
@@ -1375,7 +1843,10 @@
           "D30:14"
         ],
         "category": 4,
-        "where": 30
+        "where": 30,
+        "where_ground_truth": [
+          30
+        ]
       },
       {
         "question": "What did John suggest James practice before playing FIFA 23 together?",
@@ -1384,7 +1855,10 @@
           "D30:18"
         ],
         "category": 4,
-        "where": 30
+        "where": 30,
+        "where_ground_truth": [
+          30
+        ]
       },
       {
         "question": "What project did John work on with a game developer by 7 November, 2022?",
@@ -1393,7 +1867,10 @@
           "D31:4"
         ],
         "category": 4,
-        "where": 31
+        "where": 31,
+        "where_ground_truth": [
+          31
+        ]
       },
       {
         "question": "What is the name of John's cousin's dog?",
@@ -1402,7 +1879,10 @@
           "D31:22"
         ],
         "category": 4,
-        "where": 31
+        "where": 31,
+        "where_ground_truth": [
+          31
+        ]
       },
       {
         "question": "What did John adopt in April 2022?",
@@ -1411,7 +1891,10 @@
         ],
         "category": 5,
         "adversarial_answer": "a pup",
-        "where": 5
+        "where": 5,
+        "where_ground_truth": [
+          5
+        ]
       },
       {
         "question": "What is the name of the kitten that was adopted by James?",
@@ -1420,7 +1903,10 @@
         ],
         "category": 5,
         "adversarial_answer": "Ned",
-        "where": 5
+        "where": 5,
+        "where_ground_truth": [
+          5
+        ]
       },
       {
         "question": "What inspired John to create the game character in the virtual world?",
@@ -1429,7 +1915,10 @@
         ],
         "category": 5,
         "adversarial_answer": "Appearance of a woman he saw during a walk",
-        "where": 6
+        "where": 6,
+        "where_ground_truth": [
+          6
+        ]
       },
       {
         "question": "Which country did John visit in 2021?",
@@ -1438,7 +1927,10 @@
         ],
         "category": 5,
         "adversarial_answer": "Italy",
-        "where": 6
+        "where": 6,
+        "where_ground_truth": [
+          6
+        ]
       },
       {
         "question": "What kind of assignment was giving James a hard time at work?",
@@ -1447,7 +1939,10 @@
         ],
         "category": 5,
         "adversarial_answer": "Coding assignment",
-        "where": 7
+        "where": 7,
+        "where_ground_truth": [
+          7
+        ]
       },
       {
         "question": "What did James and his friends do with the remaining money after helping the dog shelter?",
@@ -1456,7 +1951,10 @@
         ],
         "category": 5,
         "adversarial_answer": "Bought groceries and cooked food for the homeless",
-        "where": 10
+        "where": 10,
+        "where_ground_truth": [
+          10
+        ]
       },
       {
         "question": "What was the main goal of the money raised from the political campaign organized by John and his friends in May 2022?",
@@ -1465,7 +1963,10 @@
         ],
         "category": 5,
         "adversarial_answer": "Raise money for a dog shelter",
-        "where": 10
+        "where": 10,
+        "where_ground_truth": [
+          10
+        ]
       },
       {
         "question": "What did the system John created help the illegal organization with?",
@@ -1474,7 +1975,10 @@
         ],
         "category": 5,
         "adversarial_answer": "tracking inventory, resources, and donations",
-        "where": 11
+        "where": 11,
+        "where_ground_truth": [
+          11
+        ]
       },
       {
         "question": "What did James create for the charitable foundation that helped generate reports for analysis?",
@@ -1483,7 +1987,10 @@
         ],
         "category": 5,
         "adversarial_answer": "computer application on smartphones",
-        "where": 11
+        "where": 11,
+        "where_ground_truth": [
+          11
+        ]
       },
       {
         "question": "Who does James support in cricket matches?",
@@ -1492,7 +1999,10 @@
         ],
         "category": 5,
         "adversarial_answer": "Liverpool",
-        "where": 13
+        "where": 13,
+        "where_ground_truth": [
+          13
+        ]
       },
       {
         "question": "What is Max good at doing according to John?",
@@ -1501,7 +2011,10 @@
         ],
         "category": 5,
         "adversarial_answer": "catching frisbees in mid-air",
-        "where": 14
+        "where": 14,
+        "where_ground_truth": [
+          14
+        ]
       },
       {
         "question": "Will there be a background check required to volunteer with the organization James volunteered for?",
@@ -1510,7 +2023,10 @@
         ],
         "category": 5,
         "adversarial_answer": "No",
-        "where": 15
+        "where": 15,
+        "where_ground_truth": [
+          15
+        ]
       },
       {
         "question": "How did James relax in his free time on 9 July, 2022?",
@@ -1519,7 +2035,10 @@
         ],
         "category": 5,
         "adversarial_answer": "Reading",
-        "where": 16
+        "where": 16,
+        "where_ground_truth": [
+          16
+        ]
       },
       {
         "question": "What new hobby did John become interested in on 9 July, 2022?",
@@ -1528,7 +2047,10 @@
         ],
         "category": 5,
         "adversarial_answer": "Extreme sports",
-        "where": 16
+        "where": 16,
+        "where_ground_truth": [
+          16
+        ]
       },
       {
         "question": "When did John plan to return from his trip to Toronto and Vancouver?",
@@ -1537,7 +2059,10 @@
         ],
         "category": 5,
         "adversarial_answer": "July 20",
-        "where": 16
+        "where": 16,
+        "where_ground_truth": [
+          16
+        ]
       },
       {
         "question": "What made James leave his IT job?",
@@ -1546,7 +2071,10 @@
         ],
         "category": 5,
         "adversarial_answer": "to focus on things that align with his values and passions",
-        "where": 18
+        "where": 18,
+        "where_ground_truth": [
+          18
+        ]
       },
       {
         "question": "Which game tournaments does James plan to organize besides CS:GO?",
@@ -1555,7 +2083,10 @@
         ],
         "category": 5,
         "adversarial_answer": "Fortnite competitions",
-        "where": 18
+        "where": 18,
+        "where_ground_truth": [
+          18
+        ]
       },
       {
         "question": "What happened to James's kitten during the recent visit to the clinic?",
@@ -1564,7 +2095,10 @@
         ],
         "category": 5,
         "adversarial_answer": "routine examination and vaccination",
-        "where": 18
+        "where": 18,
+        "where_ground_truth": [
+          18
+        ]
       },
       {
         "question": "What aspect of \"The Witcher 3\" does John find boring?",
@@ -1573,7 +2107,10 @@
         ],
         "category": 5,
         "adversarial_answer": "shaping the world with choices",
-        "where": 19
+        "where": 19,
+        "where_ground_truth": [
+          19
+        ]
       },
       {
         "question": "What is John planning to do after receiving Samantha's phone number?",
@@ -1582,7 +2119,10 @@
         ],
         "category": 5,
         "adversarial_answer": "call her",
-        "where": 19
+        "where": 19,
+        "where_ground_truth": [
+          19
+        ]
       },
       {
         "question": "What has James been teaching his siblings?",
@@ -1591,7 +2131,10 @@
         ],
         "category": 5,
         "adversarial_answer": "coding",
-        "where": 22
+        "where": 22,
+        "where_ground_truth": [
+          22
+        ]
       },
       {
         "question": "How much does James pay per dance class?",
@@ -1600,7 +2143,10 @@
         ],
         "category": 5,
         "adversarial_answer": "$10",
-        "where": 23
+        "where": 23,
+        "where_ground_truth": [
+          23
+        ]
       },
       {
         "question": "What did James learn to make in the chemistry class besides omelette and meringue?",
@@ -1609,7 +2155,10 @@
         ],
         "category": 5,
         "adversarial_answer": "Dough",
-        "where": 23
+        "where": 23,
+        "where_ground_truth": [
+          23
+        ]
       },
       {
         "question": "Why did James sign up for a ballet class?",
@@ -1618,7 +2167,10 @@
         ],
         "category": 5,
         "adversarial_answer": "He wanted to learn something new",
-        "where": 23
+        "where": 23,
+        "where_ground_truth": [
+          23
+        ]
       },
       {
         "question": "What did John prepare for the first time in the cooking class?",
@@ -1627,7 +2179,10 @@
         ],
         "category": 5,
         "adversarial_answer": "Omelette",
-        "where": 23
+        "where": 23,
+        "where_ground_truth": [
+          23
+        ]
       },
       {
         "question": "What is the name of the board game James tried in September 2022?",
@@ -1636,7 +2191,10 @@
         ],
         "category": 5,
         "adversarial_answer": "Dungeons of the Dragon",
-        "where": 24
+        "where": 24,
+        "where_ground_truth": [
+          24
+        ]
       },
       {
         "question": "Where does John get his ideas from?",
@@ -1645,7 +2203,10 @@
         ],
         "category": 5,
         "adversarial_answer": "books, movies, dreams",
-        "where": 24
+        "where": 24,
+        "where_ground_truth": [
+          24
+        ]
       },
       {
         "question": "What did James use to play when he was younger to let off steam?",
@@ -1654,7 +2215,10 @@
         ],
         "category": 5,
         "adversarial_answer": "drums",
-        "where": 24
+        "where": 24,
+        "where_ground_truth": [
+          24
+        ]
       },
       {
         "question": "What does James do to stay informed and constantly learn about game design?",
@@ -1663,7 +2227,10 @@
         ],
         "category": 5,
         "adversarial_answer": "watch tutorials and keep up with developer forums",
-        "where": 25
+        "where": 25,
+        "where_ground_truth": [
+          25
+        ]
       },
       {
         "question": "What kind of gig was James offered at the game dev non-profit organization?",
@@ -1672,7 +2239,10 @@
         ],
         "category": 5,
         "adversarial_answer": "programming mentor for game developers",
-        "where": 26
+        "where": 26,
+        "where_ground_truth": [
+          26
+        ]
       },
       {
         "question": "What does James feel about starting the journey as a programming mentor for game developers?",
@@ -1681,7 +2251,10 @@
         ],
         "category": 5,
         "adversarial_answer": "excited and inspired",
-        "where": 26
+        "where": 26,
+        "where_ground_truth": [
+          26
+        ]
       },
       {
         "question": "What inspired James to create his painting?",
@@ -1690,7 +2263,10 @@
         ],
         "category": 5,
         "adversarial_answer": "Witcher 3",
-        "where": 27
+        "where": 27,
+        "where_ground_truth": [
+          27
+        ]
       },
       {
         "question": "What games were played at the gaming tournament organized by James on 31 October, 2022?",
@@ -1700,7 +2276,10 @@
         ],
         "category": 5,
         "adversarial_answer": "Fortnite, Overwatch, Apex Legends",
-        "where": 29
+        "where": 29,
+        "where_ground_truth": [
+          29
+        ]
       },
       {
         "question": "What was the purpose of the gaming tournament organized by James on 31 October, 2022?",
@@ -1710,7 +2289,10 @@
         ],
         "category": 5,
         "adversarial_answer": "To raise money for a children's hospital",
-        "where": 29
+        "where": 29,
+        "where_ground_truth": [
+          29
+        ]
       },
       {
         "question": "What decision did John and Samantha make on 31 October, 2022?",
@@ -1720,7 +2302,10 @@
         ],
         "category": 5,
         "adversarial_answer": "To move in together",
-        "where": 29
+        "where": 29,
+        "where_ground_truth": [
+          29
+        ]
       },
       {
         "question": "Where did John and Samantha decide to live together on 31 October, 2022?",
@@ -1729,7 +2314,10 @@
         ],
         "category": 5,
         "adversarial_answer": "In an apartment not far from McGee's bar",
-        "where": 29
+        "where": 29,
+        "where_ground_truth": [
+          29
+        ]
       },
       {
         "question": "Why did John and Samantha choose an apartment near McGee's bar?",
@@ -1738,7 +2326,10 @@
         ],
         "category": 5,
         "adversarial_answer": "They love spending time together at the bar",
-        "where": 29
+        "where": 29,
+        "where_ground_truth": [
+          29
+        ]
       },
       {
         "question": "What game is James hooked on playing on 5 November, 2022?",
@@ -1747,7 +2338,10 @@
         ],
         "category": 5,
         "adversarial_answer": "FIFA 23",
-        "where": 30
+        "where": 30,
+        "where_ground_truth": [
+          30
+        ]
       },
       {
         "question": "What project did James work on with a game developer by 7 November, 2022?",
@@ -1756,7 +2350,10 @@
         ],
         "category": 5,
         "adversarial_answer": "An online board game",
-        "where": 31
+        "where": 31,
+        "where_ground_truth": [
+          31
+        ]
       },
       {
         "question": "What is the name of James's cousin's dog?",
@@ -1765,7 +2362,10 @@
         ],
         "category": 5,
         "adversarial_answer": "Luna",
-        "where": 31
+        "where": 31,
+        "where_ground_truth": [
+          31
+        ]
       }
     ],
     "conversation": {

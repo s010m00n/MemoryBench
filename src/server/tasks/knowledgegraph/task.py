@@ -90,7 +90,7 @@ class KnowledgeGraph(Task):
                 session.inject(ONE_SHOT)
             session.inject(ChatCompletionUserMessageParam(
                 role='user',
-                content=f'{question}\nEntities: [{", ".join([entity for entity in entities])}]'
+                content=f'{question}\nEntities: [{", ".join([f"{entity} ({entity_id})" for entity, entity_id in entities.items()])}]'
             ))
 
             variables_list = []

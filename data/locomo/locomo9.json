@@ -8,7 +8,10 @@
           "D3:1"
         ],
         "category": 2,
-        "where": 3
+        "where": 3,
+        "where_ground_truth": [
+          3
+        ]
       },
       {
         "question": "What items did Calvin buy in March 2023?",
@@ -18,7 +21,11 @@
           "D2:1"
         ],
         "category": 1,
-        "where": 2
+        "where": 2,
+        "where_ground_truth": [
+          1,
+          2
+        ]
       },
       {
         "question": "When did Dave see Aerosmith perform live?",
@@ -27,7 +34,10 @@
           "D2:10"
         ],
         "category": 2,
-        "where": 2
+        "where": 2,
+        "where_ground_truth": [
+          2
+        ]
       },
       {
         "question": "Which bands has Dave enjoyed listening to?",
@@ -37,7 +47,11 @@
           "D23:9"
         ],
         "category": 1,
-        "where": 23
+        "where": 23,
+        "where_ground_truth": [
+          2,
+          23
+        ]
       },
       {
         "question": "Which country do Calvin and Dave want to meet in?",
@@ -47,7 +61,10 @@
           "D3:10"
         ],
         "category": 3,
-        "where": 3
+        "where": 3,
+        "where_ground_truth": [
+          3
+        ]
       },
       {
         "question": "What are Dave's dreams?",
@@ -58,7 +75,11 @@
           "D5:5"
         ],
         "category": 1,
-        "where": 5
+        "where": 5,
+        "where_ground_truth": [
+          4,
+          5
+        ]
       },
       {
         "question": "Which types of cars does Dave like the most?",
@@ -70,7 +91,12 @@
           "D4:7"
         ],
         "category": 1,
-        "where": 4
+        "where": 4,
+        "where_ground_truth": [
+          1,
+          3,
+          4
+        ]
       },
       {
         "question": "Does Dave's shop employ a lot of people?",
@@ -79,7 +105,10 @@
           "D4:17"
         ],
         "category": 3,
-        "where": 4
+        "where": 4,
+        "where_ground_truth": [
+          4
+        ]
       },
       {
         "question": "When did Dave start his car maintenance shop?",
@@ -88,7 +117,10 @@
           "D4:1"
         ],
         "category": 2,
-        "where": 4
+        "where": 4,
+        "where_ground_truth": [
+          4
+        ]
       },
       {
         "question": "When did a mishap occur with Calvin's musical gear and favorite mic?",
@@ -97,7 +129,10 @@
           "D6:3"
         ],
         "category": 2,
-        "where": 6
+        "where": 6,
+        "where_ground_truth": [
+          6
+        ]
       },
       {
         "question": "When did Calvin's place get flooded in Tokyo?",
@@ -106,7 +141,10 @@
           "D6:3"
         ],
         "category": 2,
-        "where": 6
+        "where": 6,
+        "where_ground_truth": [
+          6
+        ]
       },
       {
         "question": "What mishaps has Calvin run into?",
@@ -116,7 +154,11 @@
           "D9:1"
         ],
         "category": 1,
-        "where": 9
+        "where": 9,
+        "where_ground_truth": [
+          6,
+          9
+        ]
       },
       {
         "question": "When was Calvin's concert in Tokyo?",
@@ -126,7 +168,11 @@
           "D7:1"
         ],
         "category": 2,
-        "where": 7
+        "where": 7,
+        "where_ground_truth": [
+          6,
+          7
+        ]
       },
       {
         "question": "Would Calvin enjoy performing at the Hollywood Bowl?",
@@ -135,7 +181,10 @@
           "D7:11"
         ],
         "category": 3,
-        "where": 7
+        "where": 7,
+        "where_ground_truth": [
+          7
+        ]
       },
       {
         "question": "When did Calvin meet with the creative team for his new album?",
@@ -144,7 +193,10 @@
           "D8:1"
         ],
         "category": 2,
-        "where": 8
+        "where": 8,
+        "where_ground_truth": [
+          8
+        ]
       },
       {
         "question": "Why does Dave regularly visit parks?",
@@ -154,7 +206,11 @@
           "D1:16"
         ],
         "category": 1,
-        "where": 8
+        "where": 8,
+        "where_ground_truth": [
+          1,
+          8
+        ]
       },
       {
         "question": "When did Dave take a trip to mountainous regions?",
@@ -163,7 +219,10 @@
           "D8:10"
         ],
         "category": 2,
-        "where": 8
+        "where": 8,
+        "where_ground_truth": [
+          8
+        ]
       },
       {
         "question": "When did Calvin have a car incident?",
@@ -172,7 +231,10 @@
           "D9:1"
         ],
         "category": 2,
-        "where": 9
+        "where": 9,
+        "where_ground_truth": [
+          9
+        ]
       },
       {
         "question": "How many times has Calvin had to deal with insurance paperwork?",
@@ -182,7 +244,11 @@
           "D9:1"
         ],
         "category": 1,
-        "where": 9
+        "where": 9,
+        "where_ground_truth": [
+          6,
+          9
+        ]
       },
       {
         "question": "Which places or events has Calvin visited in Tokyo?",
@@ -193,7 +259,12 @@
           "D24:19"
         ],
         "category": 1,
-        "where": 24
+        "where": 24,
+        "where_ground_truth": [
+          3,
+          12,
+          24
+        ]
       },
       {
         "question": "Who inspired Dave's passion for car engineering?",
@@ -204,7 +275,11 @@
           "D26:6"
         ],
         "category": 1,
-        "where": 26
+        "where": 26,
+        "where_ground_truth": [
+          12,
+          26
+        ]
       },
       {
         "question": "Does Calvin wish to become more popular?",
@@ -214,7 +289,11 @@
           "D27:1"
         ],
         "category": 3,
-        "where": 27
+        "where": 27,
+        "where_ground_truth": [
+          12,
+          27
+        ]
       },
       {
         "question": "Does Calvin want to expand his brand?",
@@ -224,7 +303,11 @@
           "D18:7"
         ],
         "category": 1,
-        "where": 18
+        "where": 18,
+        "where_ground_truth": [
+          12,
+          18
+        ]
       },
       {
         "question": "What is Dave's main passion?",
@@ -236,7 +319,13 @@
           "D3:12"
         ],
         "category": 1,
-        "where": 13
+        "where": 13,
+        "where_ground_truth": [
+          3,
+          4,
+          5,
+          13
+        ]
       },
       {
         "question": "Can Dave work with engines?",
@@ -247,7 +336,12 @@
           "D20:1"
         ],
         "category": 1,
-        "where": 22
+        "where": 22,
+        "where_ground_truth": [
+          13,
+          20,
+          22
+        ]
       },
       {
         "question": "When did Dave host a card-playing night with his friends?",
@@ -256,7 +350,10 @@
           "D15:1"
         ],
         "category": 2,
-        "where": 15
+        "where": 15,
+        "where_ground_truth": [
+          15
+        ]
       },
       {
         "question": "When did Calvin record a podcast with his friends?",
@@ -265,7 +362,10 @@
           "D15:12"
         ],
         "category": 2,
-        "where": 15
+        "where": 15,
+        "where_ground_truth": [
+          15
+        ]
       },
       {
         "question": "Which city was Calvin visiting in August 2023?",
@@ -274,7 +374,10 @@
           "D16:6"
         ],
         "category": 2,
-        "where": 16
+        "where": 16,
+        "where_ground_truth": [
+          16
+        ]
       },
       {
         "question": "What does Calvin do to relax?",
@@ -285,7 +388,11 @@
           "D7:5"
         ],
         "category": 1,
-        "where": 7
+        "where": 7,
+        "where_ground_truth": [
+          5,
+          7
+        ]
       },
       {
         "question": "What are Dave's hobbies other than fixing cars?",
@@ -297,7 +404,12 @@
           "D27:2"
         ],
         "category": 1,
-        "where": 27
+        "where": 27,
+        "where_ground_truth": [
+          5,
+          8,
+          27
+        ]
       },
       {
         "question": "What kind of music does Dave listen to?",
@@ -308,7 +420,12 @@
           "D10:11"
         ],
         "category": 1,
-        "where": 28
+        "where": 28,
+        "where_ground_truth": [
+          2,
+          10,
+          28
+        ]
       },
       {
         "question": "Where was Dave in the last two weeks of August 2023?",
@@ -318,7 +435,11 @@
           "D17:1"
         ],
         "category": 2,
-        "where": 17
+        "where": 17,
+        "where_ground_truth": [
+          14,
+          17
+        ]
       },
       {
         "question": "Where did Dave return from with new knowledge of different techniques of car restoration?",
@@ -328,7 +449,11 @@
           "D14:1"
         ],
         "category": 1,
-        "where": 17
+        "where": 17,
+        "where_ground_truth": [
+          14,
+          17
+        ]
       },
       {
         "question": "What was Dave doing in San Francisco?",
@@ -338,7 +463,11 @@
           "D14:1"
         ],
         "category": 1,
-        "where": 17
+        "where": 17,
+        "where_ground_truth": [
+          14,
+          17
+        ]
       },
       {
         "question": "When did Dave return from San Francisco?",
@@ -347,7 +476,10 @@
           "D17:1"
         ],
         "category": 2,
-        "where": 17
+        "where": 17,
+        "where_ground_truth": [
+          17
+        ]
       },
       {
         "question": "When did Calvin book flight tickets to Boston?",
@@ -356,7 +488,10 @@
           "D17:6"
         ],
         "category": 2,
-        "where": 17
+        "where": 17,
+        "where_ground_truth": [
+          17
+        ]
       },
       {
         "question": "When was Calvin's album released?",
@@ -365,7 +500,10 @@
           "D18:1"
         ],
         "category": 2,
-        "where": 18
+        "where": 18,
+        "where_ground_truth": [
+          18
+        ]
       },
       {
         "question": "Does Calvin love music tours?",
@@ -376,7 +514,12 @@
           "D7:1"
         ],
         "category": 3,
-        "where": 18
+        "where": 18,
+        "where_ground_truth": [
+          7,
+          16,
+          18
+        ]
       },
       {
         "question": "When did Dave have a great jam session with his band?",
@@ -385,14 +528,18 @@
           "D19:1"
         ],
         "category": 2,
-        "where": 19
+        "where": 19,
+        "where_ground_truth": [
+          19
+        ]
       },
       {
         "question": "Would Dave prefer working on a Dodge Charger or a Subaru Forester?",
         "answer": "Dodge Charger",
         "evidence": [],
         "category": 3,
-        "where": 30
+        "where": 30,
+        "where_ground_truth": []
       },
       {
         "question": "What was the artists Calvin used to listen to when he was a kid?",
@@ -402,7 +549,10 @@
           "D20:6"
         ],
         "category": 1,
-        "where": 20
+        "where": 20,
+        "where_ground_truth": [
+          20
+        ]
       },
       {
         "question": "Which of their family member do Calvin and Dave have nostalgic memories about?",
@@ -412,14 +562,19 @@
           "D20:6"
         ],
         "category": 1,
-        "where": 20
+        "where": 20,
+        "where_ground_truth": [
+          12,
+          20
+        ]
       },
       {
         "question": "Based on the conversation, did Calvin and Dave have a meeting in Boston between August and November 2023? Answer in yes or no.",
         "answer": "No",
         "evidence": [],
         "category": 3,
-        "where": 30
+        "where": 30,
+        "where_ground_truth": []
       },
       {
         "question": "Which city was Calvin at on October 3, 2023?",
@@ -428,7 +583,10 @@
           "D21:1"
         ],
         "category": 2,
-        "where": 21
+        "where": 21,
+        "where_ground_truth": [
+          21
+        ]
       },
       {
         "question": "When did Calvin met with local artists in Boston?",
@@ -437,7 +595,10 @@
           "D21:1"
         ],
         "category": 2,
-        "where": 21
+        "where": 21,
+        "where_ground_truth": [
+          21
+        ]
       },
       {
         "question": "What shared activities do Dave and Calvin have?",
@@ -447,7 +608,10 @@
           "D21:4"
         ],
         "category": 1,
-        "where": 21
+        "where": 21,
+        "where_ground_truth": [
+          21
+        ]
       },
       {
         "question": "What is Dave's favorite activity?",
@@ -458,7 +622,12 @@
           "D19:7"
         ],
         "category": 1,
-        "where": 22
+        "where": 22,
+        "where_ground_truth": [
+          19,
+          21,
+          22
+        ]
       },
       {
         "question": "How many car shows has Dave attended?",
@@ -468,7 +637,11 @@
           "D22:1"
         ],
         "category": 1,
-        "where": 22
+        "where": 22,
+        "where_ground_truth": [
+          3,
+          22
+        ]
       },
       {
         "question": "What was Dave doing in the first weekend of October 2023?",
@@ -477,7 +650,10 @@
           "D22:1"
         ],
         "category": 2,
-        "where": 22
+        "where": 22,
+        "where_ground_truth": [
+          22
+        ]
       },
       {
         "question": "When Dave was a child, what did he and his father do in the garage?",
@@ -488,7 +664,11 @@
           "D22:5"
         ],
         "category": 1,
-        "where": 22
+        "where": 22,
+        "where_ground_truth": [
+          12,
+          22
+        ]
       },
       {
         "question": "When did Calvin buy his second Ferrari?",
@@ -497,7 +677,10 @@
           "D23:16"
         ],
         "category": 2,
-        "where": 23
+        "where": 23,
+        "where_ground_truth": [
+          23
+        ]
       },
       {
         "question": "When did Calvin and Frank Ocean start collaborating?",
@@ -507,7 +690,11 @@
           "D15:2"
         ],
         "category": 2,
-        "where": 24
+        "where": 24,
+        "where_ground_truth": [
+          15,
+          24
+        ]
       },
       {
         "question": "When did Calvin plan on travelling to Tokyo the second time?",
@@ -516,7 +703,10 @@
           "D24:17"
         ],
         "category": 2,
-        "where": 24
+        "where": 24,
+        "where_ground_truth": [
+          24
+        ]
       },
       {
         "question": "Who supports Calvin in tough times?",
@@ -526,7 +716,11 @@
           "D29:7"
         ],
         "category": 1,
-        "where": 29
+        "where": 29,
+        "where_ground_truth": [
+          25,
+          29
+        ]
       },
       {
         "question": "What does help Calvin stay connected to the creative process?",
@@ -536,7 +730,11 @@
           "D28:31"
         ],
         "category": 1,
-        "where": 28
+        "where": 28,
+        "where_ground_truth": [
+          25,
+          28
+        ]
       },
       {
         "question": "When did Calvin visit some of the sights in Boston with a former high school friend?",
@@ -545,7 +743,10 @@
           "D26:1"
         ],
         "category": 2,
-        "where": 26
+        "where": 26,
+        "where_ground_truth": [
+          26
+        ]
       },
       {
         "question": "Which cities did Dave travel to in 2023?",
@@ -555,7 +756,11 @@
           "D26:2"
         ],
         "category": 1,
-        "where": 26
+        "where": 26,
+        "where_ground_truth": [
+          14,
+          26
+        ]
       },
       {
         "question": "Which hobby did Dave pick up in October 2023?",
@@ -564,7 +769,10 @@
           "D27:2"
         ],
         "category": 2,
-        "where": 27
+        "where": 27,
+        "where_ground_truth": [
+          27
+        ]
       },
       {
         "question": "Which events in Dave's life inspired him to take up auto engineering?",
@@ -576,7 +784,12 @@
           "D12:4"
         ],
         "category": 1,
-        "where": 26
+        "where": 26,
+        "where_ground_truth": [
+          12,
+          25,
+          26
+        ]
       },
       {
         "question": "How many Ferraris does Calvin own?",
@@ -586,7 +799,11 @@
           "D23:16"
         ],
         "category": 1,
-        "where": 23
+        "where": 23,
+        "where_ground_truth": [
+          2,
+          23
+        ]
       },
       {
         "question": "What gifts has Calvin received from his artist friends?",
@@ -597,7 +814,11 @@
           "D16:14"
         ],
         "category": 1,
-        "where": 16
+        "where": 16,
+        "where_ground_truth": [
+          4,
+          16
+        ]
       },
       {
         "question": "How long did Dave's work on the Ford Mustang take?",
@@ -608,7 +829,12 @@
           "D21:4"
         ],
         "category": 2,
-        "where": 21
+        "where": 21,
+        "where_ground_truth": [
+          14,
+          20,
+          21
+        ]
       },
       {
         "question": "How long was the car modification workshop in San Francisco?",
@@ -618,7 +844,11 @@
           "D17:1"
         ],
         "category": 2,
-        "where": 17
+        "where": 17,
+        "where_ground_truth": [
+          14,
+          17
+        ]
       },
       {
         "question": "What style of guitars does Calvin own?",
@@ -630,7 +860,10 @@
           "D16:19"
         ],
         "category": 1,
-        "where": 16
+        "where": 16,
+        "where_ground_truth": [
+          16
+        ]
       },
       {
         "question": "What activities has Dave participated in with his friends?",
@@ -642,7 +875,13 @@
           "D15:1"
         ],
         "category": 1,
-        "where": 15
+        "where": 15,
+        "where_ground_truth": [
+          6,
+          10,
+          11,
+          15
+        ]
       },
       {
         "question": "When did Dave take a photo of a Boston clock tower?",
@@ -651,7 +890,10 @@
           "D27:6"
         ],
         "category": 2,
-        "where": 27
+        "where": 27,
+        "where_ground_truth": [
+          27
+        ]
       },
       {
         "question": "Do all of Dave's car restoration projects go smoothly?",
@@ -663,7 +905,13 @@
           "D20:1"
         ],
         "category": 1,
-        "where": 27
+        "where": 27,
+        "where_ground_truth": [
+          13,
+          20,
+          25,
+          27
+        ]
       },
       {
         "question": "Where was Calvin located in the last week of October 2023?",
@@ -672,7 +920,10 @@
           "D28:1"
         ],
         "category": 2,
-        "where": 28
+        "where": 28,
+        "where_ground_truth": [
+          28
+        ]
       },
       {
         "question": "When did Dave find the car he repaired and started sharing in his blog?",
@@ -681,7 +932,10 @@
           "D28:20"
         ],
         "category": 2,
-        "where": 28
+        "where": 28,
+        "where_ground_truth": [
+          28
+        ]
       },
       {
         "question": "When did Dave buy a vintage camera?",
@@ -690,7 +944,10 @@
           "D30:05"
         ],
         "category": 2,
-        "where": 30
+        "where": 30,
+        "where_ground_truth": [
+          30
+        ]
       },
       {
         "question": "When did Calvin attend a gala in Boston?",
@@ -699,7 +956,10 @@
           "D30:1"
         ],
         "category": 2,
-        "where": 30
+        "where": 30,
+        "where_ground_truth": [
+          30
+        ]
       },
       {
         "question": "How long did Calvin plan to stay in Japan?",
@@ -708,7 +968,10 @@
           "D1:15"
         ],
         "category": 4,
-        "where": 1
+        "where": 1,
+        "where_ground_truth": [
+          1
+        ]
       },
       {
         "question": "Which band was Dave's favorite at the music festival in April 2023?",
@@ -717,7 +980,10 @@
           "D2:10"
         ],
         "category": 4,
-        "where": 2
+        "where": 2,
+        "where_ground_truth": [
+          2
+        ]
       },
       {
         "question": "Where did Calvin attend a music festival in April 2023?",
@@ -726,7 +992,10 @@
           "D3:1"
         ],
         "category": 4,
-        "where": 3
+        "where": 3,
+        "where_ground_truth": [
+          3
+        ]
       },
       {
         "question": "What advice did Calvin receive from the producer at the music festival?",
@@ -735,7 +1004,10 @@
           "D3:7"
         ],
         "category": 4,
-        "where": 3
+        "where": 3,
+        "where_ground_truth": [
+          3
+        ]
       },
       {
         "question": "What is Dave's new business venture as of 1 May, 2023?",
@@ -744,7 +1016,10 @@
           "D4:1"
         ],
         "category": 4,
-        "where": 4
+        "where": 4,
+        "where_ground_truth": [
+          4
+        ]
       },
       {
         "question": "What type of cars does Dave work on at his shop?",
@@ -753,7 +1028,10 @@
           "D4:19"
         ],
         "category": 4,
-        "where": 4
+        "where": 4,
+        "where_ground_truth": [
+          4
+        ]
       },
       {
         "question": "What did Calvin receive as a gift from another artist?",
@@ -762,7 +1040,10 @@
           "D4:26"
         ],
         "category": 4,
-        "where": 4
+        "where": 4,
+        "where_ground_truth": [
+          4
+        ]
       },
       {
         "question": "What was the necklace Calvin received meant to remind him of?",
@@ -771,7 +1052,10 @@
           "D4:26"
         ],
         "category": 4,
-        "where": 4
+        "where": 4,
+        "where_ground_truth": [
+          4
+        ]
       },
       {
         "question": "What does Dave do when he feels his creativity is frozen?",
@@ -780,7 +1064,10 @@
           "D5:11"
         ],
         "category": 4,
-        "where": 5
+        "where": 5,
+        "where_ground_truth": [
+          5
+        ]
       },
       {
         "question": "How does Calvin plan to jumpstart his inspiration?",
@@ -789,7 +1076,10 @@
           "D5:11"
         ],
         "category": 4,
-        "where": 5
+        "where": 5,
+        "where_ground_truth": [
+          5
+        ]
       },
       {
         "question": "What did Calvin manage to save during the flood incident?",
@@ -798,7 +1088,10 @@
           "D6:3"
         ],
         "category": 4,
-        "where": 6
+        "where": 6,
+        "where_ground_truth": [
+          6
+        ]
       },
       {
         "question": "What did Dave open in May 2023?",
@@ -807,7 +1100,10 @@
           "D6:8"
         ],
         "category": 4,
-        "where": 6
+        "where": 6,
+        "where_ground_truth": [
+          6
+        ]
       },
       {
         "question": "What gives Dave a sense of achievement and purpose?",
@@ -816,7 +1112,10 @@
           "D7:6"
         ],
         "category": 4,
-        "where": 7
+        "where": 7,
+        "where_ground_truth": [
+          7
+        ]
       },
       {
         "question": "What fuels Calvin's soul?",
@@ -825,7 +1124,10 @@
           "D7:11"
         ],
         "category": 4,
-        "where": 7
+        "where": 7,
+        "where_ground_truth": [
+          7
+        ]
       },
       {
         "question": "What is Dave doing to relax on weekends?",
@@ -834,7 +1136,10 @@
           "D8:4"
         ],
         "category": 4,
-        "where": 8
+        "where": 8,
+        "where_ground_truth": [
+          8
+        ]
       },
       {
         "question": "What sports activity is Calvin planning to try after the tour with Frank Ocean?",
@@ -843,7 +1148,10 @@
           "D9:15"
         ],
         "category": 4,
-        "where": 9
+        "where": 9,
+        "where_ground_truth": [
+          9
+        ]
       },
       {
         "question": "What was Calvin excited to do after getting his car fixed on 7 July, 2023?",
@@ -852,7 +1160,10 @@
           "D10:1"
         ],
         "category": 4,
-        "where": 10
+        "where": 10,
+        "where_ground_truth": [
+          10
+        ]
       },
       {
         "question": "What did Calvin and his friends arrange for in the park?",
@@ -861,7 +1172,10 @@
           "D10:3"
         ],
         "category": 4,
-        "where": 10
+        "where": 10,
+        "where_ground_truth": [
+          10
+        ]
       },
       {
         "question": "What kind of music has Calvin been creating lately?",
@@ -870,7 +1184,10 @@
           "D11:6"
         ],
         "category": 4,
-        "where": 11
+        "where": 11,
+        "where_ground_truth": [
+          11
+        ]
       },
       {
         "question": "How does Calvin describe his process of adding electronic elements to his songs?",
@@ -879,7 +1196,10 @@
           "D11:6"
         ],
         "category": 4,
-        "where": 11
+        "where": 11,
+        "where_ground_truth": [
+          11
+        ]
       },
       {
         "question": "What car brand does Calvin own that he is proud of?",
@@ -888,7 +1208,10 @@
           "D12:7"
         ],
         "category": 4,
-        "where": 12
+        "where": 12,
+        "where_ground_truth": [
+          12
+        ]
       },
       {
         "question": "What is Calvin's biggest current goal?",
@@ -897,7 +1220,10 @@
           "D12:11"
         ],
         "category": 4,
-        "where": 12
+        "where": 12,
+        "where_ground_truth": [
+          12
+        ]
       },
       {
         "question": "What is Dave's advice to Calvin regarding his dreams?",
@@ -906,7 +1232,10 @@
           "D12:14"
         ],
         "category": 4,
-        "where": 12
+        "where": 12,
+        "where_ground_truth": [
+          12
+        ]
       },
       {
         "question": "What workshop did Dave get picked for on 11 August, 2023?",
@@ -915,7 +1244,10 @@
           "D13:1"
         ],
         "category": 4,
-        "where": 13
+        "where": 13,
+        "where_ground_truth": [
+          13
+        ]
       },
       {
         "question": "What kind of modifications has Dave been working on in the car mod workshop?",
@@ -924,7 +1256,10 @@
           "D13:7"
         ],
         "category": 4,
-        "where": 13
+        "where": 13,
+        "where_ground_truth": [
+          13
+        ]
       },
       {
         "question": "What type of car did Dave work on during the workshop?",
@@ -933,7 +1268,10 @@
           "D13:7"
         ],
         "category": 4,
-        "where": 13
+        "where": 13,
+        "where_ground_truth": [
+          13
+        ]
       },
       {
         "question": "What does Dave say is important for making his custom cars unique?",
@@ -942,7 +1280,10 @@
           "D13:11"
         ],
         "category": 4,
-        "where": 13
+        "where": 13,
+        "where_ground_truth": [
+          13
+        ]
       },
       {
         "question": "How did the audience in Tokyo react when Calvin sang one of his songs?",
@@ -951,7 +1292,10 @@
           "D14:6"
         ],
         "category": 4,
-        "where": 14
+        "where": 14,
+        "where_ground_truth": [
+          14
+        ]
       },
       {
         "question": "How did Calvin meet Frank Ocean?",
@@ -960,7 +1304,10 @@
           "D15:4"
         ],
         "category": 4,
-        "where": 15
+        "where": 15,
+        "where_ground_truth": [
+          15
+        ]
       },
       {
         "question": "Where did Calvin and Frank Ocean record a song together?",
@@ -969,7 +1316,10 @@
           "D15:4"
         ],
         "category": 4,
-        "where": 15
+        "where": 15,
+        "where_ground_truth": [
+          15
+        ]
       },
       {
         "question": "What did Calvin and his friends record in August 2023?",
@@ -978,7 +1328,10 @@
           "D15:12"
         ],
         "category": 4,
-        "where": 15
+        "where": 15,
+        "where_ground_truth": [
+          15
+        ]
       },
       {
         "question": "Where did Calvin start shooting a video for his new album?",
@@ -987,7 +1340,10 @@
           "D16:8"
         ],
         "category": 4,
-        "where": 16
+        "where": 16,
+        "where_ground_truth": [
+          16
+        ]
       },
       {
         "question": "What design is featured on Calvin's guitar?",
@@ -996,7 +1352,10 @@
           "D16:14"
         ],
         "category": 4,
-        "where": 16
+        "where": 16,
+        "where_ground_truth": [
+          16
+        ]
       },
       {
         "question": "Why did Calvin get his guitar customized with a shiny finish?",
@@ -1005,7 +1364,10 @@
           "D16:20"
         ],
         "category": 4,
-        "where": 16
+        "where": 16,
+        "where_ground_truth": [
+          16
+        ]
       },
       {
         "question": "What color glow did Calvin customize his guitar with?",
@@ -1014,7 +1376,10 @@
           "D16:20"
         ],
         "category": 4,
-        "where": 16
+        "where": 16,
+        "where_ground_truth": [
+          16
+        ]
       },
       {
         "question": "Where did Dave come back from with insights on car modification on 1st September 2023?",
@@ -1023,7 +1388,10 @@
           "D17:1"
         ],
         "category": 4,
-        "where": 17
+        "where": 17,
+        "where_ground_truth": [
+          17
+        ]
       },
       {
         "question": "What emotion does Dave mention feeling when he sees the relief of someone whose car he fixed?",
@@ -1032,7 +1400,10 @@
           "D17:5"
         ],
         "category": 4,
-        "where": 17
+        "where": 17,
+        "where_ground_truth": [
+          17
+        ]
       },
       {
         "question": "What did Calvin book a flight ticket for on 1st September 2023?",
@@ -1041,7 +1412,10 @@
           "D17:6"
         ],
         "category": 4,
-        "where": 17
+        "where": 17,
+        "where_ground_truth": [
+          17
+        ]
       },
       {
         "question": "What is Calvin excited about after the tour?",
@@ -1050,7 +1424,10 @@
           "D18:7"
         ],
         "category": 4,
-        "where": 18
+        "where": 18,
+        "where_ground_truth": [
+          18
+        ]
       },
       {
         "question": "What plans do Calvin and Dave have for when Calvin visits Boston?",
@@ -1059,7 +1436,10 @@
           "D18:11"
         ],
         "category": 4,
-        "where": 18
+        "where": 18,
+        "where_ground_truth": [
+          18
+        ]
       },
       {
         "question": "Which Disney movie did Dave mention as one of his favorites?",
@@ -1068,7 +1448,10 @@
           "D19:6"
         ],
         "category": 4,
-        "where": 19
+        "where": 19,
+        "where_ground_truth": [
+          19
+        ]
       },
       {
         "question": "How does Dave feel about the reactions of people when they see the finished restoration project?",
@@ -1077,7 +1460,10 @@
           "D19:9"
         ],
         "category": 4,
-        "where": 19
+        "where": 19,
+        "where_ground_truth": [
+          19
+        ]
       },
       {
         "question": "What activity did Calvin enjoy during his summer drives?",
@@ -1086,7 +1472,10 @@
           "D20:4"
         ],
         "category": 4,
-        "where": 20
+        "where": 20,
+        "where_ground_truth": [
+          20
+        ]
       },
       {
         "question": "Which song from the childhood of Calvin brings back memories of a road trip with his dad?",
@@ -1096,7 +1485,10 @@
           "D20:8"
         ],
         "category": 4,
-        "where": 20
+        "where": 20,
+        "where_ground_truth": [
+          20
+        ]
       },
       {
         "question": "What project did Calvin work on to chill out?",
@@ -1105,7 +1497,10 @@
           "D21:3"
         ],
         "category": 4,
-        "where": 21
+        "where": 21,
+        "where_ground_truth": [
+          21
+        ]
       },
       {
         "question": "What car did Dave work on in the junkyard?",
@@ -1114,7 +1509,10 @@
           "D21:4"
         ],
         "category": 4,
-        "where": 21
+        "where": 21,
+        "where_ground_truth": [
+          21
+        ]
       },
       {
         "question": "What does Dave find satisfying about restoring old cars?",
@@ -1123,7 +1521,10 @@
           "D21:10"
         ],
         "category": 4,
-        "where": 21
+        "where": 21,
+        "where_ground_truth": [
+          21
+        ]
       },
       {
         "question": "What do Calvin and Dave use to reach their goals?",
@@ -1132,7 +1533,10 @@
           "D21:15"
         ],
         "category": 4,
-        "where": 21
+        "where": 21,
+        "where_ground_truth": [
+          21
+        ]
       },
       {
         "question": "What does working on cars represent for Dave?",
@@ -1141,7 +1545,10 @@
           "D22:5"
         ],
         "category": 4,
-        "where": 22
+        "where": 22,
+        "where_ground_truth": [
+          22
+        ]
       },
       {
         "question": "What does Dave aim to do with his passion for cars?",
@@ -1150,7 +1557,10 @@
           "D22:5"
         ],
         "category": 4,
-        "where": 22
+        "where": 22,
+        "where_ground_truth": [
+          22
+        ]
       },
       {
         "question": "What did Calvin recently get that is a \"masterpiece on wheels\"?",
@@ -1159,7 +1569,10 @@
           "D23:16"
         ],
         "category": 4,
-        "where": 23
+        "where": 23,
+        "where_ground_truth": [
+          23
+        ]
       },
       {
         "question": "Who headlined the music festival that Dave attended in October?",
@@ -1168,7 +1581,10 @@
           "D23:9"
         ],
         "category": 4,
-        "where": 23
+        "where": 23,
+        "where_ground_truth": [
+          23
+        ]
       },
       {
         "question": "How does Calvin stay motivated when faced with setbacks?",
@@ -1177,7 +1593,10 @@
           "D23:4"
         ],
         "category": 4,
-        "where": 23
+        "where": 23,
+        "where_ground_truth": [
+          23
+        ]
       },
       {
         "question": "What activity does Dave find fulfilling, similar to Calvin's passion for music festivals?",
@@ -1186,7 +1605,10 @@
           "D23:11"
         ],
         "category": 4,
-        "where": 23
+        "where": 23,
+        "where_ground_truth": [
+          23
+        ]
       },
       {
         "question": "Where did Calvin and Dave meet Frank Ocean to start collaborating?",
@@ -1195,7 +1617,10 @@
           "D24:5"
         ],
         "category": 4,
-        "where": 24
+        "where": 24,
+        "where_ground_truth": [
+          24
+        ]
       },
       {
         "question": "Which part of Tokyo is described as Tokyo's Times Square by Calvin?",
@@ -1204,7 +1629,10 @@
           "D24:19"
         ],
         "category": 4,
-        "where": 24
+        "where": 24,
+        "where_ground_truth": [
+          24
+        ]
       },
       {
         "question": "What specific location in Tokyo does Calvin mention being excited to explore?",
@@ -1213,7 +1641,10 @@
           "D24:19"
         ],
         "category": 4,
-        "where": 24
+        "where": 24,
+        "where_ground_truth": [
+          24
+        ]
       },
       {
         "question": "What dish does Dave recommend Calvin to try in Tokyo?",
@@ -1222,7 +1653,10 @@
           "D24:20"
         ],
         "category": 4,
-        "where": 24
+        "where": 24,
+        "where_ground_truth": [
+          24
+        ]
       },
       {
         "question": "What does Calvin find energizing during the tour?",
@@ -1231,7 +1665,10 @@
           "D25:2"
         ],
         "category": 4,
-        "where": 25
+        "where": 25,
+        "where_ground_truth": [
+          25
+        ]
       },
       {
         "question": "How does Calvin balance his job and personal life?",
@@ -1240,7 +1677,10 @@
           "D25:4"
         ],
         "category": 4,
-        "where": 25
+        "where": 25,
+        "where_ground_truth": [
+          25
+        ]
       },
       {
         "question": "What inspired Calvin's recent music?",
@@ -1249,7 +1689,10 @@
           "D25:10"
         ],
         "category": 4,
-        "where": 25
+        "where": 25,
+        "where_ground_truth": [
+          25
+        ]
       },
       {
         "question": "How does Calvin describe his music in relation to capturing feelings?",
@@ -1258,7 +1701,10 @@
           "D25:12"
         ],
         "category": 4,
-        "where": 25
+        "where": 25,
+        "where_ground_truth": [
+          25
+        ]
       },
       {
         "question": "Why did Dave start working on cars?",
@@ -1267,7 +1713,10 @@
           "D25:15"
         ],
         "category": 4,
-        "where": 25
+        "where": 25,
+        "where_ground_truth": [
+          25
+        ]
       },
       {
         "question": "What is the toughest part of car restoration according to Dave?",
@@ -1276,7 +1725,10 @@
           "D25:19"
         ],
         "category": 4,
-        "where": 25
+        "where": 25,
+        "where_ground_truth": [
+          25
+        ]
       },
       {
         "question": "What does Calvin believe makes an artist create something extraordinary?",
@@ -1285,7 +1737,10 @@
           "D25:22"
         ],
         "category": 4,
-        "where": 25
+        "where": 25,
+        "where_ground_truth": [
+          25
+        ]
       },
       {
         "question": "When did Dave sell the car he restored last year?",
@@ -1294,7 +1749,10 @@
           "D25:17"
         ],
         "category": 4,
-        "where": 25
+        "where": 25,
+        "where_ground_truth": [
+          25
+        ]
       },
       {
         "question": "When did Calvin first get interested in cars?",
@@ -1303,7 +1761,10 @@
           "D26:6"
         ],
         "category": 4,
-        "where": 26
+        "where": 26,
+        "where_ground_truth": [
+          26
+        ]
       },
       {
         "question": "How did Calvin feel about performing with someone he admires?",
@@ -1312,7 +1773,10 @@
           "D26:9"
         ],
         "category": 4,
-        "where": 26
+        "where": 26,
+        "where_ground_truth": [
+          26
+        ]
       },
       {
         "question": "What realization did the nightclub experience bring to Calvin?",
@@ -1321,7 +1785,10 @@
           "D26:9"
         ],
         "category": 4,
-        "where": 26
+        "where": 26,
+        "where_ground_truth": [
+          26
+        ]
       },
       {
         "question": "What do Dave and Calvin agree on regarding their pursuits?",
@@ -1330,7 +1797,10 @@
           "D26:11"
         ],
         "category": 4,
-        "where": 26
+        "where": 26,
+        "where_ground_truth": [
+          26
+        ]
       },
       {
         "question": "Which city is featured in the photograph Dave showed Calvin?",
@@ -1339,7 +1809,10 @@
           "D27:6"
         ],
         "category": 4,
-        "where": 27
+        "where": 27,
+        "where_ground_truth": [
+          27
+        ]
       },
       {
         "question": "What did Calvin do recently at his Japanese house?",
@@ -1348,7 +1821,10 @@
           "D28:1"
         ],
         "category": 4,
-        "where": 28
+        "where": 28,
+        "where_ground_truth": [
+          28
+        ]
       },
       {
         "question": "What did Dave recently start a blog about?",
@@ -1357,7 +1833,10 @@
           "D28:8"
         ],
         "category": 4,
-        "where": 28
+        "where": 28,
+        "where_ground_truth": [
+          28
+        ]
       },
       {
         "question": "What is Dave's way to share his passion with others?",
@@ -1366,7 +1845,10 @@
           "D28:8"
         ],
         "category": 4,
-        "where": 28
+        "where": 28,
+        "where_ground_truth": [
+          28
+        ]
       },
       {
         "question": "What type of videos does Calvin usually watch on his television?",
@@ -1375,7 +1857,10 @@
           "D28:31"
         ],
         "category": 4,
-        "where": 28
+        "where": 28,
+        "where_ground_truth": [
+          28
+        ]
       },
       {
         "question": "What type of music has Dave been getting into lately?",
@@ -1384,7 +1869,10 @@
           "D28:40"
         ],
         "category": 4,
-        "where": 28
+        "where": 28,
+        "where_ground_truth": [
+          28
+        ]
       },
       {
         "question": "What tools does Calvin use to boost his motivation for music?",
@@ -1393,7 +1881,10 @@
           "D28:34"
         ],
         "category": 4,
-        "where": 28
+        "where": 28,
+        "where_ground_truth": [
+          28
+        ]
       },
       {
         "question": "What type of content does Dave post on his blog that inspired others to start their own DIY projects?",
@@ -1402,7 +1893,10 @@
           "D28:10"
         ],
         "category": 4,
-        "where": 28
+        "where": 28,
+        "where_ground_truth": [
+          28
+        ]
       },
       {
         "question": "What kind of impact does Dave's blog on car mods have on people?",
@@ -1411,7 +1905,10 @@
           "D28:10"
         ],
         "category": 4,
-        "where": 28
+        "where": 28,
+        "where_ground_truth": [
+          28
+        ]
       },
       {
         "question": "Who did Calvin invite to see him perform in Boston on 13 November, 2023?",
@@ -1420,7 +1917,10 @@
           "D29:1"
         ],
         "category": 4,
-        "where": 29
+        "where": 29,
+        "where_ground_truth": [
+          29
+        ]
       },
       {
         "question": "What hobby did Calvin take up recently?",
@@ -1429,7 +1929,10 @@
           "D30:1"
         ],
         "category": 4,
-        "where": 30
+        "where": 30,
+        "where_ground_truth": [
+          30
+        ]
       },
       {
         "question": "What new item did Dave buy recently?",
@@ -1438,7 +1941,10 @@
           "D30:5"
         ],
         "category": 4,
-        "where": 30
+        "where": 30,
+        "where_ground_truth": [
+          30
+        ]
       },
       {
         "question": "What type of photos does Dave like to capture with his new camera?",
@@ -1447,7 +1953,10 @@
           "D30:9"
         ],
         "category": 4,
-        "where": 30
+        "where": 30,
+        "where_ground_truth": [
+          30
+        ]
       },
       {
         "question": "What event did Calvin attend in Boston?",
@@ -1456,7 +1965,10 @@
           "D30:2"
         ],
         "category": 4,
-        "where": 30
+        "where": 30,
+        "where_ground_truth": [
+          30
+        ]
       },
       {
         "question": "What did Calvin discuss with the cool artist he met at the gala?",
@@ -1465,7 +1977,10 @@
           "D30:4"
         ],
         "category": 4,
-        "where": 30
+        "where": 30,
+        "where_ground_truth": [
+          30
+        ]
       },
       {
         "question": "Where did Dave take a stunning photo of a waterfall?",
@@ -1474,7 +1989,10 @@
           "D30:15"
         ],
         "category": 4,
-        "where": 30
+        "where": 30,
+        "where_ground_truth": [
+          30
+        ]
       },
       {
         "question": "What positive impact does Calvin mention nature has on tough times?",
@@ -1483,7 +2001,10 @@
           "D30:12"
         ],
         "category": 4,
-        "where": 30
+        "where": 30,
+        "where_ground_truth": [
+          30
+        ]
       },
       {
         "question": "Which DJ was Dave's favorite at the music festival in April 2023?",
@@ -1492,7 +2013,10 @@
         ],
         "category": 5,
         "adversarial_answer": "Aerosmith",
-        "where": 2
+        "where": 2,
+        "where_ground_truth": [
+          2
+        ]
       },
       {
         "question": "What advice did Calvin receive from the chef at the music festival?",
@@ -1501,7 +2025,10 @@
         ],
         "category": 5,
         "adversarial_answer": "to stay true to himself and sound unique",
-        "where": 3
+        "where": 3,
+        "where_ground_truth": [
+          3
+        ]
       },
       {
         "question": "What is Calvin's new business venture as of 1 May, 2023?",
@@ -1510,7 +2037,10 @@
         ],
         "category": 5,
         "adversarial_answer": "Car maintenance shop",
-        "where": 4
+        "where": 4,
+        "where_ground_truth": [
+          4
+        ]
       },
       {
         "question": "What type of cars does Calvin work on at his shop?",
@@ -1519,7 +2049,10 @@
         ],
         "category": 5,
         "adversarial_answer": "all kinds of cars, from regular maintenance to full restorations of classic cars",
-        "where": 4
+        "where": 4,
+        "where_ground_truth": [
+          4
+        ]
       },
       {
         "question": "What did Dave receive as a gift from another artist?",
@@ -1528,7 +2061,10 @@
         ],
         "category": 5,
         "adversarial_answer": "a gold necklace with a diamond pendant",
-        "where": 4
+        "where": 4,
+        "where_ground_truth": [
+          4
+        ]
       },
       {
         "question": "What was the necklace Dave received meant to remind him of?",
@@ -1537,7 +2073,10 @@
         ],
         "category": 5,
         "adversarial_answer": "why he keeps hustling as a musician",
-        "where": 4
+        "where": 4,
+        "where_ground_truth": [
+          4
+        ]
       },
       {
         "question": "What did Calvin open in May 2023?",
@@ -1546,7 +2085,10 @@
         ],
         "category": 5,
         "adversarial_answer": "a car shop",
-        "where": 6
+        "where": 6,
+        "where_ground_truth": [
+          6
+        ]
       },
       {
         "question": "What gives Calvin a sense of achievement and purpose?",
@@ -1555,7 +2097,10 @@
         ],
         "category": 5,
         "adversarial_answer": "Fixing up things",
-        "where": 7
+        "where": 7,
+        "where_ground_truth": [
+          7
+        ]
       },
       {
         "question": "What sports activity is Dave planning to try after the tour with Frank Ocean?",
@@ -1564,7 +2109,10 @@
         ],
         "category": 5,
         "adversarial_answer": "Skiing",
-        "where": 9
+        "where": 9,
+        "where_ground_truth": [
+          9
+        ]
       },
       {
         "question": "How does Calvin describe his process of adding acoustic elements to his songs?",
@@ -1573,7 +2121,10 @@
         ],
         "category": 5,
         "adversarial_answer": "gives them a fresh vibe",
-        "where": 11
+        "where": 11,
+        "where_ground_truth": [
+          11
+        ]
       },
       {
         "question": "What clothing brand does Calvin own that he is proud of?",
@@ -1582,7 +2133,10 @@
         ],
         "category": 5,
         "adversarial_answer": "Ferrari",
-        "where": 12
+        "where": 12,
+        "where_ground_truth": [
+          12
+        ]
       },
       {
         "question": "What workshop did Calvin get picked for on 11 August, 2023?",
@@ -1591,7 +2145,10 @@
         ],
         "category": 5,
         "adversarial_answer": "Car mod workshop",
-        "where": 13
+        "where": 13,
+        "where_ground_truth": [
+          13
+        ]
       },
       {
         "question": "What kind of modifications has Calvin been working on in the car mod workshop?",
@@ -1600,7 +2157,10 @@
         ],
         "category": 5,
         "adversarial_answer": "engine swaps, suspension modifications, and body modifications",
-        "where": 13
+        "where": 13,
+        "where_ground_truth": [
+          13
+        ]
       },
       {
         "question": "What type of car did Calvin work on during the workshop?",
@@ -1609,7 +2169,10 @@
         ],
         "category": 5,
         "adversarial_answer": "classic muscle car",
-        "where": 13
+        "where": 13,
+        "where_ground_truth": [
+          13
+        ]
       },
       {
         "question": "What did Dave and his friends record in August 2023?",
@@ -1618,7 +2181,10 @@
         ],
         "category": 5,
         "adversarial_answer": "a podcast discussing the rap industry",
-        "where": 15
+        "where": 15,
+        "where_ground_truth": [
+          15
+        ]
       },
       {
         "question": "Where did Dave start shooting a video for his new album?",
@@ -1627,7 +2193,10 @@
         ],
         "category": 5,
         "adversarial_answer": "Miami",
-        "where": 16
+        "where": 16,
+        "where_ground_truth": [
+          16
+        ]
       },
       {
         "question": "What design is featured on Dave's guitar?",
@@ -1636,7 +2205,10 @@
         ],
         "category": 5,
         "adversarial_answer": "octopus",
-        "where": 16
+        "where": 16,
+        "where_ground_truth": [
+          16
+        ]
       },
       {
         "question": "Why did Dave get his guitar customized with a shiny finish?",
@@ -1645,7 +2217,10 @@
         ],
         "category": 5,
         "adversarial_answer": "unique look",
-        "where": 16
+        "where": 16,
+        "where_ground_truth": [
+          16
+        ]
       },
       {
         "question": "What color glow did Dave customize his guitar with?",
@@ -1654,7 +2229,10 @@
         ],
         "category": 5,
         "adversarial_answer": "purple",
-        "where": 16
+        "where": 16,
+        "where_ground_truth": [
+          16
+        ]
       },
       {
         "question": "Where did Calvin come back from with insights on car modification on 1st September 2023?",
@@ -1663,7 +2241,10 @@
         ],
         "category": 5,
         "adversarial_answer": "San Francisco",
-        "where": 17
+        "where": 17,
+        "where_ground_truth": [
+          17
+        ]
       },
       {
         "question": "What emotion does Calvin mention feeling when he sees the relief of someone whose car he fixed?",
@@ -1672,7 +2253,10 @@
         ],
         "category": 5,
         "adversarial_answer": "Proud",
-        "where": 17
+        "where": 17,
+        "where_ground_truth": [
+          17
+        ]
       },
       {
         "question": "What did Dave book a flight ticket for on 1st September 2023?",
@@ -1681,7 +2265,10 @@
         ],
         "category": 5,
         "adversarial_answer": "Boston",
-        "where": 17
+        "where": 17,
+        "where_ground_truth": [
+          17
+        ]
       },
       {
         "question": "Which horror movie did Dave mention as one of his favorites?",
@@ -1690,7 +2277,10 @@
         ],
         "category": 5,
         "adversarial_answer": "Ratatouille",
-        "where": 19
+        "where": 19,
+        "where_ground_truth": [
+          19
+        ]
       },
       {
         "question": "Which song from the childhood of Dave brings back memories of a road trip with his dad?",
@@ -1700,7 +2290,10 @@
         ],
         "category": 5,
         "adversarial_answer": "\"California Love\"",
-        "where": 20
+        "where": 20,
+        "where_ground_truth": [
+          20
+        ]
       },
       {
         "question": "What car did Calvin work on in the junkyard?",
@@ -1709,7 +2302,10 @@
         ],
         "category": 5,
         "adversarial_answer": "Ford Mustang",
-        "where": 21
+        "where": 21,
+        "where_ground_truth": [
+          21
+        ]
       },
       {
         "question": "What does Dave find satisfying about destroying old cars?",
@@ -1718,7 +2314,10 @@
         ],
         "category": 5,
         "adversarial_answer": "Transforming something old and beat-up into something beautiful",
-        "where": 21
+        "where": 21,
+        "where_ground_truth": [
+          21
+        ]
       },
       {
         "question": "What does working on boats represent for Dave?",
@@ -1727,7 +2326,10 @@
         ],
         "category": 5,
         "adversarial_answer": "Therapy and a way to get away from everyday stress",
-        "where": 22
+        "where": 22,
+        "where_ground_truth": [
+          22
+        ]
       },
       {
         "question": "What does Dave aim to do with his passion for cooking?",
@@ -1736,7 +2338,10 @@
         ],
         "category": 5,
         "adversarial_answer": "Take something broken and make it into something awesome",
-        "where": 22
+        "where": 22,
+        "where_ground_truth": [
+          22
+        ]
       },
       {
         "question": "What did Calvin recently get that is a \"masterpiece on canvas\"?",
@@ -1745,7 +2350,10 @@
         ],
         "category": 5,
         "adversarial_answer": "Ferrari",
-        "where": 23
+        "where": 23,
+        "where_ground_truth": [
+          23
+        ]
       },
       {
         "question": "Who headlined the music festival that Calvin attended in October?",
@@ -1754,7 +2362,10 @@
         ],
         "category": 5,
         "adversarial_answer": "The Fireworks",
-        "where": 23
+        "where": 23,
+        "where_ground_truth": [
+          23
+        ]
       },
       {
         "question": "Which part of Tokyo is described as Tokyo's Times Square by Dave?",
@@ -1763,7 +2374,10 @@
         ],
         "category": 5,
         "adversarial_answer": "Shibuya Crossing",
-        "where": 24
+        "where": 24,
+        "where_ground_truth": [
+          24
+        ]
       },
       {
         "question": "What specific location in Tokyo does Calvin mention being excited to avoid?",
@@ -1772,7 +2386,10 @@
         ],
         "category": 5,
         "adversarial_answer": "Shinjuku",
-        "where": 24
+        "where": 24,
+        "where_ground_truth": [
+          24
+        ]
       },
       {
         "question": "When did Calvin sell the car he restored last year?",
@@ -1781,7 +2398,10 @@
         ],
         "category": 5,
         "adversarial_answer": "Last year",
-        "where": 25
+        "where": 25,
+        "where_ground_truth": [
+          25
+        ]
       },
       {
         "question": "When did Calvin first get interested in motorcycles?",
@@ -1790,7 +2410,10 @@
         ],
         "category": 5,
         "adversarial_answer": "at an early age",
-        "where": 26
+        "where": 26,
+        "where_ground_truth": [
+          26
+        ]
       },
       {
         "question": "What realization did the nightclub experience bring to Dave?",
@@ -1799,7 +2422,10 @@
         ],
         "category": 5,
         "adversarial_answer": "how much music means to him, it's like his passion and purpose",
-        "where": 26
+        "where": 26,
+        "where_ground_truth": [
+          26
+        ]
       },
       {
         "question": "What did Dave do recently at his Japanese house?",
@@ -1808,7 +2434,10 @@
         ],
         "category": 5,
         "adversarial_answer": "Threw a small party for his new album",
-        "where": 28
+        "where": 28,
+        "where_ground_truth": [
+          28
+        ]
       },
       {
         "question": "What did Calvin recently start a blog about?",
@@ -1817,7 +2446,10 @@
         ],
         "category": 5,
         "adversarial_answer": "Car mods",
-        "where": 28
+        "where": 28,
+        "where_ground_truth": [
+          28
+        ]
       },
       {
         "question": "What type of videos does Dave usually watch on his television?",
@@ -1826,7 +2458,10 @@
         ],
         "category": 5,
         "adversarial_answer": "Music videos, concerts, documentaries about artists and their creative process",
-        "where": 28
+        "where": 28,
+        "where_ground_truth": [
+          28
+        ]
       },
       {
         "question": "What type of art has Dave been getting into lately?",
@@ -1835,7 +2470,10 @@
         ],
         "category": 5,
         "adversarial_answer": "Classic rock",
-        "where": 28
+        "where": 28,
+        "where_ground_truth": [
+          28
+        ]
       },
       {
         "question": "What type of content does Dave post on his blog that inspired others to start their own cooking projects?",
@@ -1844,7 +2482,10 @@
         ],
         "category": 5,
         "adversarial_answer": "How he made his car look like a beast",
-        "where": 28
+        "where": 28,
+        "where_ground_truth": [
+          28
+        ]
       },
       {
         "question": "What kind of impact does Dave's blog on vegan recipes have on people?",
@@ -1853,7 +2494,10 @@
         ],
         "category": 5,
         "adversarial_answer": "It inspires others to start their DIY projects",
-        "where": 28
+        "where": 28,
+        "where_ground_truth": [
+          28
+        ]
       },
       {
         "question": "Who did Dave invite to see him perform in Boston on 13 November, 2023?",
@@ -1862,7 +2506,10 @@
         ],
         "category": 5,
         "adversarial_answer": "his old high school buddy",
-        "where": 29
+        "where": 29,
+        "where_ground_truth": [
+          29
+        ]
       },
       {
         "question": "What new item did Calvin buy recently?",
@@ -1871,7 +2518,10 @@
         ],
         "category": 5,
         "adversarial_answer": "A vintage camera",
-        "where": 30
+        "where": 30,
+        "where_ground_truth": [
+          30
+        ]
       },
       {
         "question": "What type of photos does Calvin like to capture with his new camera?",
@@ -1880,7 +2530,10 @@
         ],
         "category": 5,
         "adversarial_answer": "Nature - sunsets, beaches, waves",
-        "where": 30
+        "where": 30,
+        "where_ground_truth": [
+          30
+        ]
       },
       {
         "question": "What did Dave discuss with the cool artist he met at the gala?",
@@ -1889,7 +2542,10 @@
         ],
         "category": 5,
         "adversarial_answer": "Music and art",
-        "where": 30
+        "where": 30,
+        "where_ground_truth": [
+          30
+        ]
       },
       {
         "question": "Where did Calvin take a stunning photo of a waterfall?",
@@ -1898,7 +2554,10 @@
         ],
         "category": 5,
         "adversarial_answer": "Nearby park",
-        "where": 30
+        "where": 30,
+        "where_ground_truth": [
+          30
+        ]
       }
     ],
     "conversation": {

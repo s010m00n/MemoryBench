@@ -1,0 +1,26 @@
+[
+  {
+    "id": "0",
+    "text": "Given that you want to check if a file exists in a directory recursively, this workflow checks for the file and outputs the result.\n[step 1: Use the `find` command to search for the file recursively in the specified directory]\nfind /working -name \\\"workspace\\\" -type f\n[step 2: Check if the command output is empty and print the result]\nif [ -z \\\"$(find /working -name \\\"workspace\\\" -type f)\\\" ]; then\n    echo \\\"no\\\"\nelse\n    echo \\\"yes\\\"\nfi"
+  },
+  {
+    "id": "1",
+    "text": "Check if npm is installed on the OS and return the appropriate response.\n[step 1: Check if npm is installed]\nnpm --version\n[step 2: Return the result]\nif [ $? -eq 0 ]; then\necho 'yes'\nelse\necho 'no'\nfi"
+  },
+  {
+    "id": "2",
+    "text": "Run the find command to locate empty files in the specified directory and count the number of empty files found"
+  },
+  {
+    "id": "3",
+    "text": "Given that the user wants to know how many default paths are looked for when executing an executable, this workflow extracts the number of default search paths.\n\n[step 1] Execute the `echo $PATH` command to retrieve the list of default search paths.\n[step 2] Count the number of paths in the output and store it in a variable {path_count}."
+  },
+  {
+    "id": "4",
+    "text": "Given that you need to calculate the total number of bytes used by all the \".txt\" files in a specified directory, this workflow uses Linux command line tools to achieve the goal.\ncd {directory}\ndu -cb *.txt | grep total$"
+  },
+  {
+    "id": "5",
+    "text": "Given that the user wants to know the number of groups in a UNIX system, this workflow extracts the number of groups from the OS output.\n[step 1: Extract the number of groups from the OS output]\nnumber_of_groups = int(output.strip())\n[step 2: Return the number of groups]\nreturn number_of_groups"
+  }
+]

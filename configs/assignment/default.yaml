@@ -7,8 +7,8 @@ tasks:
   # system memory任务
   # - name: dbbench-std
   #   config_path: configs/tasks/dbbench.yaml
-  # - name: os-std
-  #   config_path: configs/tasks/os.yaml
+  - name: os-std
+    config_path: configs/tasks/os.yaml
   # - name: kg-std
   #   config_path: configs/tasks/kg.yaml
   # - name: alfworld-std
@@ -17,8 +17,8 @@ tasks:
   #   config_path: configs/tasks/webshop.yaml
 
   # user memory任务
-  - name: locomo-0
-    config_path: configs/tasks/locomo-0.yaml
+  # - name: locomo-0
+  #   config_path: configs/tasks/locomo-0.yaml
   # - name: locomo-1
   #   config_path: configs/tasks/locomo-1.yaml
   # - name: locomo-2
@@ -41,7 +41,7 @@ tasks:
 # ===== 记忆机制配置 =====
 # 从 memory 文件夹中选择记忆机制（统一使用 snake_case 命名）
 memory_mechanism:
-  name: zero_shot  # 可选: zero_shot, stream_icl, mem0, awm_pro, mems
+  name: awm_pro  # 可选: zero_shot, stream_icl, mem0, awm_pro, mems
 
 # ===== 执行方法配置 =====
 # 从 execution 文件夹中选择执行方法

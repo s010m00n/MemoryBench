@@ -1,39 +1,25 @@
  # 每个顶层 key 是一个 agent 名称，脚本/前端在选择模型时直接使用该名称
+Qwen/Qwen3-30B-A3B-Thinking-2507:
+  import: "./api.yaml"
+  parameters:
+    name: "Qwen/Qwen3-30B-A3B-Thinking-2507"
+    body:
+      model: "Qwen/Qwen3-30B-A3B-Thinking-2507"
+      max_tokens: 4096
+      temperature: 0
+      extra_body:
+        thinking_budget: 1024
+
 Qwen/Qwen3-14B:
   import: "./api.yaml"
   parameters:
     name: "Qwen/Qwen3-14B"
     body:
       model: "Qwen/Qwen3-14B"
-      max_tokens: 512
+      max_tokens: 4096
       temperature: 0
-
-Qwen/Qwen3-14B-Induction:
-  import: "./api.yaml"
-  parameters:
-    name: "Qwen/Qwen3-14B"
-    body:
-      model: "Qwen/Qwen3-14B"
-      max_tokens: 512
-      temperature: 0
-
-deepseek-ai/DeepSeek-V2.5:
-  import: "./api.yaml"
-  parameters:
-    name: "deepseek-ai/DeepSeek-V2.5"
-    body:
-      model: "deepseek-ai/DeepSeek-V2.5"
-      max_tokens: 512
-      temperature: 0
-
-THUDM/GLM-4-32B-0414:
-  import: "./api.yaml"
-  parameters:
-    name: "THUDM/GLM-4-32B-0414"
-    body:
-      model: "THUDM/GLM-4-32B-0414"
-      max_tokens: 512
-      temperature: 0
+      extra_body:
+        thinking_budget: 1024
 
 Pro/Qwen/Qwen2.5-7B-Instruct:
   import: "./api.yaml"
@@ -41,5 +27,5 @@ Pro/Qwen/Qwen2.5-7B-Instruct:
     name: "Pro/Qwen/Qwen2.5-7B-Instruct"
     body:
       model: "Pro/Qwen/Qwen2.5-7B-Instruct"
-      max_tokens: 20000
+      max_tokens: 4096
       temperature: 0
