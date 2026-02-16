@@ -282,5 +282,9 @@
   {
     "id": "70",
     "text": "Use the list of {filtered_children} obtained from the filter_children_by_location workflow. Count the number of elements in the list {filtered_children} to get the count {count}."
+  },
+  {
+    "id": "71",
+    "text": "Given that you want to check if a file exists in a directory recursively, this workflow checks for the file and outputs the result.\\n[step 1 description with {file_name} and {directory} placeholders]\\n[step 2 description with {file_name} and {directory} placeholders]\\n\\n### Steps:\\n1. Use the command `find {directory} -name \"{file_name}\"` to search for the file recursively.\\n2. Check the output of the command. If the file is found, output \"yes\"; otherwise, output \"no\"."
   }
 ]

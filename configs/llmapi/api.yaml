@@ -6,20 +6,8 @@ parameters:
 # 
   headers:
     Content-Type: application/json
-    # 176
-    # Authorization: "Bearer sk-dehnduvlxcxjjfoeuxnehbyqeelzigotvijyhoqahogedhro"
-    
-    # 132
-    # Authorization: "Bearer sk-ariujdmfjqgfenygjstreeuzvfisddhqeqaidqzbamqffllp"
-
-    # 186
-    Authorization: "Bearer sk-ctzhtskphjvythtitichvowadgmcruzuxxoqiidzueakjkbx"
-
-    # 134
-    # Authorization: "Bearer sk-boccqkdcupuxjnvwlmngvjlxfqpzvllknewhoyajoogmdgda"
-
-    # 学长
-    # Authorization: "Bearer sk-lulftrotchteqxihtxojzyxouozpcyihhnumstxlcffkxovw"
+   
+    Authorization: "Bearer sk-xxxxxxxxxxxxxxxxxxxxxxxxxxxx"
 
   # ===== 默认模型调用参数（可被 agent.yaml 覆盖） =====
   body:

@@ -6,7 +6,7 @@ parameters:
 
   headers:
     Content-Type: application/json
-    Authorization: "Bearer sk-lulftrotchteqxihtxojzyxouozpcyihhnumstxlcffkxovw"
+    Authorization: "Bearer sk-xxxxxxxxxxxxxxxxxxxxxxxxxxxx"
 
   # ===== 默认模型调用参数（可被 agent.yaml 覆盖） =====
   body:

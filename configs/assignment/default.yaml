@@ -41,7 +41,7 @@ tasks:
 # ===== 记忆机制配置 =====
 # 从 memory 文件夹中选择记忆机制（统一使用 snake_case 命名）
 memory_mechanism:
-  name: zero_shot  # 可选: zero_shot, stream_icl, mem0, awm_pro
+  name: mems  # 可选: zero_shot, stream_icl, mem0, awm_pro, mems
 
 # ===== 执行方法配置 =====
 # 从 execution 文件夹中选择执行方法

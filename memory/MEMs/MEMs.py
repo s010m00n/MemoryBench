@@ -93,9 +93,9 @@ class MEMs(MemoryMechanism):
                 return Mem0Memory(memory_config)
 
             elif "awmpro" in yaml_data:
-                from ..awmPro.awmPro import AwmProMemory, AwmProConfig
+                from ..awmPro.awmPro import AWMPro, AWMProConfig
                 awm_cfg = yaml_data["awmpro"]
-                memory_config = AwmProConfig(
+                memory_config = AWMProConfig(
                     model_name=awm_cfg.get("model_name", ""),
                     workflow_induction_prompt=awm_cfg.get("workflow_induction_prompt", ""),
                     workflow_management_prompt=awm_cfg.get("workflow_management_prompt", ""),
@@ -112,7 +112,7 @@ class MEMs(MemoryMechanism):
                     workflow_management_similarity_top_k=awm_cfg.get("workflow_management_similarity_top_k", 5),
                     workflow_storage_path=Path(awm_cfg.get("workflow_storage_path", "memory/awmPro/workflows.jsonl")),
                 )
-                return AwmProMemory(memory_config)
+                return AWMPro(memory_config)
 
             elif "streamicl" in yaml_data:
                 from ..streamICL.streamICL import StreamICLMemory, StreamICLConfig
