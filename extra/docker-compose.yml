@@ -96,7 +96,7 @@ services:
   #   build:
   #     context: ..
   #     dockerfile: src/server/tasks/webshop/Dockerfile
-  #   command: --controller http://172.17.0.1:5037/api webshop-std
+  #   command: --controller http://172.17.0.1:5038/api webshop-std
   #   deploy:
   #     mode: replicated
   #     replicas: 1

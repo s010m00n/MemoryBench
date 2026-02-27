@@ -60,5 +60,6 @@ COPY ./src/server/tasks/webshop /app/src/server/tasks/webshop
 COPY ./configs/tasks/webshop.yaml /app/configs/tasks/webshop.yaml
 
 COPY --chmod=0755 ./extra/worker-entrypoint.sh /entrypoint.sh
+RUN sed -i 's/\r$//' /entrypoint.sh
 
 ENTRYPOINT ["/entrypoint.sh", "-c", "configs/tasks/webshop.yaml"]
