@@ -16,5 +16,6 @@ COPY ./configs/tasks/kg.yaml /app/configs/tasks/kg.yaml
 COPY ./data/knowledgegraph /app/data/knowledgegraph
 
 COPY --chmod=0755 ./extra/worker-entrypoint.sh /entrypoint.sh
+RUN sed -i 's/\r$//' /entrypoint.sh
 
 ENTRYPOINT ["/entrypoint.sh", "-c", "configs/tasks/kg.yaml"]

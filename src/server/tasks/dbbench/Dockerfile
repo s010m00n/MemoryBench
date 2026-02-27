@@ -16,5 +16,6 @@ COPY ./configs/tasks/dbbench.yaml /app/configs/tasks/dbbench.yaml
 COPY ./data/dbbench /app/data/dbbench
 
 COPY --chmod=0755 ./extra/worker-entrypoint.sh /entrypoint.sh
+RUN sed -i 's/\r$//' /entrypoint.sh
 
 ENTRYPOINT ["/entrypoint.sh", "-c", "configs/tasks/dbbench.yaml"]

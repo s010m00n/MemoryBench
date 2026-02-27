@@ -44,7 +44,7 @@ SYSTEM_PROMPT = """You are a helpful assistant that answers questions based on c
 Given a question, provide a clear and accurate answer based on the information from the conversations."""
 
 # Default RoBERTa tokenizer path (can be overridden in task config)
-DEFAULT_TOKENIZER_PATH = r"B:\desktop\python\agent\lifeLongLearning (ACL2026\xlm-roberta-base"
+DEFAULT_TOKENIZER_PATH = "C:/Users/123/Desktop/python/agent/agent-memory-bench/xlm-roberta-base"
 
 
 def convert_session_to_history(session_dialogues: List[Dict[str, str]]) -> List[Dict[str, Any]]:

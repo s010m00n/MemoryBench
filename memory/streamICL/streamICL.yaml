@@ -3,7 +3,7 @@ stream_icl:
   rag:
 
     # 如需离线/本地加载，填本地模型目录绝对路径，例如：
-    embedding_model: "B:/desktop/python/agent/lifeLongLearning (ACL2026/bge-base-en-v1.5"  # 用于编码的 embedding 模型
+    embedding_model: "C:/Users/123/Desktop/python/agent/agent-memory-bench/bge-base-en-v1.5"  # 用于编码的 embedding 模型
 
     top_k: 4  # 检索 top_k 个最相似的经验
     order: "similar_at_top"  # "similar_at_top" | "similar_at_bottom" | "random"

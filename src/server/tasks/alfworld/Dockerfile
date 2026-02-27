@@ -35,6 +35,7 @@ RUN --mount=type=cache,target=/root/.cache/pip \
     sed -i '/numpy/d' /usr/src/alfworld/requirements.txt && \
     sed -i '/torch/d' /usr/src/alfworld/requirements.txt && \
     sed -i '/transformers/d' /usr/src/alfworld/requirements.txt && \
+    sed -i '/visdom/d' /usr/src/alfworld/requirements.txt && \
     echo "blis<=1.2.0" >> /usr/src/alfworld/requirements.txt && \
     echo "jsonlines" >> /usr/src/alfworld/requirements.txt && \
     echo "numpy<2.0" >> /usr/src/alfworld/requirements.txt && \
@@ -57,5 +58,6 @@ COPY ./configs/tasks/alfworld.yaml /app/configs/tasks/alfworld.yaml
 COPY ./data/alfworld /app/data/alfworld
 
 COPY --chmod=0755 ./extra/worker-entrypoint.sh /entrypoint.sh
+RUN sed -i 's/\r$//' /entrypoint.sh
 
 ENTRYPOINT ["/entrypoint.sh", "-c", "configs/tasks/alfworld.yaml"]

@@ -14,5 +14,6 @@ COPY ./configs/tasks/os.yaml /app/configs/tasks/os.yaml
 COPY ./data/os_interaction /app/data/os_interaction
 
 COPY --chmod=0755 ./extra/worker-entrypoint.sh /entrypoint.sh
+RUN sed -i 's/\r$//' /entrypoint.sh
 
 ENTRYPOINT ["/entrypoint.sh", "-c", "configs/tasks/os.yaml"]

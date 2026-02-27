@@ -19,5 +19,6 @@ EXPOSE 13001/tcp
 STOPSIGNAL SIGTERM
 
 COPY --chmod=0755 extra/freebase-entrypoint.sh /entrypoint.sh
+RUN sed -i 's/\r$//' /entrypoint.sh
 
 CMD ["/entrypoint.sh"]
