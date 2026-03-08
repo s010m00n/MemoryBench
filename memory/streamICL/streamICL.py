@@ -11,8 +11,7 @@ import logging
 from src.utils.message_schema import (
     extract_message_info,
     enhance_messages_with_memory,
-    extract_original_question,
-    extract_question_from_history,
+    extract_original_question
 )
 
 try:
@@ -25,15 +24,14 @@ except ImportError:
     print("Warning: faiss, torch, or transformers not installed. StreamICL will not work.")
 
 from ..base import MemoryMechanism
-from src.utils.message_schema import extract_message_info
 
 
 class RAG:
     """
-    RAG (Retrieval-Augmented Generation) 向量检索系统。
-    参考 stream-bench 的实现。
+    RAG (Retrieval-Augmented Generation) vector retrieval system.
+    Based on the stream-bench implementation.
     """
-    
+
     def __init__(
         self,
         embedding_model: str = "BAAI/bge-base-en-v1.5",
@@ -43,29 +41,29 @@ class RAG:
     ):
         if not HAS_DEPENDENCIES:
             raise ImportError("faiss, torch, or transformers not installed. Please install them to use StreamICL.")
-        
+
         self.tokenizer = AutoTokenizer.from_pretrained(embedding_model)
         self.embed_model = AutoModel.from_pretrained(embedding_model).eval()
 
-        self.index = None
-        self.id2evidence = dict()
-        # 直接从模型配置读取 embedding 维度，避免不必要的推理
+        self.index = None  # FAISS vector index
+        self.id2evidence = dict()  # stores raw text values
+        # Read embedding dimension directly from model config to avoid unnecessary inference
         self.embed_dim = self.embed_model.config.hidden_size
-        self.insert_acc = 0
-        
+        self.insert_acc = 0  # insertion counter
+
         self.seed = seed
         self.top_k = top_k
         self.order = order
         random.seed(self.seed)
-        
+
         self.create_faiss_index()
-    
+
     def create_faiss_index(self):
-        """创建 FAISS 向量索引"""
+        """Create FAISS vector index."""
         self.index = faiss.IndexFlatL2(self.embed_dim)
-    
+
     def encode_data(self, sentence: str) -> np.ndarray:
-        """对文本进行 embedding 编码"""
+        """Encode text into an embedding vector."""
         encoded_input = self.tokenizer([sentence], padding=True, truncation=True, return_tensors="pt")
         with torch.no_grad():
             model_output = self.embed_model(**encoded_input)
@@ -74,91 +72,91 @@ class RAG:
         feature = sentence_embeddings.numpy()[0]
         norm = np.linalg.norm(feature)
         return feature / norm
-    
+
     def insert(self, key: str, value: str) -> None:
         """
-        插入经验到 RAG 中。
-        
+        Insert an experience into the RAG index.
+
         Args:
-            key: question（用于检索的 key）
-            value: formatted example chunk（存储的值）
+            key: question text (used as the retrieval key)
+            value: formatted experience chunk (the stored value)
         """
         embedding = self.encode_data(key).astype('float32')
         self.index.add(np.expand_dims(embedding, axis=0))
         self.id2evidence[str(self.insert_acc)] = value
         self.insert_acc += 1
-    
+
     def retrieve(self, query: str, top_k: int) -> List[str]:
         """
-        检索 top_k 个最相似的经验。
-        
+        Retrieve the top_k most similar experiences.
+
         Args:
-            query: 当前 question
-            top_k: 检索数量
-            
+            query: current question text
+            top_k: number of results to retrieve
+
         Returns:
-            检索到的 formatted chunks 列表
+            list of retrieved formatted chunks
         """
         if self.insert_acc == 0:
             return []
-        
+
         embedding = self.encode_data(query).astype('float32')
         top_k = min(top_k, self.insert_acc)
         distances, indices = self.index.search(np.expand_dims(embedding, axis=0), top_k)
         distances = distances[0].tolist()
         indices = indices[0].tolist()
-        
+
         results = [{'link': str(idx), '_score': {'faiss': dist}} for dist, idx in zip(distances, indices)]
-        
-        # 根据排序策略重新排序
+
+        # Reorder results according to the configured ordering strategy
         if self.order == "similar_at_bottom":
             results = list(reversed(results))
         elif self.order == "random":
             random.shuffle(results)
-        
+
         text_list = [self.id2evidence[result["link"]] for result in results]
         return text_list
 
 
 class StreamICLMemory(MemoryMechanism):
     """
-    StreamICL 记忆机制：基于向量检索的 RAG 系统。
-    
-    参考 stream-bench 的实现：
-    - 使用 FAISS 向量数据库存储经验
-    - 根据当前 question 的 embedding 检索 top_k 个最相似的经验
-    - 只存储正确答案（is_correct=True）
-    - 支持两种插入位置：system 或 user message 中的占位符
+    StreamICL memory mechanism: RAG-based in-context learning system.
+
+    Based on the stream-bench implementation:
+    - Uses a FAISS vector database to store experiences
+    - Retrieves top_k most similar experiences by embedding similarity to the current question
+    - Optionally filters to only store successful samples
+    - Supports two injection positions: appended before or after the user message
     """
-    
+
     def __init__(
         self,
         embedding_model: str = "BAAI/bge-base-en-v1.5",
         top_k: int = 5,
         order: str = "similar_at_top",  # "similar_at_top" | "similar_at_bottom" | "random"
-        success_only: bool = True,  # True: 只存储成功完成的样本（finish 或 status=="completed"），False: 都存储
-        reward_bigger_than_zero: bool = False,  # True: 只存储 reward>0 的样本，False: 都存储
+        success_only: bool = True,  # True: only store samples with status=="completed", False: store all
+        reward_bigger_than_zero: bool = False,  # True: only store samples with reward>0, False: store all
         prompt_template: str = "Here are some examples of the task you have completed:\n\n{examples}",
-        where: str = "tail",  # "tail": 记忆放在 user question 后面 | "front": 记忆放在 user question 前面
+        where: str = "tail",  # "tail": inject after user question | "front": inject before user question
         seed: int = 42,
     ):
         """
-        初始化 StreamICL 记忆机制。
+        Initialize the StreamICL memory mechanism.
 
         Args:
-            embedding_model: 用于编码的 embedding 模型
-            top_k: 检索 top_k 个最相似的经验
-            order: 检索结果的排序方式
-            success_only: True 表示只存储成功完成的样本（finish 或 status=="completed"），False 表示都存储
-            reward_bigger_than_zero: True 表示只存储 reward>0 的样本，False 表示都存储
-            prompt_template: 记忆内容的模板
-            where: "tail" 表示记忆放在 user question 后面，"front" 表示记忆放在 user question 前面
-            seed: 随机种子
+            embedding_model: embedding model used to encode questions
+            top_k: number of similar experiences to retrieve
+            order: ordering strategy for retrieved results
+            success_only: if True, only store samples with status=="completed"
+            reward_bigger_than_zero: if True, only store samples with reward>0
+            prompt_template: template string for formatting the memory block
+            where: injection position — "tail" appends after the question, "front" prepends before it
+            seed: random seed (used only when order="random")
         """
         if not HAS_DEPENDENCIES:
             raise ImportError("faiss, torch, or transformers not installed. Please install them to use StreamICL.")
 
-        # 保存 RAG 配置
+        # Save RAG configuration for lazy/re-initialization
         self.rag_config = dict(
             embedding_model=embedding_model,
             top_k=top_k,
@@ -170,125 +168,130 @@ class StreamICLMemory(MemoryMechanism):
         self.prompt_template = prompt_template
         self.where = where
 
-        # 提取 template title（从 prompt_template 中提取，用于识别增强后的消息）
-        # 例如: "Here are some examples:\n\n{examples}" -> "Here are some examples:"
+        # Extract the template title from the prompt_template (used to detect injected memory)
+        # e.g. "Here are some examples:\n\n{examples}" -> "Here are some examples:"
         self.template_title = self.prompt_template.split('{examples}')[0].strip()
 
-        # 全局单一向量库（不再按任务分组）
+        # Single global vector store (not partitioned by task)
         self.rag: Optional[RAG] = None
         try:
             self.rag = RAG(**self.rag_config)
         except Exception as e:
             raise ImportError(f"Failed to initialize RAG: {e}")
-    
+
     def use_memory(self, task: str, messages: List[Dict[str, Any]]) -> List[Dict[str, Any]]:
         """
-        基于当前任务名和原始 messages，返回改写后的 messages。
-        记忆内容会追加到第一个 user message 的末尾。
+        Given the task name and original messages, return messages enhanced with retrieved memory.
+        The memory content is injected into the first user message.
         """
-        # 提取当前 question（使用公共工具）
+        # Extract the current question text (strips any previously injected memory)
         template_titles = [self.template_title]
         question = extract_original_question(messages, where=self.where, template_titles=template_titles)
         if not question:
-            return list(messages) if messages is not None else []
+            return list(messages) if messages is not None else []  # fallback; rarely triggered
 
-        # 检索相似经验（全局向量库，不按任务隔离）
+        # Retrieve similar experiences from the global vector store
         if not self.rag:
-            return list(messages) if messages is not None else []
+            return list(messages) if messages is not None else []  # RAG not initialized; rarely triggered
+
         shots = self.rag.retrieve(query=question, top_k=self.rag.top_k)
-
         if not shots:
-            return list(messages) if messages is not None else []
+            return list(messages) if messages is not None else []  # no relevant memory found; rarely triggered
 
-        # 格式化经验文本
+        # Format the retrieved experiences into a single memory block
         fewshot_text = "\n\n\n".join(shots).replace("\\", "\\\\")
         memory_content = self.prompt_template.format(examples=fewshot_text)
 
-        # 使用公共工具插入记忆
+        # Inject the memory block into the messages
         return enhance_messages_with_memory(messages, memory_content, where=self.where)
-    
+
     def update_memory(self, task: str, history: List[Dict[str, Any]], result: Dict[str, Any]) -> None:
         """
-        在单个样本执行结束后调用，用于把新的轨迹/结果写入记忆。
+        Called after a single sample finishes execution.
+        Writes the new trajectory/result into the memory store.
         """
-        finish = result.get("finish", False)
         status = result.get("status", "")
         reward = result.get("reward", 0)
-        # success_only 只负责检查是否成功完成（finish 或 status），不涉及 reward
-        is_success = finish or status == "completed"
-        
-        # 过滤：如果 success_only=True，只存储成功完成的样本（不涉及 reward）
+        # is_success is based solely on status, independent of reward
+        is_success = status == "completed"
+
+        # Filter: if success_only=True, skip samples that did not complete successfully
         if self.success_only and not is_success:
-            print(f"[StreamICL] Skipping sample storage: success_only=True but sample not completed (finish={finish}, status={status}, task={task})")
-            logging.info(f"[StreamICL] Skipping sample storage: success_only=True but sample not completed (finish={finish}, status={status}, task={task})")
+            print(f"[StreamICL] Skipping sample storage: success_only=True but sample not completed (status={status}, task={task})")
+            logging.info(f"[StreamICL] Skipping sample storage: success_only=True but sample not completed (status={status}, task={task})")
             return
-        
-        # 过滤：如果 reward_bigger_than_zero=True，只存储 reward>0 的样本
+
+        # Filter: if reward_bigger_than_zero=True, skip samples with non-positive reward
         if self.reward_bigger_than_zero:
             if reward <= 0:
                 print(f"[StreamICL] Skipping sample storage: reward_bigger_than_zero=True but reward={reward} (task={task})")
                 logging.info(f"[StreamICL] Skipping sample storage: reward_bigger_than_zero=True but reward={reward} (task={task})")
                 return
-        
-        # 提取 question（用于检索的 key，使用公共工具）
+
+        # Extract the question text from history (used as the retrieval key)
         template_titles = [self.template_title]
-        question = extract_question_from_history(history, where=self.where, template_titles=template_titles)
+        question = extract_original_question(history, where=self.where, template_titles=template_titles)
         if not question:
             print(f"[StreamICL] Skipping sample storage: No question extracted from history (task={task})")
             logging.info(f"[StreamICL] Skipping sample storage: No question extracted from history (task={task})")
             return
-        
-        # 格式化经验 chunk（参考 stream-bench 的 shot_template 格式）
-        chunk = self._format_experience(history, result)
-        
-        # 插入到 RAG（全局向量库，不按任务隔离）
+
+        # Format the trajectory into an experience chunk
+        chunk = self._format_experience(history)
+
+        # Insert into the global vector store (not partitioned by task)
         if not self.rag:
             return
         self.rag.insert(key=question, value=chunk)
-    
-    def _format_experience(self, history: List[Dict[str, Any]], result: Dict[str, Any]) -> str:
+
+    def _format_experience(self, history: List[Dict[str, Any]]) -> str:
         """
-        格式化经验为 chunk 文本。
+        Serialize a conversation history into a plain-text experience chunk.
 
-        格式：
-        Question: {question}
-        {answer}
+        Output format:
+            Question: {question}
+            {answer}
 
-        关键：必须过滤掉本轮use_memory()插入的few-shot examples，只保留原始的question和answer。
+        Important: injected few-shot examples from use_memory() must be stripped out;
+        only the original question and the agent's actual trajectory are stored.
         """
         template_prefix = self.template_title
 
-        # 1. 提取原始question（使用公共工具）
+        # Step 1: extract the original question (strips any injected memory)
         template_titles = [template_prefix]
-        question = extract_question_from_history(history, where=self.where, template_titles=template_titles)
+        question = extract_original_question(history, where=self.where, template_titles=template_titles)
 
         if not question:
             return ""
 
-        # 2. 提取answer（assistant和tool的交互，跳过第一个user消息）
+        # Step 2: build the answer lines from the trajectory (skip the first user message)
         answer_lines = []
         skip_first_user = True
 
         for msg in history:
-            role, content, msg_dict = extract_message_info(msg) 
+            role, content, msg_dict = extract_message_info(msg)
             if role is None or role == "system":
                 continue
 
             content = content if content else ""
 
-            # 跳过第一个user消息（已经作为question了）
+            # Skip the first user message — it is already captured as the question
             if role == "user":
                 if skip_first_user:
                     skip_first_user = False
                     continue
-                # 后续user消息：只有不包含模板标题的才保留
+                # Subsequent user messages: keep only those that don't contain injected memory
                 if template_prefix not in content:
                     answer_lines.append(f"User: {content}")
                 continue
 
-            # 格式化assistant消息
+            # Format assistant messages
             if role == "assistant":
                 tool_calls = msg_dict.get("tool_calls", []) if msg_dict else []
+                reasoning_content = msg_dict.get("reasoning_content", "") if msg_dict else ""
+                reasoning_content = reasoning_content[:500] + "..." if len(reasoning_content) > 500 else reasoning_content
+                think_part = f"<think>{reasoning_content}</think> " if reasoning_content else ""
+
                 if tool_calls:
                     tool_calls_info = []
                     for tc in tool_calls:
@@ -296,18 +299,17 @@ class StreamICLMemory(MemoryMechanism):
                         func_name = func.get("name", "unknown")
                         func_args = func.get("arguments", "{}")
                         try:
-                            args_dict = json.loads(func_args)
-                            args_str = json.dumps(args_dict, ensure_ascii=False)
+                            args_dict = json.loads(func_args)  # 1. parse JSON string to Python object  2. decode escape sequences (e.g. \uXXXX -> actual char)
+                            args_str = json.dumps(args_dict, ensure_ascii=False)  # 1. serialize Python object back to JSON string  2. re-escape special chars, but preserve non-ASCII (e.g. Chinese) as-is
                         except:
                             args_str = func_args
                         tool_calls_info.append(f"{func_name}({args_str})")
                     tool_calls_str = " ".join(tool_calls_info)
-                    answer_lines.append(f"Assistant: {tool_calls_str}" + (f" {content}" if content else ""))
+                    answer_lines.append(f"Assistant: {think_part}{content} {tool_calls_str}")
                 else:
-                    if content:
-                        answer_lines.append(f"Assistant: {content}")
+                    answer_lines.append(f"Assistant: {think_part}{content}")
 
-            # 格式化tool消息
+            # Format tool messages (truncate long outputs)
             elif role == "tool":
                 tool_content = content[:500] + "..." if len(content) > 500 else content
                 answer_lines.append(f"Tool: {tool_content}")
@@ -318,7 +320,7 @@ class StreamICLMemory(MemoryMechanism):
 
 def load_stream_icl_from_yaml(config_path: str) -> StreamICLMemory:
     """
-    从 memory/streamICL/streamICL.yaml 读取配置，构造 StreamICLMemory。
+    Load configuration from memory/streamICL/streamICL.yaml and construct a StreamICLMemory.
     """
     with open(config_path, "r", encoding="utf-8") as f:
         cfg = yaml.safe_load(f) or {}
@@ -327,7 +329,7 @@ def load_stream_icl_from_yaml(config_path: str) -> StreamICLMemory:
     rag_cfg = stream_icl_cfg.get("rag", {})
 
     embedding_model = rag_cfg.get("embedding_model", "BAAI/bge-base-en-v1.5")
-    top_k = rag_cfg.get("top_k", 5)
+    top_k = rag_cfg.get("top_k", 4)
     order = rag_cfg.get("order", "similar_at_top")
     seed = rag_cfg.get("seed", 42)
 
@@ -346,4 +348,3 @@ def load_stream_icl_from_yaml(config_path: str) -> StreamICLMemory:
         where=where,
         seed=seed,
     )
-

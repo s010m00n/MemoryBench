@@ -1,10 +1,10 @@
 # zero_shot memory mechanism configuration
-# 当前阶段作为占位配置，仅用于在 configs/assignment/default.yaml 中引用。
+# Currently serves as a placeholder config, referenced by configs/assignment/default.yaml.
 #
-# 由于 zero_shot 不需要持久化任何经验，这里没有额外参数。
+# Since zero_shot does not persist any experience, no additional parameters are needed.
 #
-# 后续如需扩展（例如为不同任务注入固定的 system few-shot），可以在此文件中
-# 增加 per-task 的说明文本，并在 ZeroShotMemory 内部读取使用。
+# For future extensions (e.g., injecting fixed system few-shots per task), add
+# per-task description text here and read it inside ZeroShotMemory.
 
 zero_shot:
   description: >

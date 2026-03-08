@@ -9,31 +9,33 @@ from ..base import MemoryMechanism
 
 class ZeroShotMemory(MemoryMechanism):
     """
-    Zero-shot 记忆机制：完全不利用历史经验，也不更新任何记忆文件。
+    Zero-shot memory mechanism: does not leverage any historical experience
+    and does not update any memory store.
 
-    - use_memory: 原样透传后端返回的 messages
-    - update_memory:  不做任何操作
+    - use_memory: passes through the backend messages unchanged
+    - update_memory: no-op
 
-    之所以仍然实现这个类，是为了和后续 few_shot 等机制
-    共享同一套接口，便于在 runner 中通过配置文件动态切换。
+    This class exists so that all memory mechanisms share the same interface,
+    making it easy to switch between them via configuration in the runner.
     """
 
     def use_memory(self, task: str, messages: List[Dict[str, Any]]) -> List[Dict[str, Any]]:
-        # 为避免外部误改原列表，这里返回一个浅拷贝
+        # Return a shallow copy to prevent callers from mutating the original list
         return list(messages) if messages is not None else []
 
     def update_memory(self, task: str, history: List[Dict[str, Any]], result: Dict[str, Any]) -> None:
-        # Zero-shot 不记录任何经验，这里刻意留空
+        # Zero-shot records no experience; intentionally left empty
         return
 
 
 def load_zero_shot_from_yaml(config_path: str) -> ZeroShotMemory:
     """
-    从 memory/zero_shot/zero_shot.yaml 读取配置，构造 ZeroShotMemory。
+    Load configuration from memory/zero_shot/zero_shot.yaml and construct a ZeroShotMemory.
 
-    目前 zero_shot.yaml 只包含描述信息，因此这里只是验证文件存在 / 结构合法，
-    返回一个简单的 ZeroShotMemory 实例，为后续扩展（例如为不同任务增加静态提示）预留位置。
+    The YAML currently only contains descriptive metadata, so this function simply
+    validates that the file exists and is well-formed, then returns a ZeroShotMemory
+    instance. The structure is kept for future extensibility (e.g., per-task static prompts).
     """
     with open(config_path, "r", encoding="utf-8") as f:
-        _ = yaml.safe_load(f) or {}
+        _ = yaml.safe_load(f) or {}  # safe_load returns None for empty files; fall back to {}
     return ZeroShotMemory()

@@ -3,7 +3,7 @@ awmpro:
   # 统一使用一个模型，避免重复注册 client
   model_name: "Pro/Qwen/Qwen2.5-7B-Instruct"
 
-  # ===== 工作流归纳 Prompt =====
+  # ===== 工作流归纳配置 =====
   workflow_induction_prompt: |
     Given a completed trajectory, your task is to extract reusable workflow(s) from it.
     Each workflow should be a commonly-reused sub-routine. Do not generate similar or overlapping workflows. Each workflow should have at least two steps.
@@ -21,8 +21,9 @@ awmpro:
     - Then list the steps, using {variable-name} for parameterizable values
     - Extract multiple workflows if the trajectory contains different reusable patterns
     - Use clear, descriptive variable names in {curly_braces}
+  workflow_induction_max_retries: 5  # Workflow induction 最大重试次数
 
-  # ===== 工作流管理 Prompt =====
+  # ===== 工作流管理配置 =====
   workflow_management_prompt: |
     You are a smart workflow memory manager. You control the workflow memory of a system.
     You can perform four operations: (1) ADD, (2) UPDATE, (3) DELETE, and (4) NONE.
@@ -144,17 +145,23 @@ awmpro:
     - Escape quotes with \\"
     - Escape newlines with \\n
     - Return valid JSON only
-
-  # ===== 工作流管理配置 =====
+  workflow_management_max_retries: 5  # Workflow management 最大重试次数
   # 向量搜索时每个新工作流找 top_k 个相似工作流（参考 mem0 的做法，默认 5）
   workflow_management_similarity_top_k: 5
 
-  # 最大重试次数配置（避免无限重试，默认 5）
-  workflow_induction_max_retries: 5  # Workflow induction 最大重试次数
-  workflow_management_max_retries: 5  # Workflow management 最大重试次数
-
   # ===== 工作流存储路径 =====
   workflow_storage_path: "memory/awmPro/workflows.json"
+
+  # ===== Filter configuration =====
+  success_only: true
+  reward_bigger_than_zero: true
+
+  # ===== Prompt template =====
+  # The memory block is injected into the user message at the position specified by `where`
+  prompt_template: |
+    Here are some useful workflows learned from past similar episodes, you can use them to help you complete the task:
+    {workflows}
+  where: front  # tail: inject after the user question | front: inject before the user question
 
   # ===== 工作流 RAG 配置 =====
   workflow_rag:
@@ -162,10 +169,3 @@ awmpro:
     top_k: 8
     order: "similar_at_top"  # "similar_at_top" | "similar_at_bottom" | "random"
     seed: 42
-    # 记忆内容会追加到 user question 末尾
-    prompt_template: |
-      Here are some useful workflows learned from past similar episodes, you can use them to help you complete the task:
-      {workflows}
-    where: front  # tail: 记忆放在 user question 后面 | front: 记忆放在 user question 前面
-    success_only: true
-    reward_bigger_than_zero: true
