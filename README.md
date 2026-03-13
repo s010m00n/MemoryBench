@@ -299,92 +299,6 @@ model: "Qwen/Qwen2.5-14B-Instruct"  # Or evaluation model
 
 Edit `configs/assignment/default.yaml`:
 
-```yaml
-# Lifelong Learning Benchmark Configuration
-# 配置要测试的任务、记忆机制、执行方法和实验参数
-
-# ===== 任务配置 =====
-# 指定要测试的任务列表（5个system memory任务+2个user memory任务，共7个任务）
-tasks:
-  # system memory任务
-  # - name: dbbench-std
-  #   config_path: configs/tasks/dbbench.yaml
-  - name: os-std
-    config_path: configs/tasks/os.yaml
-  # - name: kg-std
-  #   config_path: configs/tasks/kg.yaml
-  # - name: alfworld-std
-  #   config_path: configs/tasks/alfworld.yaml
-  # - name: webshop-std
-  #   config_path: configs/tasks/webshop.yaml
-
-  # user memory任务
-  # - name: locomo-0
-  #   config_path: configs/tasks/locomo-0.yaml
-  # - name: locomo-1
-  #   config_path: configs/tasks/locomo-1.yaml
-  # - name: locomo-2
-  #   config_path: configs/tasks/locomo-2.yaml
-  # - name: locomo-3
-  #   config_path: configs/tasks/locomo-3.yaml
-  # - name: locomo-4
-  #   config_path: configs/tasks/locomo-4.yaml
-  # - name: locomo-5
-  #   config_path: configs/tasks/locomo-5.yaml
-  # - name: locomo-6
-  #   config_path: configs/tasks/locomo-6.yaml
-  # - name: locomo-7
-  #   config_path: configs/tasks/locomo-7.yaml
-  # - name: locomo-8
-  #   config_path: configs/tasks/locomo-8.yaml
-  # - name: locomo-9
-  #   config_path: configs/tasks/locomo-9.yaml
-
-# ===== 记忆机制配置 =====
-# 从 memory 文件夹中选择记忆机制（统一使用 snake_case 命名）
-memory_mechanism:
-  name: zero_shot  # 可选: zero_shot, stream_icl, mem0, awm_pro
-
-# ===== 执行方法配置 =====
-# 从 execution 文件夹中选择执行方法
-execution_method:
-  name: single_agent  # 当前版本仅支持 single_agent
-  config_path: execution/single_agent/single_agent.yaml
-
-# ===== 实验参数 =====
-experiment:
-  # 训练模式: online (在线学习) 或 offline (离线学习) 或 replay (重放学习) 或 transfer (迁移学习)  或 repair（修复学习）
-  training_mode: online  # online | offline | replay | transfer | repair
-  
-  keep_number: 700 #只有training_mode等于online时，这个参数才有效 #为None或者小于等于0，则不进行截断
-
-  train_size: 0.6 #只有training_mode等于offline时，这个参数才有效
-
-  #在transfer_task中学习（update+enhance，相当于online），在transfer_after_task中进行测试（仅enhance）
-  transfer_task: dbbench-std #只有training_mode等于transfer时，这个参数才有效
-  transfer_after_task: os-std #只有training_mode等于transfer时，这个参数才有效
-  forward_transfer_num: 3 #只有training_mode等于transfer且transfer_task==transfer_after_task时，这个参数才有效，表示前向迁移的步数
-
-  #这两个参数的意思是，每学过m个样本（update+enhance，相当于online），就从学过的所有样本中随机抽样n个进行测试（仅enhance）
-  replay_m: 20 #只有training_mode等于replay时，这个参数才有效
-  replay_n: 20 #只有training_mode等于replay时，这个参数才有效
-  replay_seed: 66 #只有training_mode等于replay时，这个参数才有效
-
-  #这两个参数的意思是，将所有的case按照m分成x组，然后组与组之前是串行学习的，这没毛病，但是每个组中会有n个case的judge是错乱的
-  repair_m: 20  # 只有training_mode等于repair时，这个参数才有效（对于普通任务），每组的样本数量
-  repair_n: 20  # 只有training_mode等于repair时，这个参数才有效，每组中需要反转奖励的样本数量
-  repair_seed: 66  # 只有training_mode等于repair时，这个参数才有效，选择反转样本的随机种子
-  repair_size_locomo: 0.5  # 只有training_mode等于repair且任务为locomo时有效，表示每个session中需要反转的QA比例（0-1之间）
-
-  ...
-  
-  cross_task: False  # True | False
-
-  # 数据打乱: 是否打乱任务顺序，可以设置随机种子
-  shuffle:
-    enabled: True  # True | False
-    seed: 66  # 整数，如果 enabled 为 true 时使用
-```
 
 ### 6. Run Experiments
 
@@ -509,9 +423,9 @@ memory_mechanism:
 
 ### Fair Comparison Notes
 
-- **streamICL**: Uses topk=4 following [original paper](https://arxiv.org/abs/2406.08747)
-- **awmPro**: Modified from [AWM](https://arxiv.org/abs/2409.07429) with mem0-inspired management, topk=8 based on workflow induction experiments
-- **mem0**: Uses best practices from [official implementation](https://arxiv.org/abs/2504.19413)
+- **streamICL**: Uses topk=4 following original paper
+- **awmPro**: Modified from AWM with mem0-inspired management, topk=8 based on workflow induction experiments
+- **mem0**: Uses best practices from official implementation
 
 See ablation studies in paper for detailed topk analysis across different tasks.
 
@@ -521,6 +435,6 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## 🙏 Acknowledgments
 
-- Task datasets adapted from AgentBench and LoCoMo
-- Evaluation protocols inspired by continual learning literature
-- Memory baselines from StreamBench, AWM, and Mem0
+- Task datasets adapted from [AgentBench](https://arxiv.org/abs/2308.03688) and [LoCoMo](https://arxiv.org/abs/2402.17753)
+- Evaluation protocols inspired by [continual learning literature](https://arxiv.org/abs/2404.16789) and [knowledge edition paper](https://arxiv.org/abs/2503.05683)
+- Memory baselines from [StreamBench](https://arxiv.org/abs/2406.08747), [AWM](https://arxiv.org/abs/2409.07429), and [Mem0](https://arxiv.org/abs/2504.19413)
