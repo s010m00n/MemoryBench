@@ -19,7 +19,7 @@ try:
     import faiss
     from transformers import AutoTokenizer, AutoModel
     HAS_DEPENDENCIES = True
-except ImportError:
+except ImportError: #"except" wiil not disturb the execution of file
     HAS_DEPENDENCIES = False
     print("Warning: faiss, torch, or transformers not installed. StreamICL will not work.")
 
@@ -40,12 +40,12 @@ class RAG:
         seed: int = 42,
     ):
         if not HAS_DEPENDENCIES:
-            raise ImportError("faiss, torch, or transformers not installed. Please install them to use StreamICL.")
+            raise ImportError("faiss, torch, or transformers not installed. Please install them to use StreamICL.") #"raise" wiil not disturb the execution of file
 
         self.tokenizer = AutoTokenizer.from_pretrained(embedding_model)
-        self.embed_model = AutoModel.from_pretrained(embedding_model).eval()
+        self.embed_model = AutoModel.from_pretrained(embedding_model).eval() #plz remeber to plus ".eval" to shut down dropout or sth else
 
-        self.index = None  # FAISS vector index
+        self.index = None  # FAISS vector index, latter we will use it to create a VectorDatabse
         self.id2evidence = dict()  # stores raw text values
         # Read embedding dimension directly from model config to avoid unnecessary inference
         self.embed_dim = self.embed_model.config.hidden_size
@@ -56,7 +56,7 @@ class RAG:
         self.order = order
         random.seed(self.seed)
 
-        self.create_faiss_index()
+        self.create_faiss_index()#creating FAISS vector index
 
     def create_faiss_index(self):
         """Create FAISS vector index."""
@@ -69,9 +69,9 @@ class RAG:
             model_output = self.embed_model(**encoded_input)
             # CLS pooling
             sentence_embeddings = model_output[0][:, 0]
-        feature = sentence_embeddings.numpy()[0]
+        feature = sentence_embeddings.numpy()[0] #making sure only the first sentence was embedded
         norm = np.linalg.norm(feature)
-        return feature / norm
+        return feature / norm #This an vector whose length is 768
 
     def insert(self, key: str, value: str) -> None:
         """
@@ -82,7 +82,7 @@ class RAG:
             value: formatted experience chunk (the stored value)
         """
         embedding = self.encode_data(key).astype('float32')
-        self.index.add(np.expand_dims(embedding, axis=0))
+        self.index.add(np.expand_dims(embedding, axis=0))#FAISS only accept 2-dim data
         self.id2evidence[str(self.insert_acc)] = value
         self.insert_acc += 1
 
@@ -97,7 +97,7 @@ class RAG:
         Returns:
             list of retrieved formatted chunks
         """
-        if self.insert_acc == 0:
+        if self.insert_acc == 0:#which means there is no data in the Vector Database
             return []
 
         embedding = self.encode_data(query).astype('float32')
@@ -154,7 +154,7 @@ class StreamICLMemory(MemoryMechanism):
             seed: random seed (used only when order="random")
         """
         if not HAS_DEPENDENCIES:
-            raise ImportError("faiss, torch, or transformers not installed. Please install them to use StreamICL.")
+            raise ImportError("faiss, torch, or transformers not installed. Please install them to use StreamICL.") #"raise" will disturb the execution of the file
 
         # Save RAG configuration for lazy/re-initialization
         self.rag_config = dict(
@@ -170,7 +170,7 @@ class StreamICLMemory(MemoryMechanism):
 
         # Extract the template title from the prompt_template (used to detect injected memory)
         # e.g. "Here are some examples:\n\n{examples}" -> "Here are some examples:"
-        self.template_title = self.prompt_template.split('{examples}')[0].strip()
+        self.template_title = self.prompt_template.split('{examples}')[0].strip()#clearing the " " and "\n"
 
         # Single global vector store (not partitioned by task)
         self.rag: Optional[RAG] = None
@@ -218,14 +218,12 @@ class StreamICLMemory(MemoryMechanism):
         # Filter: if success_only=True, skip samples that did not complete successfully
         if self.success_only and not is_success:
             print(f"[StreamICL] Skipping sample storage: success_only=True but sample not completed (status={status}, task={task})")
-            logging.info(f"[StreamICL] Skipping sample storage: success_only=True but sample not completed (status={status}, task={task})")
             return
 
         # Filter: if reward_bigger_than_zero=True, skip samples with non-positive reward
         if self.reward_bigger_than_zero:
             if reward <= 0:
                 print(f"[StreamICL] Skipping sample storage: reward_bigger_than_zero=True but reward={reward} (task={task})")
-                logging.info(f"[StreamICL] Skipping sample storage: reward_bigger_than_zero=True but reward={reward} (task={task})")
                 return
 
         # Extract the question text from history (used as the retrieval key)
@@ -233,7 +231,6 @@ class StreamICLMemory(MemoryMechanism):
         question = extract_original_question(history, where=self.where, template_titles=template_titles)
         if not question:
             print(f"[StreamICL] Skipping sample storage: No question extracted from history (task={task})")
-            logging.info(f"[StreamICL] Skipping sample storage: No question extracted from history (task={task})")
             return
 
         # Format the trajectory into an experience chunk
@@ -270,7 +267,7 @@ class StreamICLMemory(MemoryMechanism):
 
         for msg in history:
             role, content, msg_dict = extract_message_info(msg)
-            if role is None or role == "system":
+            if role is None or role == "system":#system prompt is useless, so that we don't keep it
                 continue
 
             content = content if content else ""
@@ -278,7 +275,7 @@ class StreamICLMemory(MemoryMechanism):
             # Skip the first user message — it is already captured as the question
             if role == "user":
                 if skip_first_user:
-                    skip_first_user = False
+                    skip_first_user = False#the first message from user we don't keep it too
                     continue
                 # Subsequent user messages: keep only those that don't contain injected memory
                 if template_prefix not in content:
@@ -323,7 +320,7 @@ def load_stream_icl_from_yaml(config_path: str) -> StreamICLMemory:
     Load configuration from memory/streamICL/streamICL.yaml and construct a StreamICLMemory.
     """
     with open(config_path, "r", encoding="utf-8") as f:
-        cfg = yaml.safe_load(f) or {}
+        cfg = yaml.safe_load(f) or {} #if safe_loaf gets empty file, it will return None. This situation is very dangerous
 
     stream_icl_cfg = cfg.get("stream_icl", {})
     rag_cfg = stream_icl_cfg.get("rag", {})

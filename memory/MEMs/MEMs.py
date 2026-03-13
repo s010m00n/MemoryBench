@@ -16,14 +16,14 @@ logger = logging.getLogger(__name__)
 
 @dataclass
 class MemorySourceConfig:
-    """单个记忆源的配置"""
-    name: str  # 记忆源名称，如 "system_memory" 或 "personal_memory"
-    config_path: Path  # 记忆源配置文件路径
+    """Configuration for a single memory source."""
+    name: str  # Memory source name, e.g. "system_memory" or "personal_memory"
+    config_path: Path  # Path to the memory source config file
 
 
 @dataclass
 class MEMsConfig:
-    """MEMs配置"""
+    """MEMs configuration."""
     model_name: str
     memory_source_1: MemorySourceConfig
     memory_source_2: MemorySourceConfig
@@ -37,14 +37,17 @@ class MEMsConfig:
 class MEMs(MemoryMechanism):
     """
     Multi-Enhanced Memory System (MEMs):
-    - 支持任意两个记忆源的组合
-    - 使用Trigger Model在检索和更新阶段决定使用哪个记忆源
+    - Supports any combination of two memory sources
+    - Uses a Trigger Model to decide which memory source to use at retrieval and update time
     """
 
     def __init__(self, config: MEMsConfig) -> None:
         self.config = config
 
-        # 动态加载两个记忆源
+        # Cache LLM config to avoid re-reading from disk on every trigger model call
+        self._agent_cfg: Optional[Dict[str, Any]] = self._load_agent_config(config.model_name)
+
+        # Dynamically load two memory sources
         self.memory_1: Optional[MemoryMechanism] = self._load_memory_source(
             config.memory_source_1
         )
@@ -60,18 +63,18 @@ class MEMs(MemoryMechanism):
         )
 
     def _load_memory_source(self, source_config: MemorySourceConfig) -> Optional[MemoryMechanism]:
-        """动态加载记忆源"""
+        """Dynamically load a memory source from its config file."""
         config_path = source_config.config_path
         if not config_path.exists():
             logger.warning(f"[MEMs] Config not found: {config_path}")
             return None
 
         try:
-            # 读取配置文件
+            # Read the config file
             with config_path.open("r", encoding="utf-8") as f:
                 yaml_data = yaml.safe_load(f) or {}
 
-            # 根据配置文件推断记忆源类型
+            # Infer memory source type from the top-level key in the config file
             if "mem0" in yaml_data:
                 from ..mem0.mem0 import Mem0Memory, Mem0Config
                 mem0_cfg = yaml_data["mem0"]
@@ -85,6 +88,7 @@ class MEMs(MemoryMechanism):
                     success_only=mem0_cfg.get("success_only", True),
                     reward_bigger_than_zero=mem0_cfg.get("reward_bigger_than_zero", True),
                     prompt_template=mem0_cfg.get("prompt_template", ""),
+                    where=mem0_cfg.get("where", "tail"),
                     max_retries=mem0_cfg.get("max_retries", -1),
                     retry_delay=mem0_cfg.get("retry_delay", 5.0),
                     retry_backoff=mem0_cfg.get("retry_backoff", 2.0),
@@ -95,20 +99,21 @@ class MEMs(MemoryMechanism):
             elif "awmpro" in yaml_data:
                 from ..awmPro.awmPro import AWMPro, AWMProConfig
                 awm_cfg = yaml_data["awmpro"]
+                rag_cfg = awm_cfg.get("workflow_rag", {}) or {}
                 memory_config = AWMProConfig(
                     model_name=awm_cfg.get("model_name", ""),
                     workflow_induction_prompt=awm_cfg.get("workflow_induction_prompt", ""),
                     workflow_management_prompt=awm_cfg.get("workflow_management_prompt", ""),
                     workflow_induction_max_retries=awm_cfg.get("workflow_induction_max_retries", 5),
                     workflow_management_max_retries=awm_cfg.get("workflow_management_max_retries", 5),
-                    workflow_rag_embedding_model=awm_cfg["workflow_rag"].get("embedding_model", ""),
-                    workflow_rag_top_k=awm_cfg["workflow_rag"].get("top_k", 50),
-                    workflow_rag_order=awm_cfg["workflow_rag"].get("order", "similar_at_top"),
-                    workflow_rag_seed=awm_cfg["workflow_rag"].get("seed", 42),
-                    workflow_rag_prompt_template=awm_cfg["workflow_rag"].get("prompt_template", ""),
-                    workflow_rag_where=awm_cfg["workflow_rag"].get("where", "tail"),
-                    workflow_rag_success_only=awm_cfg["workflow_rag"].get("success_only", True),
-                    workflow_rag_reward_bigger_than_zero=awm_cfg["workflow_rag"].get("reward_bigger_than_zero", True),
+                    workflow_rag_embedding_model=rag_cfg.get("embedding_model", ""),
+                    workflow_rag_top_k=rag_cfg.get("top_k", 50),
+                    workflow_rag_order=rag_cfg.get("order", "similar_at_top"),
+                    workflow_rag_seed=rag_cfg.get("seed", 42),
+                    workflow_rag_prompt_template=awm_cfg.get("prompt_template", ""),
+                    workflow_rag_where=awm_cfg.get("where", "tail"),
+                    workflow_rag_success_only=awm_cfg.get("success_only", True),
+                    workflow_rag_reward_bigger_than_zero=awm_cfg.get("reward_bigger_than_zero", True),
                     workflow_management_similarity_top_k=awm_cfg.get("workflow_management_similarity_top_k", 5),
                     workflow_storage_path=Path(awm_cfg.get("workflow_storage_path", "memory/awmPro/workflows.jsonl")),
                 )
@@ -139,7 +144,7 @@ class MEMs(MemoryMechanism):
             return None
 
     def _load_agent_config(self, model_name: str) -> Optional[Dict[str, Any]]:
-        """加载LLM配置"""
+        """Load LLM config from agent.yaml and api.yaml."""
         model_name = (model_name or "").strip()
         if not model_name:
             return None
@@ -189,10 +194,10 @@ class MEMs(MemoryMechanism):
         max_retries: int = 3,
         purpose: str = "LLM call"
     ) -> Optional[str]:
-        """调用LLM API"""
+        """Call the LLM API."""
         logger.info(f"[MEMs] {purpose}: messages_count={len(messages)}")
 
-        cfg = self._load_agent_config(self.config.model_name)
+        cfg = self._agent_cfg
         if not cfg:
             logger.error(f"[MEMs] Failed to load agent config")
             return None
@@ -235,8 +240,8 @@ class MEMs(MemoryMechanism):
         **kwargs
     ) -> Optional[List[str]]:
         """
-        调用trigger model决定使用哪些记忆源
-        返回: ["system_memory"] 或 ["personal_memory"] 或 ["system_memory", "personal_memory"] 或 None
+        Call the trigger model to decide which memory sources to use.
+        Returns: ["system_memory"], ["personal_memory"], ["system_memory", "personal_memory"], or None
         """
         prompt = prompt_template.format(**kwargs)
         messages = [{"role": "user", "content": prompt}]
@@ -250,7 +255,7 @@ class MEMs(MemoryMechanism):
         if not response:
             return None
 
-        # 解析JSON响应
+        # Parse JSON response
         parsed = parse_llm_json_response(response)
         if not parsed or "sources" not in parsed:
             logger.warning(f"[MEMs] Trigger model response invalid: {response}")
@@ -270,19 +275,19 @@ class MEMs(MemoryMechanism):
         messages: List[Dict[str, Any]]
     ) -> List[Dict[str, Any]]:
         """
-        使用记忆增强messages:
-        1. 调用trigger model决定检索哪个记忆源
-        2. 从选中的记忆源检索记忆
-        3. 合并记忆并追加到messages
+        Augment messages with retrieved memories:
+        1. Call trigger model to decide which memory source(s) to retrieve from
+        2. Retrieve memories from selected source(s), chaining the output sequentially
+        3. Return the augmented messages
         """
-        # 提取query用于trigger model
+        # Extract query for the trigger model (use first user message, fall back to task)
         query = task
         for msg in messages:
             if isinstance(msg, dict) and msg.get("role") == "user":
                 query = msg.get("content", task)
                 break
 
-        # 调用retrieval trigger model
+        # Call retrieval trigger model
         sources = self._call_trigger_model(
             self.config.retrieval_trigger_prompt,
             query=query
@@ -290,19 +295,28 @@ class MEMs(MemoryMechanism):
 
         if not sources:
             logger.warning("[MEMs] Trigger model failed, using both sources as fallback")
+            print(f"[MEMs] Retrieval trigger model failed — falling back to both sources: "
+                  f"{self.config.memory_source_1.name}, {self.config.memory_source_2.name}")
             sources = [self.config.memory_source_1.name, self.config.memory_source_2.name]
+        else:
+            print(f"[MEMs] Retrieval trigger model selected sources: {sources}")
 
-        # 根据trigger model决策检索记忆
+        # Retrieve from selected sources, chaining results sequentially
         enhanced_messages = list(messages)
 
         if self.config.memory_source_1.name in sources and self.memory_1:
-            logger.info(f"[MEMs] Retrieving from {self.config.memory_source_1.name}")
+            print(f"[MEMs] Retrieving from {self.config.memory_source_1.name} ...")
             enhanced_messages = self.memory_1.use_memory(task, enhanced_messages)
+            print(f"[MEMs] Done retrieving from {self.config.memory_source_1.name}")
 
         if self.config.memory_source_2.name in sources and self.memory_2:
-            logger.info(f"[MEMs] Retrieving from {self.config.memory_source_2.name}")
+            print(f"[MEMs] Retrieving from {self.config.memory_source_2.name} ...")
             enhanced_messages = self.memory_2.use_memory(task, enhanced_messages)
+            print(f"[MEMs] Done retrieving from {self.config.memory_source_2.name}")
 
+        active = [s for s in [self.config.memory_source_1.name, self.config.memory_source_2.name] if s in sources]
+        skipped = [s for s in [self.config.memory_source_1.name, self.config.memory_source_2.name] if s not in sources]
+        print(f"[MEMs] use_memory complete — used: {active}, skipped: {skipped}")
         return enhanced_messages
 
     def update_memory(
@@ -312,30 +326,40 @@ class MEMs(MemoryMechanism):
         result: Dict[str, Any]
     ) -> None:
         """
-        更新记忆:
-        1. 检查是否满足更新条件（success_only, reward>0）
-        2. 调用trigger model决定更新哪个记忆源
-        3. 更新选中的记忆源
+        Update memory sources:
+        1. Check update conditions (success_only, reward > 0)
+        2. Call trigger model to decide which source(s) to update
+        3. Update the selected source(s)
         """
-        # 检查是否满足更新条件
+        # Check update conditions
         if self.config.update_success_only:
             status = result.get("status", "")
             reward = result.get("reward", 0)
             is_success = status == "completed" or reward > 0
             if not is_success:
                 logger.info("[MEMs] Skipping update: task not successful")
+                print(f"[MEMs] Skipping update: update_success_only=True but task not successful "
+                      f"(status={status}, reward={reward})")
                 return
 
         if self.config.update_reward_bigger_than_zero:
             reward = result.get("reward", 0)
             if reward <= 0:
                 logger.info("[MEMs] Skipping update: reward <= 0")
+                print(f"[MEMs] Skipping update: reward_bigger_than_zero=True but reward={reward}")
                 return
 
-        # 构建trajectory文本用于trigger model
-        history_text = json.dumps(history, ensure_ascii=False, indent=2)
+        # Serialise history for the trigger model prompt; handle Pydantic/non-serialisable objects
+        def _default(obj: Any) -> Any:
+            if hasattr(obj, "model_dump"):
+                return obj.model_dump()
+            if hasattr(obj, "dict"):
+                return obj.dict()
+            return str(obj)
 
-        # 调用update trigger model
+        history_text = json.dumps(history, ensure_ascii=False, indent=2, default=_default)
+
+        # Call update trigger model
         sources = self._call_trigger_model(
             self.config.update_trigger_prompt,
             history=history_text
@@ -343,13 +367,22 @@ class MEMs(MemoryMechanism):
 
         if not sources:
             logger.warning("[MEMs] Trigger model failed, skipping update")
+            print("[MEMs] Update trigger model failed — skipping update entirely")
             return
 
-        # 根据trigger model决策更新记忆
+        print(f"[MEMs] Update trigger model selected sources: {sources}")
+
+        # Update selected sources
         if self.config.memory_source_1.name in sources and self.memory_1:
-            logger.info(f"[MEMs] Updating {self.config.memory_source_1.name}")
+            print(f"[MEMs] Updating {self.config.memory_source_1.name} ...")
             self.memory_1.update_memory(task, history, result)
+            print(f"[MEMs] Done updating {self.config.memory_source_1.name}")
 
         if self.config.memory_source_2.name in sources and self.memory_2:
-            logger.info(f"[MEMs] Updating {self.config.memory_source_2.name}")
+            print(f"[MEMs] Updating {self.config.memory_source_2.name} ...")
             self.memory_2.update_memory(task, history, result)
+            print(f"[MEMs] Done updating {self.config.memory_source_2.name}")
+
+        active = [s for s in [self.config.memory_source_1.name, self.config.memory_source_2.name] if s in sources]
+        skipped = [s for s in [self.config.memory_source_1.name, self.config.memory_source_2.name] if s not in sources]
+        print(f"[MEMs] update_memory complete — updated: {active}, skipped: {skipped}")

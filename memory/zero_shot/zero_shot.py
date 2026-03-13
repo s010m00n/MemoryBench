@@ -36,6 +36,6 @@ def load_zero_shot_from_yaml(config_path: str) -> ZeroShotMemory:
     validates that the file exists and is well-formed, then returns a ZeroShotMemory
     instance. The structure is kept for future extensibility (e.g., per-task static prompts).
     """
-    with open(config_path, "r", encoding="utf-8") as f:
+    with open(config_path, "r", encoding="utf-8") as f: #using "utf-8" to prevent there are some CHINESE in yaml file
         _ = yaml.safe_load(f) or {}  # safe_load returns None for empty files; fall back to {}
     return ZeroShotMemory()
